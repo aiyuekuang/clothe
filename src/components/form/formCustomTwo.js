@@ -71,7 +71,7 @@ function Index(prop, ref) {
     let rules = () => {
       return [
         {
-          required: true,
+          required: data.fill,
           whitespace: true,
           message: `${data.title}不能为空`,
         },

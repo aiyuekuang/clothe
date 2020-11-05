@@ -12,7 +12,7 @@ export default {
     rest:"重置",
     query:"查询",
     open:"展开",
-    PutItAway:"收起",
+    putItAway:"收起",
     pleaseEnterOptions: "请输入选项",
     add:"新增",
     options:"选项",

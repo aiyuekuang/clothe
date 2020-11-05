@@ -18,11 +18,14 @@ let defaultProps = {
   //关闭之后的回调
   close: () => {
   },
-  Compnent:(props) => {
+  width:800,
+  Component:(props) => {
     return(
       <div>dd</div>
     )
   },
+  //外部的显示与不显示来控制组件
+  visible:null
 }
 
 function index(prop, ref) {
@@ -33,11 +36,13 @@ function index(prop, ref) {
     ...defaultProps, ...prop
   }
 
-  const {title, className, config, open,close,Compnent} = props;
+  const {title, className, config, open,close,Component,width} = props;
 
   useEffect(() => {
-    console.log("重新加载了弹窗");
-  }, []);
+    if(props.visible !== null){
+      setVisible(props.visible)
+    }
+  }, [props.visible]);
 
 
   let handleCancel = () => {
@@ -66,10 +71,11 @@ function index(prop, ref) {
         visible={visible}
         footer={null}
         onCancel={handleCancel}
+        width={width}
         {...config}
       >
         {/*<Comp visible={visible} setVisible={setVisible}/>*/}
-        <Compnent visible={visible} setVisible={setVisible}/>
+        <Component visible={visible} setVisible={setVisible}/>
         {/*{compnent({visible, setVisible})}*/}
       </Modal>
     </Fragment>
@@ -93,7 +99,7 @@ export default class Index extends Component{
     //关闭之后的回调
     close: () => {
     },
-    Compnent:(props) => {
+    Component:(props) => {
       return(
         <div>dd</div>
       )
@@ -126,7 +132,7 @@ export default class Index extends Component{
     })
   }
   render(){
-    const {title, className, config, open,close,Compnent} = this.props;
+    const {title, className, config, open,close,Component} = this.props;
     const {visible} = this.state;
 
     return(
@@ -142,7 +148,7 @@ export default class Index extends Component{
           {...config}
         >
           {/!*<Comp visible={visible} setVisible={setVisible}/>*!/}
-          <Compnent visible={visible} setVisible={this.setVisible}/>
+          <Component visible={visible} setVisible={this.setVisible}/>
           {/!*{compnent({visible, setVisible})}*!/}
         </Modal>
       </Fragment>

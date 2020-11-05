@@ -117,6 +117,10 @@ const defaultProps = {
   //禁用提交按钮
   disabledBtn:false,
   size: "middle",
+  //其他新增时需要的按钮,用<div>包裹一下
+  otherBtn:({form})=><Fragment/>,
+  //提交时的文本
+  submitText:null
 }
 
 export let formItemLayoutFun = (formItemLayout_, _layoutHorizontal) => {
@@ -151,7 +155,7 @@ export default function index(prop, ref) {
     ...prop
   };
 
-  const {li, className, formData, hasBtn, editUrl, otherForm, record, formSet, formDataChangeRest, hideParam, returnForm, layoutHorizontal, renderFooter, visible, isVisibleRest, clotheLang, onValuesChange,disabledBtn,size} = props;
+  const {li, className, formData, hasBtn, editUrl, otherForm, record, formSet, formDataChangeRest, hideParam, returnForm, layoutHorizontal, renderFooter, visible, isVisibleRest, clotheLang, onValuesChange,disabledBtn,size,otherBtn,submitText} = props;
 
 
   const [form] = Form.useForm();
@@ -333,8 +337,9 @@ export default function index(prop, ref) {
             <Col {...formItemLayout().labelCol}/>
             <Col {...formItemLayout().wrapperCol}>
               <div className="up_table_form_add_btn">
+                {otherBtn({form})}
                 <div>
-                  <Button disabled={disabled || disabledBtn} type="primary" htmlType="submit">{clotheLang.form.submit}</Button>
+                  <Button disabled={disabled || disabledBtn} type="primary" htmlType="submit">{submitText?submitText:anupLang.form.submit}</Button>
                 </div>
                 {!props.record ? <div>
                   <Button disabled={disabled} onClick={rest}

@@ -191,7 +191,9 @@ export default class Index extends Component {
     sortOrderField: "orderType",
     //点击新增按钮时的回调
     addCallback: () => {
-    }
+    },
+    //表格加载数据时的loading回调
+    loadingFun:(loading)=>{}
   }
 
   constructor(props) {
@@ -330,10 +332,12 @@ export default class Index extends Component {
   //获取表格数据
   get_data = (page = this.state.pagination.current, values = this.state.values, pageSize = this.state.pagination.pageSize, url = this.props.url, fun = () => {
   }) => {
-    const {setTotal, hasPage,setData} = this.props;
+    const {setTotal, hasPage,setData,loadingFun} = this.props;
     const {otherSearchValues} = this.state;
     this.setState({
       loading: true,
+    },()=>{
+      loadingFun(true)
     })
     //搜索框初始值的判断
     let search_init_data = {}
@@ -371,6 +375,7 @@ export default class Index extends Component {
       this.setState({
         loading: false,
       }, () => {
+        loadingFun(false)
         this.getHeight()
       })
     })

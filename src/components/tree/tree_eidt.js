@@ -56,7 +56,9 @@ const defaultProps = {
   //树控件的删除地址
   tree_delect: "",
   treeEditUrl: null,
-  values:{}
+  values:{},
+  onValuesChange:()=>{}
+
 }
 
 
@@ -70,7 +72,8 @@ export function Tree_form(prop) {
 
 
   const [form] = Form.useForm();
-  const [show, setShow] = useState(false);
+  const [loading, setLoading] = useState(false);
+
 
   useEffect(() => {
     // Update the document title using the browser API
@@ -94,12 +97,15 @@ export function Tree_form(prop) {
     if (treeEditUrl && id) {
       _url = treeEditUrl
     }
+    setLoading(true)
 
     props.ajax(_url, {...values, ...obj}, data => {
       message.success(props.msg(data));
       props.onSelect();
       props.get_tree();
       form.resetFields();
+      setLoading(false)
+
     });
   };
 
@@ -112,7 +118,7 @@ export function Tree_form(prop) {
       props.get_tree();
       props.onSelect();
       // props.rest_select_data();
-      props.form.resetFields();
+      form.resetFields();
     });
   };
 
@@ -250,7 +256,7 @@ export function Tree_form(prop) {
             <Button
               type="primary"
               htmlType="submit"
-              disabled={!props.tree_edit}
+              disabled={!props.tree_edit || loading}
             >
               {
                 Object.keys(props.select_data).length === 0

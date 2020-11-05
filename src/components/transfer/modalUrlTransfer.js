@@ -80,7 +80,7 @@ export default function Index(prop) {
         }
       }
       open={open}
-      Compnent={(props) => {
+      Component={(props) => {
         closeMask = props.setVisible;
         return <UrlTransfer value={val} {...urlTransferSet} onChange={(value) => {
           setVal(value)

@@ -69,7 +69,9 @@ const defaultProps = {
   //展开或者收起时，触发的回调
   toggleFun:(bool)=>{
 
-  }
+  },
+  //重置的时候的回调
+  restFun:()=>{}
 }
 
 export default function index(prop) {
@@ -78,7 +80,7 @@ export default function index(prop) {
     ...prop
   };
 
-  const {search_line, formData, noLabel, formSet, returnForm, clotheLang, layoutHorizontal, onValuesChange, hasSubmit,hasRest,toggleFun} = props;
+  const {search_line, formData, noLabel, formSet, returnForm, clotheLang, layoutHorizontal, onValuesChange, hasSubmit,hasRest,toggleFun,restFun} = props;
 
   const [form] = Form.useForm();
   const [toogle, setToogle] = useState(true);
@@ -126,6 +128,7 @@ export default function index(prop) {
     form.resetFields();
     form.validateFields()
       .then(values => {
+        restFun(form)
         props.submit(values);
       })
   }
@@ -185,7 +188,7 @@ export default function index(prop) {
           initialValues={initialValues}
           labelAlign="left"
           onValuesChange={(changedValues, allValues) => {
-            onValuesChange(changedValues, allValues)
+            onValuesChange(changedValues, allValues,form)
             if (!hasSubmit) {
               props.submit(allValues);
             }
@@ -212,7 +215,7 @@ export default function index(prop) {
             {show ? <a
               style={{marginLeft: 6}}
               onClick={toogle_fun}>
-              {toogle ? clotheLang.form.open : clotheLang.form.PutItAway}&nbsp;
+              {toogle ? clotheLang.form.open : clotheLang.form.putItAway}&nbsp;
               {toogle ? <DownOutlined/> : <UpOutlined/>}
             </a> : null}
           </div>
