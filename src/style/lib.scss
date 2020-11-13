@@ -3,6 +3,11 @@
 @import "./static/animate.css";
 @import "./ani";
 @import "../../node_modules/braft-editor/dist/index.css";
+@import "~braft-editor/dist/index.css";
+@import '~codemirror/theme/eclipse.css';
+@import '~codemirror/theme/monokai.css';
+@import '~codemirror/theme/ambiance.css';
+@import '~codemirror/addon/hint/show-hint.css';
 //表单和树和表格边缘对齐
 $up_table_warp_bottom: 0;
 
