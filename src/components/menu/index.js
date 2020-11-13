@@ -98,17 +98,21 @@ export default class Index extends Component {
     if (props.history.listen) {
       props.history.listen((location, action) => {
         // location is an object like window.location
-        this.setState({
-          selectedKeys: [location.pathname],
-          defaultOpenKeys: _defaultOpenKeys(location.pathname)
-        })
+        if(this.show) {
 
+          this.setState({
+            selectedKeys: [location.pathname],
+            defaultOpenKeys: _defaultOpenKeys(location.pathname)
+          })
+        }
       })
     }
 
   }
 
   IconFont = null
+  show = true
+
   componentDidMount = () => {
 
   }
@@ -117,6 +121,8 @@ export default class Index extends Component {
   componentWillUnmount() {
     //离开页面消除所有接口请求
     //window.requestCancel();
+    this.show = false
+
   }
 
   itemFun = (e) => {

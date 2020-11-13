@@ -54,6 +54,9 @@ import radar from "./g2/radar"
 import remoteSearch from "./select/remoteSearch"
 import editableCell from "./table/editableCell"
 import nav from "./nav"
+import date from "./date"
+import code from "./code"
+
 // import _excel from "./excel"
 
 let upConfig = {
@@ -123,6 +126,9 @@ export const Radar = Hoc(radar)
 export const EditableCell = Hoc(editableCell)
 export const ModalUp = Hoc(modalUp)
 export const NavUp = Hoc(nav)
+export const Date = Hoc(date)
+export const Code = Hoc(code)
+
 // export const Excel = Hoc(_excel)
 
 
