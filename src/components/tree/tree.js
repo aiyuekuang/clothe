@@ -45,7 +45,7 @@ export default class UpTree extends React.Component {
     //树的url，如果为null就是不需要树
     treeUrl: "/tree",
     //获取树数据的接口返回
-    get_data: (data) => {
+    getData: (data) => {
       return data.entity;
     },
     //是否直接从上个界面传递已获取的输数据
@@ -95,7 +95,7 @@ export default class UpTree extends React.Component {
     })
     if (this.props.treeUrl) {
       this.props.ajax(this.props.treeUrl, this.props.param, (data) => {
-        let value = this.props.get_data(data);
+        let value = this.props.getData(data);
 
         if ((this.props.selectFirstValue && this.first) || !(select_value  && treeFindObjById(select_value[0],value,key_value))) {
           let _value =  value && value.length ? [value[0][key_value]] : []
@@ -109,11 +109,11 @@ export default class UpTree extends React.Component {
         }
 
         this.setState({
-          treeData: this.props.get_data(data),
+          treeData: this.props.getData(data),
           loading: false
         })
-        this.props.set_tree_data(this.props.get_data(data))
-        this.generateList(this.props.get_data(data));
+        this.props.set_tree_data(this.props.getData(data))
+        this.generateList(this.props.getData(data));
       }, () => {
         this.first = false
         this.setState({

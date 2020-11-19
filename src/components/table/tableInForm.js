@@ -43,7 +43,7 @@ export default function Index(prop) {
     <div>
       <TableCommon
         values={values}
-        otherBtn={(selectedRowKeys, onSelectChange, get_data, values) => {
+        otherBtn={(selectedRowKeys, onSelectChange, getData, values) => {
           return (
             <div>
               <Table_select

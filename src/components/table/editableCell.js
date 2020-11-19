@@ -127,7 +127,7 @@ export default function Index(prop) {
         props.ajax(_url, values_temp, (data) => {
           setEditingKey('');
           setAddData([])
-          table.current.get_data(1);
+          table.current.getData(1);
         }, () => {
           setDisabled(false)
           // cancel()
@@ -226,7 +226,7 @@ export default function Index(prop) {
             );
           }}
           {...props}
-          otherBtn={(selectedRowKeys, onSelectChange, get_data, values) => {
+          otherBtn={(selectedRowKeys, onSelectChange, getData, values) => {
             return (
               <Fragment>
                 <div>
@@ -238,7 +238,7 @@ export default function Index(prop) {
                     新增
                   </Button>
                 </div>
-                {props.otherBtn ? props.otherBtn(selectedRowKeys, onSelectChange, get_data, values) : null}
+                {props.otherBtn ? props.otherBtn(selectedRowKeys, onSelectChange, getData, values) : null}
               </Fragment>
 
             )

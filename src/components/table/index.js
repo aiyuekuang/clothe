@@ -233,7 +233,7 @@ export default class Index extends Component {
 
   componentDidMount = () => {
     if (this.props.firstLoadData) {
-      this.get_data();
+      this.getData();
     }
     this.getHeight()
   }
@@ -244,11 +244,11 @@ export default class Index extends Component {
       this.setState({
         values: _values
       }, () => {
-        this.get_data(this.state.pagination.current, _values, this.state.pagination.pageSize)
+        this.getData(this.state.pagination.current, _values, this.state.pagination.pageSize)
       })
     }
     if (diffObj(nextProp.url, this.props.url)) {
-      this.get_data(this.state.pagination.current, this.state.values, this.state.pagination.pageSize, nextProp.url)
+      this.getData(this.state.pagination.current, this.state.values, this.state.pagination.pageSize, nextProp.url)
     }
   }
 
@@ -301,7 +301,7 @@ export default class Index extends Component {
         formData={this.props.addForm}
         addFormSubmitCallback={() => {
           this.handleCancel()
-          this.get_data(this.state.pagination.current, this.state.values, this.state.pagination.pageSize, this.props.url, (data) => {
+          this.getData(this.state.pagination.current, this.state.values, this.state.pagination.pageSize, this.props.url, (data) => {
             this.props.addFormSubmitCallback(record, data);
           });
         }}
@@ -332,7 +332,7 @@ export default class Index extends Component {
   }
 
   //获取表格数据
-  get_data = (page = this.state.pagination.current, values = this.state.values, pageSize = this.state.pagination.pageSize, url = this.props.url, fun = () => {
+  getData = (page = this.state.pagination.current, values = this.state.values, pageSize = this.state.pagination.pageSize, url = this.props.url, fun = () => {
   }) => {
     const {setTotal, hasPage,setData,loadingCallback} = this.props;
     const {otherSearchValues} = this.state;
@@ -388,14 +388,14 @@ export default class Index extends Component {
     const {sortField, sortOrderField} = this.props;
     switch (extra.action) {
       case "paginate":
-        this.get_data(pagination.current, this.state.values, pagination.pageSize)
+        this.getData(pagination.current, this.state.values, pagination.pageSize)
         return;
       case "sort":
         if (sorter.column.sorter === true) {
           let param = {...this.state.values}
           param[sortOrderField] = sorter.order
           param[sortField] = sorter.field
-          this.get_data(pagination.current, param)
+          this.getData(pagination.current, param)
         } else {
           return;
         }
@@ -409,7 +409,7 @@ export default class Index extends Component {
     let values = {...this.state.values}
     this.props.treeClick(value);
     values[this.props.getTreeField] = value ? value[0] : null
-    this.get_data(1, values);
+    this.getData(1, values);
     this.setState({
       values
     })
@@ -436,7 +436,7 @@ export default class Index extends Component {
   submit = (data) => {
     let values = {...this.state.values, ...data}
     this.props.onSearchChange(values)
-    this.get_data(1, values);
+    this.getData(1, values);
     this.setState({
       values
     })
@@ -482,7 +482,7 @@ export default class Index extends Component {
 
   //批量操作之后更新数据的函数
   reget_data = () => {
-    this.get_data();
+    this.getData();
   }
 
   deleteAll = (id = "") => {
@@ -521,7 +521,7 @@ export default class Index extends Component {
         selectedRowKeys: []
       })
       deleteCallback(id)
-      this.get_data(1, values);
+      this.getData(1, values);
     }, () => {
     }, true)
   }
@@ -550,7 +550,7 @@ export default class Index extends Component {
       value = parseInt(value)
     }
     values[this.props.searchLabelField] = value
-    this.get_data(1, values);
+    this.getData(1, values);
     this.setState({
       values
     }, () => {
@@ -660,7 +660,7 @@ export default class Index extends Component {
                 otherSearchValues: obj
               }, () => {
                 if (isUpdate) {
-                  this.get_data(1, values)
+                  this.getData(1, values)
                 }
               })
             }, otherSearchValues)}
@@ -693,7 +693,7 @@ export default class Index extends Component {
                   </Button>
                 </Dropdown>
               </div> : null}
-              {otherBtn ? otherBtn(this.state.selectedRowKeys, this.onSelectChange, this.get_data, {...values, ...otherSearchValues}) : null}
+              {otherBtn ? otherBtn(this.state.selectedRowKeys, this.onSelectChange, this.getData, {...values, ...otherSearchValues}) : null}
               {deleteUrl && hasDeleteBatch ?
                 <div><Button type="danger" disabled={selectedRowKeys.length === 0}
                              onClick={deleteBefore?()=>deleteBefore(selectedRowKeys,null,this.deleteAll):this.showDeleteConfirm.bind(this, selectedRowKeys, null)}><DeleteOutlined/>{clotheLang.table.bulkDelete}
@@ -712,7 +712,7 @@ export default class Index extends Component {
                     otherSearchValues: obj
                   }, () => {
                     if (isUpdate) {
-                      this.get_data(1, values)
+                      this.getData(1, values)
                     }
                   })
                 }, otherSearchValues)}

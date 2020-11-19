@@ -38,13 +38,13 @@ export default function Index(prop) {
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    get_data(values, url)
+    getData(values, url)
     return () => {
     }
   }, [values]);
 
   //获取表格数据
-  let get_data = (values = values, url = url) => {
+  let getData = (values = values, url = url) => {
     setLoading(true)
     ajax(url, {
       ...values

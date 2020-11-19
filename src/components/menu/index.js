@@ -57,10 +57,6 @@ export default class Index extends Component {
     }
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-
-    return null;
-  }
 
   constructor(props) {
     super(props);
@@ -99,7 +95,6 @@ export default class Index extends Component {
       props.history.listen((location, action) => {
         // location is an object like window.location
         if(this.show) {
-
           this.setState({
             selectedKeys: [location.pathname],
             defaultOpenKeys: _defaultOpenKeys(location.pathname)

@@ -73,7 +73,7 @@ export default class Index extends Component {
     //主键id
     primaryKeyField: "id",
     //其他按钮组件
-    otherBtn: (selectedRowKeys, onSelectChange, get_data) => {
+    otherBtn: (selectedRowKeys, onSelectChange, getData) => {
     },
     //搜索组件的form对象
     searchForm: [],
@@ -151,7 +151,7 @@ export default class Index extends Component {
 
   componentWillReceiveProps(nextProp) {
     if (!diff(nextProp.values, this.props.values)) {
-      this.get_data(this.state.pagination.current, this.state.values, this.state.pagination.pageSize, nextProp.values)
+      this.getData(this.state.pagination.current, this.state.values, this.state.pagination.pageSize, nextProp.values)
     }
 
     if (diffObj(nextProp.value, this.props.value)) {
@@ -160,7 +160,7 @@ export default class Index extends Component {
       })
     }
     if (!diff(nextProp.url, this.props.url)) {
-      this.get_data(this.state.pagination.current, this.state.values, this.state.pagination.pageSize, nextProp.values, nextProp.url)
+      this.getData(this.state.pagination.current, this.state.values, this.state.pagination.pageSize, nextProp.values, nextProp.url)
     }
   }
 
@@ -182,7 +182,7 @@ export default class Index extends Component {
   }
 
   //获取表格数据
-  get_data = (page = this.state.pagination.current, values = this.state.values, pageSize = this.state.pagination.pageSize, props_value = this.props.values, url = this.props.url) => {
+  getData = (page = this.state.pagination.current, values = this.state.values, pageSize = this.state.pagination.pageSize, props_value = this.props.values, url = this.props.url) => {
     this.setState({
       loading: true,
     })
@@ -220,14 +220,14 @@ export default class Index extends Component {
 
   //分页请求数据
   handleTableChange = (pagination, filters, sorter) => {
-    this.get_data(pagination.current, this.state.values, pagination.pageSize)
+    this.getData(pagination.current, this.state.values, pagination.pageSize)
   }
 
   select = (value, obj) => {
     let values = {...this.state.values}
     this.props.treeClick(value);
     values[this.props.getTreeField] = value ? value[0] : null
-    this.get_data(1, values);
+    this.getData(1, values);
     this.setState({
       values
     })
@@ -275,7 +275,7 @@ export default class Index extends Component {
   Search = (value) => {
     let values = {}
     values[this.props.searchLabelField] = value
-    this.get_data(1, values);
+    this.getData(1, values);
     this.setState({
       values
     })
@@ -297,7 +297,7 @@ export default class Index extends Component {
 
   show = () => {
     if (this.props.firstLoadData) {
-      this.get_data();
+      this.getData();
     }
     let data = {
       // selectedRowKeys:[],
@@ -314,7 +314,7 @@ export default class Index extends Component {
   submit = (data) => {
     let values = {...this.state.values, ...data}
     this.props.onSearchChange(values)
-    this.get_data(1, values);
+    this.getData(1, values);
     this.setState({
       values
     })
@@ -398,7 +398,7 @@ export default class Index extends Component {
                   </div>
 
 
-                  {this.props.otherBtn(this.state.selectedRowKeys, this.onSelectChange, this.get_data)}
+                  {this.props.otherBtn(this.state.selectedRowKeys, this.onSelectChange, this.getData)}
                   {searchLabelField ? <div>
                     <Search
                       placeholder={searchPlaceholder}
