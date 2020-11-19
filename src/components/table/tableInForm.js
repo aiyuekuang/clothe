@@ -11,7 +11,7 @@ import {isArrayop} from "esn";
 
 
 let defaultProps = {
-  onChange: (rowKey) => {
+  onChange: (primaryKeyField) => {
   },
   value: [],
   //

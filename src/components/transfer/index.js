@@ -83,7 +83,7 @@ let defaultProps = {
     return false
   },
   //key值取的数据源字段
-  rowKey: "id",
+  primaryKeyField: "id",
   //禁用整个组件
   disabled: false,
   //根据那个字段进行搜索
@@ -100,7 +100,7 @@ export default function Index(prop) {
     ...defaultProps, ...prop
   }
   const [_dataSource, setDataSource] = useState([])
-  const {dataSource, disabledFun, rowKey, value, disabled, searchField, columns, onChange,tableSet} = props;
+  const {dataSource, disabledFun, primaryKeyField, value, disabled, searchField, columns, onChange,tableSet} = props;
 
   const [targetKeys, setTargetKeys] = useState(value);
 
@@ -132,7 +132,7 @@ export default function Index(prop) {
 
     data.forEach((data, i) => {
       mockData.push({
-        key: rowKey ? data[rowKey] : i,
+        key: primaryKeyField ? data[primaryKeyField] : i,
         disabled: disabledFun(data),
         ...data
       });

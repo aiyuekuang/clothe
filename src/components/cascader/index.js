@@ -85,9 +85,9 @@ function index(prop, ref) {
         return {...data, isLeaf: isLeafFun(data)}
       })))
     } else {
-      let parm = {}
-      parm[paramField] = initFieldValue
-      ajax(url, parm, (json) => {
+      let param = {}
+      param[paramField] = initFieldValue
+      ajax(url, param, (json) => {
         setDataSource(formatData(setData(json), true))
       })
     }
@@ -147,13 +147,13 @@ function index(prop, ref) {
   let loadDataFun = (selectedOptions) => {
     const targetOption = selectedOptions[selectedOptions.length - 1];
     targetOption.loading = true;
-    let parm = {...values}
-    parm[paramField] = targetOption.value
+    let param = {...values}
+    param[paramField] = targetOption.value
     if (targetOption.first) {
       count = layer - 1
     }
 
-    ajax(url, parm, (json) => {
+    ajax(url, param, (json) => {
       targetOption.loading = false;
       let arr = treeSetData(_dataSource, "children", formatData(setData(json)), "children", (data) => {
         return data.value === targetOption.value

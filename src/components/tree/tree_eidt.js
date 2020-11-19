@@ -68,7 +68,7 @@ export function Tree_form(prop) {
     ...prop
   };
 
-  const {key_label, key_value, name, id, parentId, change_pos, father_item, select_data, rootId, titleRule, tree_delect, move_url, value, treeEditUrl, treeData,onValuesChange} = props;
+  const {key_label, key_value, name, primaryKeyField, parentId, change_pos, father_item, select_data, rootId, titleRule, tree_delect, move_url, value, treeEditUrl, treeData,onValuesChange} = props;
 
 
   const [form] = Form.useForm();
@@ -92,7 +92,7 @@ export function Tree_form(prop) {
   //我的资源分类_添加/修改我的资源分类
   let eidt_tree = (values, id = select_data[key_value]) => {
     let obj = {};
-    obj[props.id] = id;
+    obj[props.primaryKeyField] = id;
     let _url = props.tree_edit
     if (treeEditUrl && id) {
       _url = treeEditUrl
@@ -112,7 +112,7 @@ export function Tree_form(prop) {
   //删除我的资源分类
   let delect_tree = (id = select_data[key_value]) => {
     let obj = {};
-    obj[props.id] = id;
+    obj[props.primaryKeyField] = id;
     props.ajax(tree_delect, obj, data => {
       message.success(props.msg(data));
       props.get_tree();
@@ -125,7 +125,7 @@ export function Tree_form(prop) {
   //移动资源
   let move_tree = (forward = "up", id = select_data[key_value]) => {
     let obj = {};
-    obj[props.id] = id;
+    obj[props.primaryKeyField] = id;
     obj[props.orderForward] = forward
     props.ajax(move_url, obj, data => {
       message.success(props.msg(data));
@@ -310,7 +310,7 @@ export default class TreeEidt extends React.Component {
     //树的value
     key_value: "value",
     //提交的本级的id
-    id: "id",
+    primaryKeyField: "id",
     //上级树的id
     parentId: "parentId",
     //分类名称

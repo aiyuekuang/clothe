@@ -77,7 +77,7 @@ export const clotheInit = (data = {}) => {
   upConfig = data
 }
 
-export const TableCommon = Hoc(table);
+export const TablePro = Hoc(table);
 export const FormAdd = Hoc(formAdd)
 export const SearchTable = Hoc(searchTable)
 export const TreeCommon = Hoc(upTree)
@@ -89,7 +89,7 @@ export const Chart = Hoc(Chart_)
 export const Line = Hoc(Line_)
 export const Pie = Hoc(Pie_)
 export const Quan = Hoc(Quan_)
-export const Group_chart = Hoc(Groupchart)
+export const GroupChart = Hoc(Groupchart)
 export const DuoPie = Hoc(Duopie)
 export const RichText = Hoc(Upbraft)
 export const Ani = Hoc(Ani_)
@@ -97,10 +97,10 @@ export const TreeSelect = Hoc(Treeselectup_)
 export const MonthSelect = Hoc(Monthselect)
 export const DaySelect = Hoc(Dayselect)
 export const RangSelect = Hoc(Rangselect)
-export const Table_select = Hoc(Tableselect)
+export const TableSelect = Hoc(Tableselect)
 export const MenuUp = Hoc(MenuUp_)
 export const ModalWarp = Hoc(ModalWarp_)
-export const Select = Hoc(select)
+export const SelectPro = Hoc(select)
 export const QuestionAddForm = Hoc(QuestionAddForm_)
 export const QuestionAddFormIn = Hoc(questionAddForm)
 export const FormCustom = Hoc(FormCustom_)

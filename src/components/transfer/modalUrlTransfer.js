@@ -25,7 +25,7 @@ let defaultProps = {
   //提交按钮的其他参数
   values: {},
   //提交时，选中数据提交的字段
-  id: "id",
+  primaryKeyField: "id",
   //打开弹窗时的回调
   open: () => {
 
@@ -40,7 +40,7 @@ export default function Index(prop) {
   let props = {
     ...defaultProps, ...prop
   }
-  const {title, urlTransferSet, children, modalConfig, onChange, value, url, ajax, values, id, open,addFormSubmitCallback} = props;
+  const {title, urlTransferSet, children, modalConfig, onChange, value, url, ajax, values, primaryKeyField, open,addFormSubmitCallback} = props;
   const [val, setVal] = useState(value);
   const [none, setNone] = useState(false)
 
@@ -64,13 +64,13 @@ export default function Index(prop) {
             if (!url) {
               onChange(val)
             } else {
-              let parm = {...values};
-              parm[id] = val
+              let param = {...values};
+              param[primaryKeyField] = val
               setNone(true)
-              ajax(url, parm, (data) => {
+              ajax(url, param, (data) => {
                 closeMask(false)
                 setNone(false)
-                addFormSubmitCallback(parm,data)
+                addFormSubmitCallback(param,data)
               })
             }
           }}

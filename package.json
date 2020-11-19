@@ -29,7 +29,7 @@
   "author": "ztao",
   "license": "MIT",
   "devDependencies": {
-    "antd": "4.4.3",
+    "antd": "4.8.4",
     "autoprefixer": "^9.4.2",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",

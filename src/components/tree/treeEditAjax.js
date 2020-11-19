@@ -104,9 +104,8 @@ export default class TreeEditAjax extends React.Component {
     select_data: {},
     father_item: null,
     //从界面传来的树的数据
-    treeData: null,
-    value: null,
-    treeData: []
+    treeDataProps: null,
+    value: null
   };
 
 
@@ -144,16 +143,16 @@ export default class TreeEditAjax extends React.Component {
     this.up_tree.current.onLoadData();
   }
 
-  set_tree_data = (treeData) => {
+  set_tree_data = (treeDataProps) => {
     this.setState({
-      treeData
+      treeDataProps
     })
   }
 
 
   render() {
     const {minWidth} = this.props;
-    const {treeData, select_data, value, clotheLang} = this.state
+    const {treeDataProps, select_data, value, clotheLang} = this.state
 
     return (
       <div className="up_tree_eidt_warp">
@@ -181,7 +180,7 @@ export default class TreeEditAjax extends React.Component {
             rest_select_data={this.rest_select_data}
             father_item={this.state.father_item}
             get_tree={this.get_tree}
-            treeData={treeData}
+            treeData={treeDataProps}
             onSelect={this.onSelect}
             value={value}
             {...this.props}

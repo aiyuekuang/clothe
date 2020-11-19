@@ -8,17 +8,17 @@ import {getData, postData} from "./fetchData"
 import {qus} from "esn";
 //整合的一个get请求，
 //url:请求的地址
-//parm：参数对象
+//param：参数对象
 //chenggong：请求成功后的回调
 //all_fun：请求无论成功失败都会调用的一个回调，用于如loading的显示与消除
 //erro：错误的回调
 
-export const ajax = async (url = "", parm = {}, chenggong = () => {
+export const ajax = async (url = "", param = {}, chenggong = () => {
 }, all_fun = () => {
 }, erro = () => {
 }) => {
     NProgress.start();
-    let response = await postData("/mock" + url, parm);
+    let response = await postData("/mock" + url, param);
     //await console.log(response.data)
     await function (response) {
         if (response.data.key === 1) {

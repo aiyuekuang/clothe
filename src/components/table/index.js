@@ -60,7 +60,7 @@ export default class Index extends Component {
     //树的url，如果为null就是不需要树
     treeUrl: null,
     //表格的其他属性
-    antdSet: {},
+    tableSet: {},
     //是否有分页
     hasPage: true,
     //判断是否可以被选中的函数，返回false就是这行不可以被选中
@@ -70,7 +70,7 @@ export default class Index extends Component {
     //批量操作的对象
     rowAction: null,
     //主键id
-    rowKey: "id",
+    primaryKeyField: "id",
     //是否有新增/编辑
     hasAdd: true,
     //是否有编辑，这个参数可以传递函数，因为有的时候不同的行，有的需要编辑，有的则不需要，回调函数中会返回一个record
@@ -82,7 +82,7 @@ export default class Index extends Component {
       return true;
     },
     //其他操作的组件
-    actionComp: null,
+    actionComponent: null,
     //弹框的设置
     modalSet: {},
     //主标题字段，用于显示在新增或编辑弹框的上面
@@ -193,7 +193,7 @@ export default class Index extends Component {
     addCallback: () => {
     },
     //表格加载数据时的loading回调
-    loadingFun:(loading)=>{},
+    loadingCallback:(loading)=>{},
     //删除之前的回调
     deleteBefore:(id,record,fun)=>{}
   }
@@ -310,7 +310,7 @@ export default class Index extends Component {
         submit={this.props.addSubmitFun}
         addUrl={this.props.addUrl}
         editUrl={this.props.editUrl}
-        rowKey={this.props.addFormRowKey ? this.props.addFormRowKey : this.props.rowKey}
+        primaryKeyField={this.props.addFormRowKey ? this.props.addFormRowKey : this.props.primaryKeyField}
         {...this.props.addFormSet}
       />
     )
@@ -334,12 +334,12 @@ export default class Index extends Component {
   //获取表格数据
   get_data = (page = this.state.pagination.current, values = this.state.values, pageSize = this.state.pagination.pageSize, url = this.props.url, fun = () => {
   }) => {
-    const {setTotal, hasPage,setData,loadingFun} = this.props;
+    const {setTotal, hasPage,setData,loadingCallback} = this.props;
     const {otherSearchValues} = this.state;
     this.setState({
       loading: true,
     },()=>{
-      loadingFun(true)
+      loadingCallback(true)
     })
     //搜索框初始值的判断
     let search_init_data = {}
@@ -377,7 +377,7 @@ export default class Index extends Component {
       this.setState({
         loading: false,
       }, () => {
-        loadingFun(false)
+        loadingCallback(false)
         this.getHeight()
       })
     })
@@ -417,12 +417,12 @@ export default class Index extends Component {
 
   //计算表格的宽度
   scroll = () => {
-    const {addUrl, editUrl, hideSelectAll, deleteUrl, hasDeleteBatch, otherBtn, rowAction, actionComp} = this.props
+    const {addUrl, editUrl, hideSelectAll, deleteUrl, hasDeleteBatch, otherBtn, rowAction, actionComponent} = this.props
     if (this.props.width) {
       return this.props.width
     }
 
-    let kuan = (addUrl || editUrl || actionComp ? this.props.actionWidth : 0) + ((rowAction || (deleteUrl && hasDeleteBatch) || otherBtn) && hideSelectAll ? 60 : 0);
+    let kuan = (addUrl || editUrl || actionComponent ? this.props.actionWidth : 0) + ((rowAction || (deleteUrl && hasDeleteBatch) || otherBtn) && hideSelectAll ? 60 : 0);
     for (let i of this.props.columns) {
       if (i.minWidth) {
         kuan += i.minWidth
@@ -488,7 +488,7 @@ export default class Index extends Component {
   deleteAll = (id = "") => {
     const {pagination, values} = this.state
     const {deleteUseArr, deleteCallback} = this.props;
-    let parm = {...this.props.deleteValues};
+    let param = {...this.props.deleteValues};
 
     // let currentTemp = pagination.current;
     // let totalPage = Math.ceil(pagination.total / pagination.pageSize)
@@ -498,12 +498,12 @@ export default class Index extends Component {
     //     geshu = id.length;
     // }
     if (id instanceof Array && !deleteUseArr) {
-      parm[this.props.deleteIdField] = getTextByJs(id)
+      param[this.props.deleteIdField] = getTextByJs(id)
     } else {
       if (deleteUseArr && !isArrayop(id)) {
-        parm[this.props.deleteIdField] = [id]
+        param[this.props.deleteIdField] = [id]
       } else {
-        parm[this.props.deleteIdField] = id
+        param[this.props.deleteIdField] = id
       }
     }
 
@@ -516,7 +516,7 @@ export default class Index extends Component {
     //     currentTemp -= jiye
     // }
 
-    this.props.ajax(this.props.deleteUrl, parm, (data) => {
+    this.props.ajax(this.props.deleteUrl, param, (data) => {
       this.setState({
         selectedRowKeys: []
       })
@@ -566,7 +566,7 @@ export default class Index extends Component {
 
 
   render() {
-    const {actionWidth, treeSet, hasPage, ajax, deleteUrl, rowKey, isActionFixed, hasEdit, addForm, size, searchPlaceholder, searchLabelField, hasDeleteBatch, searchWidth, setTotal, addUrl, deleteDisabledFun, addSubmitFun, otherSearchDom, clotheLang, modalTitle, otherBtn, hideSelectAll, addData, addText, otherSearchDomIsBottom, modalSet,deleteBefore} = this.props;
+    const {actionWidth, treeSet, hasPage, ajax, deleteUrl, primaryKeyField, isActionFixed, hasEdit, addForm, size, searchPlaceholder, searchLabelField, hasDeleteBatch, searchWidth, setTotal, addUrl, deleteDisabledFun, addSubmitFun, otherSearchDom, clotheLang, modalTitle, otherBtn, hideSelectAll, addData, addText, otherSearchDomIsBottom, modalSet,deleteBefore} = this.props;
     const {selectedRowKeys, record, tree_show, visible, values, dataSource, loading, otherSearchValues, isAddText, height} = this.state;
 
 
@@ -601,7 +601,7 @@ export default class Index extends Component {
     }
 
 
-    if (this.props.actionComp || deleteUrl || (addForm.length > 0 && hasEdit)) {
+    if (this.props.actionComponent || deleteUrl || (addForm.length > 0 && hasEdit)) {
       columns.push({
         title: clotheLang.table.operation,
         dataIndex: 'action',
@@ -614,13 +614,13 @@ export default class Index extends Component {
           }
           return (
             <Fragment>
-              {this.props.actionComp ? this.props.actionComp(text, record) : null}
+              {this.props.actionComponent ? this.props.actionComponent(text, record) : null}
               {has_edit_ && addForm.length > 0 ?
                 <a onClick={this.showModal.bind(this, record, false)}>{clotheLang.table.edit}</a> : null }
               {has_edit_ || (deleteDisabledFun(record) && has_edit_) ? <Divider type="vertical"/> : null}
               {deleteUrl ? deleteDisabledFun(record) ?
                 <a
-                  onClick={deleteBefore?()=>deleteBefore(record[rowKey], record,this.deleteAll):this.showDeleteConfirm.bind(this, record[rowKey], record)}>{clotheLang.table.delete}</a> : null : null}
+                  onClick={deleteBefore?()=>deleteBefore(record[primaryKeyField], record,this.deleteAll):this.showDeleteConfirm.bind(this, record[primaryKeyField], record)}>{clotheLang.table.delete}</a> : null : null}
             </Fragment>
           )
         }
@@ -719,7 +719,7 @@ export default class Index extends Component {
               </div> : null}
             </div>
             <Table
-              rowKey={this.props.rowKey}
+              primaryKeyField={this.props.primaryKeyField}
               columns={columns}
               dataSource={[...addData, ...dataSource]}
               onChange={this.handleTableChange}

@@ -71,7 +71,7 @@ export default class Index extends Component {
     //批量操作的对象
     rowAction: null,
     //主键id
-    rowKey: "id",
+    primaryKeyField: "id",
     //其他按钮组件
     otherBtn: (selectedRowKeys, onSelectChange, get_data) => {
     },
@@ -321,7 +321,7 @@ export default class Index extends Component {
   }
 
   render() {
-    const {treeSet, hasPage, ajax, deleteUrl, rowKey, isActionFixed, hasEdit, addForm, table_className, size, searchPlaceholder, searchLabelField, hasDeleteBatch, searchWidth, tit, clotheLang,height} = this.props;
+    const {treeSet, hasPage, ajax, deleteUrl, primaryKeyField, isActionFixed, hasEdit, addForm, table_className, size, searchPlaceholder, searchLabelField, hasDeleteBatch, searchWidth, tit, clotheLang,height} = this.props;
     const {selectedRowKeys, record, tree_show, visible} = this.state;
 
     let columns = [...this.props.columns]
@@ -407,7 +407,7 @@ export default class Index extends Component {
                     />
                   </div> : null}
                 </div>
-                <Table rowKey={this.props.rowKey}
+                <Table primaryKeyField={this.props.primaryKeyField}
                        columns={columns}
                        dataSource={this.state.dataSource}
                        onChange={this.handleTableChange}

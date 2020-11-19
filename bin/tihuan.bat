@@ -10,6 +10,6 @@
 xcopy  D:\ku\clothe\dist  D:\auto\zhWeb\node_modules\clothe\dist /s /h /e /y /d
 xcopy  D:\ku\clothe\lib  D:\auto\zhWeb\node_modules\clothe\lib /s /h /e /y /d
 
-xcopy  D:\ku\clothe\dist  D:\oppo_pro\esa-manage\node_modules\clothe\dist /s /h /e /y /d
-xcopy  D:\ku\clothe\lib  D:\oppo_pro\esa-manage\node_modules\clothe\lib /s /h /e /y /d
+xcopy  D:\ku\clothe\dist  D:\oppo_pro\esa-admin\node_modules\clothe\dist /s /h /e /y /d
+xcopy  D:\ku\clothe\lib  D:\oppo_pro\esa_admin\node_modules\clothe\lib /s /h /e /y /d
 exit

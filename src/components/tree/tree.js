@@ -39,7 +39,7 @@ export default class UpTree extends React.Component {
     //去除添加,默认去除
     add: false,
     //调用树数据的参数
-    parm: {},
+    param: {},
     //是否显示搜索，默认显示
     search: false,
     //树的url，如果为null就是不需要树
@@ -94,7 +94,7 @@ export default class UpTree extends React.Component {
       loading: true
     })
     if (this.props.treeUrl) {
-      this.props.ajax(this.props.treeUrl, this.props.parm, (data) => {
+      this.props.ajax(this.props.treeUrl, this.props.param, (data) => {
         let value = this.props.get_data(data);
 
         if ((this.props.selectFirstValue && this.first) || !(select_value  && treeFindObjById(select_value[0],value,key_value))) {

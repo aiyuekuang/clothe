@@ -77,7 +77,7 @@ const defaultProps = {
   //上面表单组件的位置
   formItemLayout: [6, 16],
   //编辑时传递的主键
-  rowKey: "id",
+  primaryKeyField: "id",
   //有几列数据
   li: 1,
   //表单的样式
@@ -236,12 +236,12 @@ export default function index(prop, ref) {
       }
     }
     if (props.record) {
-      values_temp[props.rowKey] = props.record[props.rowKey]
+      values_temp[props.primaryKeyField] = props.record[props.primaryKeyField]
     }
 
     if (props.addUrl) {
       let _url = props.addUrl
-      if (editUrl && props.record && props.record[props.rowKey]) {
+      if (editUrl && props.record && props.record[props.primaryKeyField]) {
         _url = editUrl
       }
       props.ajax(_url, values_temp, (data) => {

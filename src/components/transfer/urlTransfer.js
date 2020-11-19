@@ -15,7 +15,7 @@ let defaultProps = {
   //已选中数据
   value: [],
   //主键字段
-  rowKey: "id",
+  primaryKeyField: "id",
   //请求接口用到的其他参数
   values: {},
   //数据请求到之后，写入数据的函数

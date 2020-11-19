@@ -13,7 +13,7 @@ import {
 
 
 let defaultProps = {
-  rowKey: "id",
+  primaryKeyField: "id",
   addFormSet: {},
   columns: [{
     // 表单标题
@@ -41,7 +41,7 @@ export default function Index(prop) {
     ...defaultProps, ...prop
   }
 
-  const {rowKey, clotheLang, columns, addUrl, addFormSet, editUrl} = props;
+  const {primaryKeyField, clotheLang, columns, addUrl, addFormSet, editUrl} = props;
 
   const [form] = Form.useForm();
   const [editingKey, setEditingKey] = useState('');
@@ -87,11 +87,11 @@ export default function Index(prop) {
   };
 
 
-  const isEditing = (record) => record[rowKey] === editingKey;
+  const isEditing = (record) => record[primaryKeyField] === editingKey;
 
   const edit = (record) => {
     form.setFieldsValue({...record});
-    setEditingKey(record[rowKey]);
+    setEditingKey(record[primaryKeyField]);
   };
 
   const cancel = () => {
@@ -114,9 +114,9 @@ export default function Index(prop) {
       values_temp = {...values, ...addFormSet.addParms};
 
       if (editingKey && editingKey !== "addKey") {
-        values_temp[rowKey] = editingKey
+        values_temp[primaryKeyField] = editingKey
       } else {
-        values_temp[rowKey] = null
+        values_temp[primaryKeyField] = null
       }
 
       if (addUrl) {
@@ -208,7 +208,7 @@ export default function Index(prop) {
           }}
 
           hideSelectAll={false}
-          actionComp={(_, record) => {
+          actionComponent={(_, record) => {
             const editable = isEditing(record);
             return editable ? (
               <span>
