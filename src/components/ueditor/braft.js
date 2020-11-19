@@ -8,7 +8,7 @@ import BraftEditor from 'braft-editor'
 import {ContentUtils} from 'braft-utils'
 import {ImageUtils} from 'braft-finder'
 import {upload} from "../utils/fetchData"
-import {UP_upload} from "../index";
+import {UploadPro} from "../index";
 import {UploadOutlined} from "@ant-design/icons"
 import { convertRawToHTML, convertHTMLToRaw } from 'braft-convert'
 
@@ -136,7 +136,7 @@ export default class Index extends Component {
       key: 'antd-uploader',
       type: 'component',
       component: (
-        <UP_upload
+        <UploadPro
           api_set={setData}
           api_key={is_true}
           msg={(data) => {
@@ -161,7 +161,7 @@ export default class Index extends Component {
           {/* 这里的按钮最好加上type="button"，以避免在表单容器中触发表单提交，用Antd的Button组件则无需如此 */}
           <button type="button" className="control-item button upload-button" data-title="插入图片"><UploadOutlined/>
           </button>
-        </UP_upload>
+        </UploadPro>
       )
     }] : []),
       'separator',

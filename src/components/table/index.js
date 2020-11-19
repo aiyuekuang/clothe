@@ -3,7 +3,7 @@
  */
 import React, {Component, Fragment} from 'react';
 import {Button, Divider, Dropdown, Input, Menu, Modal, Table,} from 'antd';
-import {FormAdd,SearchTable,TreeCommon} from "../index"
+import {FormAdd,SearchTable,TreePro} from "../index"
 import {getTextByJs, ajax} from "../utils/common"
 import {CaretRightOutlined, DeleteOutlined, DownOutlined, PlusOutlined} from "@ant-design/icons"
 import {diffObj, isArrayop, uid} from "esn";
@@ -669,7 +669,7 @@ export default class Index extends Component {
         <div className="up_table_warp_bottom">
           {this.props.treeUrl ?
             <div className={tree_show ? "up_table_warp_bottom_l" : "up_table_warp_bottom_l gybxs"}>
-              <TreeCommon tree_hide={this.tree_hide} ajax={ajax} select={this.select}
+              <TreePro tree_hide={this.tree_hide} ajax={ajax} select={this.select}
                        treeUrl={this.props.treeUrl} {...treeSet}/>
             </div> : null}
           <div className={this.props.treeUrl ? "up_table_warp_bottom_r" : "up_table_warp_bottom_r_s"}>
