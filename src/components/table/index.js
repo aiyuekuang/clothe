@@ -283,7 +283,7 @@ export default class Index extends Component {
   table_search = (submit) => {
     return (
       <SearchTable
-        toggleFun={() => {
+        toggleCallback={() => {
           this.getHeight()
         }}
         submit={submit}

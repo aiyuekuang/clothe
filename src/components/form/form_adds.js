@@ -99,7 +99,7 @@ const defaultProps = {
   //编辑时有遇到hide字段，是否需要隐藏整个组件
   hideParam: false,
   //实例运行时，返回一个form
-  returnForm: (form) => {
+  returnFormCallback: (form) => {
 
   },
   //是否需要表格是label和input是横向结构
@@ -157,7 +157,7 @@ export default function index(prop, ref) {
     ...prop
   };
 
-  const {li, className, formData, hasBtn, editUrl, otherForm, record, formSet, formDataChangeRest, hideParam, returnForm, layoutHorizontal, renderFooter, visible, isVisibleRest, clotheLang, onValuesChange,disabledBtn,size,otherBtn,submitText,CustomSubmit} = props;
+  const {li, className, formData, hasBtn, editUrl, otherForm, record, formSet, formDataChangeRest, hideParam, returnFormCallback, layoutHorizontal, renderFooter, visible, isVisibleRest, clotheLang, onValuesChange,disabledBtn,size,otherBtn,submitText,CustomSubmit} = props;
 
 
   const [form] = Form.useForm();
@@ -167,7 +167,7 @@ export default function index(prop, ref) {
 
   useEffect(() => {
     // Update the document title using the browser API
-    returnForm(form);
+    returnFormCallback(form);
     return () => {
     }
   }, []);

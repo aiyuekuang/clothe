@@ -60,7 +60,7 @@ export default class Index extends React.Component {
               title: "搜索",
               field: "priceRange",
               // 是否在收起时显示
-              is_top: true,
+              isTop: true,
 
 
             },
@@ -69,7 +69,7 @@ export default class Index extends React.Component {
               title: "代理",
               field: "agentName",
               // 是否在收起时显示
-              is_top: true,
+              isTop: true,
 
             },
             {

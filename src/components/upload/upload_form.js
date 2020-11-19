@@ -49,7 +49,7 @@ export default class Index extends Component {
         //上传列表的内建样式，支持三种基本样式 text, picture 和 picture-card
         listType: "picture",
         //按钮文本
-        tit: "点击上传",
+        title: "点击上传",
         //是否展示 uploadList, 可设为一个对象，用于单独设定 showPreviewIcon 和 showRemoveIcon
         showUploadList: true,
         //上传成功后的回调,
@@ -282,7 +282,7 @@ export default class Index extends Component {
                             <Button
                                 disabled={this.state.loading_img || this.props.disabled}>
                                 {this.props.showUploadList ?
-                                    <Fragment><CloudUploadOutlined/> {this.props.tit}</Fragment> : this.props.tit}
+                                    <Fragment><CloudUploadOutlined/> {this.props.title}</Fragment> : this.props.title}
                             </Button>
                         }
                     </Upload> : <Input style={{width: 180}} value={value} onChange={this.props.onChange} allowClear/>

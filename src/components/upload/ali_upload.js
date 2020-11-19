@@ -16,7 +16,7 @@ export default class Index extends Component {
         accessId: 'c2hhb2RhaG9uZw==',
         policy: 'eGl4aWhhaGFrdWt1ZGFkYQ==',
         signature: 'ZGFob25nc2hhbw==',
-        tit:"点击上传",
+        title:"点击上传",
         //其他设置
         other_set: {},
     }
@@ -106,7 +106,7 @@ export default class Index extends Component {
     };
 
     render() {
-        const {tit, value,other_set } = this.props;
+        const {title, value,other_set } = this.props;
         const props = {
             name: 'file',
             fileList: value,
@@ -121,7 +121,7 @@ export default class Index extends Component {
         return (
             <Upload {...props}>
                 <Button>
-                    <CloudUploadOutlined /> {tit}
+                    <CloudUploadOutlined /> {title}
                 </Button>
             </Upload>
         );

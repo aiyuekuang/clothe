@@ -20,7 +20,7 @@ let defaultProps = {
     title: "搜索",
     field: "title",
     // 是否在收起时显示
-    is_top: true,
+    isTop: true,
     fill: true,
     comp: <Input placeholder="输入邮箱/管理者"/>,
     editable: true

@@ -126,15 +126,15 @@ export let turn_data = (arr,arr_obj=null) => {
     }
 }
 
-export let valueFormat=(value,tit)=>{
+export let valueFormat=(value,title)=>{
     try {
         if (value) {
             return value;
         } else {
-            return tit;
+            return title;
         }
     } catch (e) {
-        return tit;
+        return title;
     }
 }
 

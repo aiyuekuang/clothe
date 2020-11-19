@@ -25,7 +25,7 @@ const defaultProps = {
     //表单组件
     comp: <Input/>,
     //是否在收起时显示
-    is_top: true
+    isTop: true
   }, {
     //表单标题
     title: "关键字",
@@ -38,14 +38,14 @@ const defaultProps = {
     //表单组件
     comp: <Input/>,
     //是否在收起时显示
-    is_top: false
+    isTop: false
   }],
   //submit提交
   submit: (values) => {
     console.log(values)
   },
   //是横向布局还是竖着的布局，默认是横向的
-  search_line: true,
+  searchLine: true,
   //布局比例
   formItemLayout: [5, 17],
   //是否需要无label的模式
@@ -53,7 +53,7 @@ const defaultProps = {
   //form表单需要的设置
   formSet: {},
   //实例运行时，返回一个form
-  returnForm: (form) => {
+  returnFormCallback: (form) => {
 
   },
   //是否需要表格是label和input是横向结构
@@ -67,11 +67,11 @@ const defaultProps = {
   //是否需要重置按钮
   hasRest:true,
   //展开或者收起时，触发的回调
-  toggleFun:(bool)=>{
+  toggleCallback:(bool)=>{
 
   },
   //重置的时候的回调
-  restFun:()=>{}
+  restCallback:()=>{}
 }
 
 export default function index(prop) {
@@ -80,7 +80,7 @@ export default function index(prop) {
     ...prop
   };
 
-  const {search_line, formData, noLabel, formSet, returnForm, clotheLang, layoutHorizontal, onValuesChange, hasSubmit,hasRest,toggleFun,restFun} = props;
+  const {searchLine, formData, noLabel, formSet, returnFormCallback, clotheLang, layoutHorizontal, onValuesChange, hasSubmit,hasRest,toggleCallback,restCallback} = props;
 
   const [form] = Form.useForm();
   const [toogle, setToogle] = useState(true);
@@ -89,14 +89,14 @@ export default function index(prop) {
   useEffect(() => {
     // Update the document title using the browser API
     showFun()
-    returnForm(form);
+    returnFormCallback(form);
     return () => {
     }
   }, []);
 
   useEffect(() => {
     // Update the document title using the browser API
-    toggleFun(!toogle)
+    toggleCallback(!toogle)
     return () => {
     }
   }, [toogle]);
@@ -105,7 +105,7 @@ export default function index(prop) {
 
   let showFun = (arr = props.formData) => {
     let index = arr.find((data, i) => {
-      return !data.is_top
+      return !data.isTop
     })
     setShow(index !== undefined)
   }
@@ -114,7 +114,7 @@ export default function index(prop) {
     if (!toogle) {
       let rest_field = [];
       for (let i = 0; i < props.formData.length; i++) {
-        if (!props.formData[i].is_top) {
+        if (!props.formData[i].isTop) {
           rest_field.push(props.formData[i].field)
         }
       }
@@ -128,7 +128,7 @@ export default function index(prop) {
     form.resetFields();
     form.validateFields()
       .then(values => {
-        restFun(form)
+        restCallback(form)
         props.submit(values);
       })
   }
@@ -164,7 +164,7 @@ export default function index(prop) {
 
 
     if (toogle) {
-      if (data.is_top) {
+      if (data.isTop) {
         return (
           <div key={i}>
             {dom}

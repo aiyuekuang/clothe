@@ -106,7 +106,7 @@ export default class Index extends Component {
     //弹窗的设置
     modalSet: {},
     //弹窗的标题
-    tit: null,
+    title: null,
     value: [],
     //是否需要重新打开时已选数据还在
     isKeepSelectedRowKeys: true,
@@ -172,7 +172,7 @@ export default class Index extends Component {
   //搜索组件
   table_search = (submit) => {
     return (
-      <Search_table returnForm={(searchForm) => {
+      <Search_table returnFormCallback={(searchForm) => {
         this.setState({
           searchForm
         })
@@ -321,7 +321,7 @@ export default class Index extends Component {
   }
 
   render() {
-    const {treeSet, hasPage, ajax, deleteUrl, primaryKeyField, isActionFixed, hasEdit, addForm, table_className, size, searchPlaceholder, searchLabelField, hasDeleteBatch, searchWidth, tit, clotheLang,height} = this.props;
+    const {treeSet, hasPage, ajax, deleteUrl, primaryKeyField, isActionFixed, hasEdit, addForm, table_className, size, searchPlaceholder, searchLabelField, hasDeleteBatch, searchWidth, title, clotheLang,height} = this.props;
     const {selectedRowKeys, record, tree_show, visible} = this.state;
 
     let columns = [...this.props.columns]
@@ -373,7 +373,7 @@ export default class Index extends Component {
         </div>
         <Modal
           {...this.props.modalSet}
-          title={tit}
+          title={title}
           visible={this.state.visible}
           onCancel={this.handleCancel}
           footer={null}

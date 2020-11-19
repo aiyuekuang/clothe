@@ -35,7 +35,7 @@ export default class UpTree extends React.Component {
     //是否显示按钮，默认不显示
     btn: false,
     //标题
-    tit: "资源目录",
+    title: "资源目录",
     //去除添加,默认去除
     add: false,
     //调用树数据的参数
@@ -258,7 +258,7 @@ export default class UpTree extends React.Component {
   }
 
   render() {
-    const {searchValue, expandedKeys, autoExpandParent, loading, treeData, select_value, tit} = this.state;
+    const {searchValue, expandedKeys, autoExpandParent, loading, treeData, select_value, title} = this.state;
     const {addFormSet, otherSet, className, tree_hide, maxHeight, clotheLang} = this.props;
 
     const loop = (data = treeData, father_item = null) => {
@@ -296,9 +296,9 @@ export default class UpTree extends React.Component {
 
     return (
       <div className={className}>
-        {tit ? <div className="up_tree_head">
+        {title ? <div className="up_tree_head">
           <div className="up_tree_head_tit">
-            {this.props.tit}
+            {this.props.title}
           </div>
           {this.props.add ? <div>
             <a onClick={this.showModal}>{clotheLang.form.add}/{clotheLang.tree.modify}</a>
