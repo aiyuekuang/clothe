@@ -3,7 +3,7 @@
  */
 import React, {Fragment, useEffect, useRef, useState} from 'react';
 import {Button, Input, InputNumber, Form, Table, Popconfirm} from "antd"
-import {TableCommon} from "../index"
+import {TablePro} from "../index"
 import {
   DeleteOutlined,
   PlusOutlined,
@@ -189,7 +189,7 @@ export default function Index(prop) {
               }
             }}
             {...addFormSet.formSet}>
-        <TableCommon
+        <TablePro
           ref={table}
           addData={addData}
           setData={(data) => data.entity.records}

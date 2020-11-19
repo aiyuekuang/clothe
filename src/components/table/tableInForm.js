@@ -3,7 +3,7 @@
  */
 import React, {Fragment, useEffect, useRef, useState} from 'react';
 import {Button} from "antd"
-import TableCommon from "./index";
+import TablePro from "./index";
 import Table_select from "./table_select"
 import {isArrayop} from "esn";
 
@@ -41,7 +41,7 @@ export default function Index(prop) {
 
   return (
     <div>
-      <TableCommon
+      <TablePro
         values={values}
         otherBtn={(selectedRowKeys, onSelectChange, getData, values) => {
           return (

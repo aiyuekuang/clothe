@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import {Input, message} from 'antd';
-import {TableCommon} from "@components"
+import {TablePro} from "@components"
 
 
 export default class Index extends React.Component {
@@ -28,7 +28,7 @@ export default class Index extends React.Component {
   render() {
     return (
       <div className="up_index">
-        <TableCommon
+        <TablePro
           columns={[
             {
               // 表单标题
