@@ -606,7 +606,7 @@ export default class Index extends Component {
         title: clotheLang.table.operation,
         dataIndex: 'action',
         width: actionWidth,
-        fixed: isActionFixed,
+        fixed: isActionFixed === true?"right":isActionFixed,
         render: (text, record) => {
           let has_edit_ = hasEdit && (addUrl || addSubmitFun);
           if (typeof hasEdit === "function") {
@@ -705,7 +705,7 @@ export default class Index extends Component {
                   style={{width: searchWidth}}
                 />
               </div> : null}
-              {otherSearchDom && otherSearchDomIsBottom ? <div className="">
+              {otherSearchDom && otherSearchDomIsBottom ? <div>
                 {otherSearchDom(loading, (data, isUpdate = true) => {
                   let obj = {...otherSearchValues, ...data}
                   this.setState({
