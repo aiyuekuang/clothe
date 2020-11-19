@@ -719,7 +719,6 @@ export default class Index extends Component {
               </div> : null}
             </div>
             <Table
-              primaryKeyField={this.props.primaryKeyField}
               columns={columns}
               dataSource={[...addData, ...dataSource]}
               onChange={this.handleTableChange}
@@ -729,6 +728,7 @@ export default class Index extends Component {
               rowSelection={(this.props.rowAction || (deleteUrl && hasDeleteBatch) || otherBtn) && hideSelectAll ? rowSelection : null}
               style={{width: "100%"}}
               size={size}
+              rowKey={primaryKeyField}
               {...this.props.antdSet}
             />
           </div>

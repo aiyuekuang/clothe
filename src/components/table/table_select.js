@@ -407,7 +407,7 @@ export default class Index extends Component {
                     />
                   </div> : null}
                 </div>
-                <Table primaryKeyField={this.props.primaryKeyField}
+                <Table
                        columns={columns}
                        dataSource={this.state.dataSource}
                        onChange={this.handleTableChange}
@@ -418,6 +418,7 @@ export default class Index extends Component {
                        style={{width: "100%"}}
                        className={table_className}
                        size={size}
+                       rowKey={primaryKeyField}
                        {...this.props.other_set}
                 />
               </div>
