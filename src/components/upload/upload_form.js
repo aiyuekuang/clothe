@@ -146,12 +146,16 @@ export default class Index extends Component {
      * 上传之前的验证
      */
     beforeUpload = (file) => {
-        this.load_fun(true)
         const {max_size} = this.props
-        this.setState({
-            loading_img: true
-        })
-        this.props.before_upload(file);
+
+        let isTrue = this.props.before_upload(file);
+        if(isTrue !== false){
+            this.load_fun(true)
+            this.setState({
+                loading_img: true
+            })
+        }
+
         let isLtMax = true, judge = true;
         if (max_size) {
             let file_size = file.size / 1024 / 1024;
@@ -183,7 +187,8 @@ export default class Index extends Component {
         this.setState({
             loading_img: false
         })
-        return judge !== undefined && isLtMax;
+        return isTrue !== false && judge !== undefined && isLtMax;
+
     };
 
     handleChange = (info) => {

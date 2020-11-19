@@ -21,7 +21,7 @@ const defaultProps = {
       max: 10, message: '长度不得超过10',
     }],
     //默认值
-    init_value: 1,
+    initValue: 1,
     //表单组件
     comp: <Input/>,
     //是否在收起时显示
@@ -146,7 +146,7 @@ export default function index(prop) {
       prop.label = data.title
     }
 
-    initialValues[data.field] = data.init_value
+    initialValues[data.field] = data.initValue
 
     let dom = (<FormItem
       name={data.field}

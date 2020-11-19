@@ -23,7 +23,7 @@ const defaultProps = {
       max: 10, message: '长度不得超过10',
     }],
     //默认值,可以是函数，(text,record)=>{}
-    init_value: 1,
+    initValue: 1,
     //其他的规则对象设置
     other_set: {},
     //其他提示
@@ -31,7 +31,7 @@ const defaultProps = {
     //日期控件用到的format
     format: 'YYYY-MM-DD',
     //表单组件
-    comp: <Input/>,
+    component: <Input/>,
     //编辑时是否需要隐藏
     hide: false,
     //新增时是否需要隐藏
@@ -51,7 +51,7 @@ const defaultProps = {
       max: 10, message: '长度不得超过10',
     }],
     //表单组件
-    comp: <Input/>,
+    component: <Input/>,
   }, {
     //表单标题
     title: "上传图片环节缓解带回家去外地",
@@ -59,7 +59,7 @@ const defaultProps = {
     field: "img",
     fill: false,
     //表单组件
-    comp: <Input/>,
+    component: <Input/>,
     rules: []
   }],
   //submit提交
@@ -120,7 +120,9 @@ const defaultProps = {
   //其他新增时需要的按钮,用<div>包裹一下
   otherBtn:({form})=><Fragment/>,
   //提交时的文本
-  submitText:null
+  submitText:null,
+  //自定义提交按钮
+  CustomSubmit:null
 }
 
 export let formItemLayoutFun = (formItemLayout_, _layoutHorizontal) => {
@@ -155,7 +157,7 @@ export default function index(prop, ref) {
     ...prop
   };
 
-  const {li, className, formData, hasBtn, editUrl, otherForm, record, formSet, formDataChangeRest, hideParam, returnForm, layoutHorizontal, renderFooter, visible, isVisibleRest, clotheLang, onValuesChange,disabledBtn,size,otherBtn,submitText} = props;
+  const {li, className, formData, hasBtn, editUrl, otherForm, record, formSet, formDataChangeRest, hideParam, returnForm, layoutHorizontal, renderFooter, visible, isVisibleRest, clotheLang, onValuesChange,disabledBtn,size,otherBtn,submitText,CustomSubmit} = props;
 
 
   const [form] = Form.useForm();
@@ -269,10 +271,10 @@ export default function index(prop, ref) {
 
   let lists = props.formData.map((data, i) => {
     initialValues[data.field] = props.record ?
-      typeof data.init_value === "function" ?
-        data.init_value(props.record[data.field], props.record)
+      typeof data.initValue === "function" ?
+        data.initValue(props.record[data.field], props.record)
         : props.record[data.field]
-      : data.init_value
+      : data.initValue
 
     if (record ? !data.hide : !data.addHide) {
       counts++
@@ -304,7 +306,7 @@ export default function index(prop, ref) {
                 ...data.other_set
               }}
             >
-              {data.comp ? (typeof data.comp === "function" ? data.comp(props.record) : data.comp) :
+              {data.component ? (typeof data.component === "function" ? data.component(props.record) : data.component) :
                 <Input placeholder={`${clotheLang.form.pleaseEnter}${data.title}`} allowClear size={size}/>}
             </FormItem>
           </div>}
@@ -338,9 +340,9 @@ export default function index(prop, ref) {
             <Col {...formItemLayout().wrapperCol}>
               <div className="up_table_form_add_btn">
                 {otherBtn({form})}
-                <div>
-                  <Button disabled={disabled || disabledBtn} type="primary" htmlType="submit">{submitText?submitText:anupLang.form.submit}</Button>
-                </div>
+                {CustomSubmit?<CustomSubmit form={form} submit={form.submit}/>:<div>
+                  <Button disabled={disabled || disabledBtn} type="primary" htmlType="submit">{submitText?submitText:clotheLang.form.submit}</Button>
+                </div>}
                 {!props.record ? <div>
                   <Button disabled={disabled} onClick={rest}
                   >

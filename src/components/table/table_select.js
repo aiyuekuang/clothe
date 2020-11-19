@@ -190,7 +190,7 @@ export default class Index extends Component {
     let search_init_data = {}
     if (JSON.stringify(values) === "{}") {
       for (let i of this.props.searchForm) {
-        search_init_data[i.field] = i.init_value
+        search_init_data[i.field] = i.initValue
       }
     } else {
       search_init_data = {}

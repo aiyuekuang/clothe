@@ -5,14 +5,14 @@
   "scripts": {
     "start": "webpack-dev-server --mode development",
     "lib": "npm run cleanLib && babel src/components --out-dir lib && npm run copy",
-    "build": "npm run cleanDist &&cross-env NODE_ENV=production webpack --mode production --progress",
+    "build": "npm run cleanDist &&cross-env NODE_ENV=production webpack --mode production --progress && npm run copy",
     "cleanDist": "rd /s/q dist && mkdir dist",
     "cleanLib": "rd /s/q lib && mkdir lib",
     "login": "npm login",
     "fabu": "npm run npm && npm run git && npm version patch && npm publish",
     "npm": "npm set registry https://registry.npmjs.org",
     "git": "python ./bin/release.py",
-    "copy": "start D:\\ku/anup/bin/tihuan.bat"
+    "copy": "start D:\\ku/clothe/bin/tihuan.bat"
   },
   "main": "./lib/index.js",
   "files": [

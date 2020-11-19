@@ -1,7 +1,7 @@
 import {Form, Input, Button, Checkbox, Switch} from 'antd';
 import {MinusCircleOutlined, PlusOutlined, ArrowUpOutlined, ArrowDownOutlined} from '@ant-design/icons';
 import React, {Fragment, useEffect, useState, useRef} from 'react';
-import {QuestionAddFormIn,Form_add} from "../index"
+import {QuestionAddFormIn,FormAdd} from "../index"
 
 
 let defaultProps = {
@@ -15,7 +15,7 @@ let defaultProps = {
         //字段
         field: "must",
         //默认值,可以是函数，(text,record)=>{}
-        init_value: true,
+        initValue: true,
         //其他提示
         extra: "",
         //表单组件
@@ -56,7 +56,7 @@ export default function Index(prop, ref) {
     }
 
     return (
-        <Form_add
+        <FormAdd
             record={record}
             formData={formData}
             submit={submitFun}

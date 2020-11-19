@@ -180,7 +180,7 @@ export function Tree_form(prop) {
       data.init_warp ?
         data.init_warp(props.select_data[data.field])
         : props.select_data[data.field]
-      : data.init_value
+      : data.initValue
     return (
       <Fragment key={i}>
         {props.select_data && data.hide ? null :

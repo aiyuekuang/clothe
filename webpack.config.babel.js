@@ -79,7 +79,7 @@ module.exports = {
                     test: /node_modules\/(.*)\.js/
                 },
                 styles: {
-                    name: 'anup',
+                    name: 'clothe',
                     test: /\.(scss|css)$/,
                     chunks: 'all',
                     minChunks: 1,

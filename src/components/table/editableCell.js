@@ -152,7 +152,7 @@ export default function Index(prop) {
     let obj = {id: "addKey"};
     for (let i of columns) {
       if (i.editable) {
-        obj[i.field] = i.init_value ? i.init_value : ""
+        obj[i.field] = i.initValue ? i.initValue : ""
       }
     }
     setAddData([obj])

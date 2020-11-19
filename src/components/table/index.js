@@ -49,7 +49,7 @@ export default class Index extends Component {
     values: {},
     //数据获取方式
     setData: (data) => {
-      return data.entity.records
+      return data.data.records
     },
     //获取分页总数的方式
     setTotal: null,
@@ -193,7 +193,9 @@ export default class Index extends Component {
     addCallback: () => {
     },
     //表格加载数据时的loading回调
-    loadingFun:(loading)=>{}
+    loadingFun:(loading)=>{},
+    //删除之前的回调
+    deleteBefore:(id,record,fun)=>{}
   }
 
   constructor(props) {
@@ -343,7 +345,7 @@ export default class Index extends Component {
     let search_init_data = {}
     if (JSON.stringify(values) === "{}") {
       for (let i of this.props.searchForm) {
-        search_init_data[i.field] = i.init_value
+        search_init_data[i.field] = i.initValue
       }
     } else {
       search_init_data = {}
@@ -483,7 +485,7 @@ export default class Index extends Component {
     this.get_data();
   }
 
-  delect_all = (id = "") => {
+  deleteAll = (id = "") => {
     const {pagination, values} = this.state
     const {deleteUseArr, deleteCallback} = this.props;
     let parm = {...this.props.deleteValues};
@@ -534,7 +536,7 @@ export default class Index extends Component {
       okType: 'danger',
       cancelText: '否',
       onOk: () => {
-        this.delect_all(id)
+        this.deleteAll(id)
       },
       onCancel() {
       },
@@ -564,7 +566,7 @@ export default class Index extends Component {
 
 
   render() {
-    const {actionWidth, treeSet, hasPage, ajax, deleteUrl, rowKey, isActionFixed, hasEdit, addForm, size, searchPlaceholder, searchLabelField, hasDeleteBatch, searchWidth, setTotal, addUrl, deleteDisabledFun, addSubmitFun, otherSearchDom, clotheLang, modalTitle, otherBtn, hideSelectAll, addData, addText, otherSearchDomIsBottom, modalSet} = this.props;
+    const {actionWidth, treeSet, hasPage, ajax, deleteUrl, rowKey, isActionFixed, hasEdit, addForm, size, searchPlaceholder, searchLabelField, hasDeleteBatch, searchWidth, setTotal, addUrl, deleteDisabledFun, addSubmitFun, otherSearchDom, clotheLang, modalTitle, otherBtn, hideSelectAll, addData, addText, otherSearchDomIsBottom, modalSet,deleteBefore} = this.props;
     const {selectedRowKeys, record, tree_show, visible, values, dataSource, loading, otherSearchValues, isAddText, height} = this.state;
 
 
@@ -618,7 +620,7 @@ export default class Index extends Component {
               {has_edit_ || (deleteDisabledFun(record) && has_edit_) ? <Divider type="vertical"/> : null}
               {deleteUrl ? deleteDisabledFun(record) ?
                 <a
-                  onClick={this.showDeleteConfirm.bind(this, record[rowKey], record)}>{clotheLang.table.delete}</a> : null : null}
+                  onClick={deleteBefore?()=>deleteBefore(record[rowKey], record,this.deleteAll):this.showDeleteConfirm.bind(this, record[rowKey], record)}>{clotheLang.table.delete}</a> : null : null}
             </Fragment>
           )
         }
@@ -694,7 +696,7 @@ export default class Index extends Component {
               {otherBtn ? otherBtn(this.state.selectedRowKeys, this.onSelectChange, this.get_data, {...values, ...otherSearchValues}) : null}
               {deleteUrl && hasDeleteBatch ?
                 <div><Button type="danger" disabled={selectedRowKeys.length === 0}
-                             onClick={this.showDeleteConfirm.bind(this, selectedRowKeys, null)}><DeleteOutlined/>{clotheLang.table.bulkDelete}
+                             onClick={deleteBefore?()=>deleteBefore(selectedRowKeys,null,this.deleteAll):this.showDeleteConfirm.bind(this, selectedRowKeys, null)}><DeleteOutlined/>{clotheLang.table.bulkDelete}
                 </Button></div> : null}
               {searchLabelField ? <div>
                 <Search
