@@ -729,7 +729,7 @@ export default class Index extends Component {
               style={{width: "100%"}}
               size={size}
               rowKey={primaryKeyField}
-              {...this.props.antdSet}
+              {...this.props.tableSet}
             />
           </div>
         </div>

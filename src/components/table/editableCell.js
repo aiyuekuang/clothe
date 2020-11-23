@@ -194,7 +194,7 @@ export default function Index(prop) {
           addData={addData}
           setData={(data) => data.entity.records}
           setTotal={(data) => data.entity.totalCount}
-          antdSet={{
+          tableSet={{
             components: {
               body: {
                 cell: EditableCell,

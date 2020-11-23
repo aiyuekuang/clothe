@@ -12,7 +12,7 @@
     "fabu": "npm run npm && npm run git && npm version patch && npm publish",
     "npm": "npm set registry https://registry.npmjs.org",
     "git": "python ./bin/release.py",
-    "copy": "start D:\\ku/clothe/bin/tihuan.bat"
+    "copy": "python ./bin/copy.py"
   },
   "main": "./lib/index.js",
   "files": [

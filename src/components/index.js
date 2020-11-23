@@ -65,11 +65,10 @@ let upConfig = {
 
 
 let Hoc = function wrapWithUsername(WrappedFunc) {
-  let newFunc = forwardRef((props, ref) => {
+  return forwardRef((props, ref) => {
     const _props = {...{clotheLang: lang}, ...upConfig, ...props}
     return <WrappedFunc {..._props} ref={ref}/>
   });
-  return newFunc;
 }
 
 

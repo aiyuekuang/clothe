@@ -15,6 +15,7 @@ let defaultProps = {
   dataSourceKey: "label",
   //数据源对应的值的字段名
   dataSourceValue: "value",
+  primaryKeyField:"id",
   //表单中用到的控制的值
   value: null,
   //选择框变化时的事件，会返回值和对象
@@ -61,7 +62,7 @@ function index(prop, ref) {
     ...defaultProps, ...prop
   }
 
-  const {dataSource, onChange, value, placeholder, ajax, paramField, url, setData, isLeafFun, isValueLabel, returnLastValue, returnString, values, initFieldValue, dataSourceKey, dataSourceValue, layer, valueFun, clotheLang,disabled} = props;
+  const {dataSource, onChange, value, placeholder, ajax, paramField, url, setData, isLeafFun, isValueLabel, returnLastValue, returnString, values, initFieldValue, dataSourceKey, dataSourceValue, layer, valueFun, clotheLang,disabled,primaryKeyField} = props;
 
   const [_dataSource, setDataSource] = useState([]);
   const [_value, setValue] = useState([]);
@@ -105,6 +106,7 @@ function index(prop, ref) {
       }
       _obj.label = data[dataSourceKey];
       _obj.value = data[dataSourceValue];
+      _obj.key = data[primaryKeyField];
       if (count > 0 && !isLeafFun(data)) {
         _obj.isLeaf = false
       }
