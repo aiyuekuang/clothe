@@ -23,7 +23,7 @@ const defaultProps = {
     //默认值
     initValue: 1,
     //表单组件
-    comp: <Input/>,
+    component: <Input/>,
     //是否在收起时显示
     isTop: true
   }, {
@@ -36,7 +36,7 @@ const defaultProps = {
       max: 10, message: '长度不得超过10',
     }],
     //表单组件
-    comp: <Input/>,
+    component: <Input/>,
     //是否在收起时显示
     isTop: false
   }],
@@ -159,7 +159,7 @@ export default function index(prop) {
         ...data.other_set
       }}
     >
-      {data.comp ? data.comp : <Input placeholder={`${clotheLang.form.pleaseEnter}${data.title}`} allowClear/>}
+      {data.component ? data.component : <Input placeholder={`${clotheLang.form.pleaseEnter}${data.title}`} allowClear/>}
     </FormItem>)
 
 

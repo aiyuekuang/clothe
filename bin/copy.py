@@ -2,7 +2,8 @@ import os
 import shutil
 import stat
 
-source_path = r"D:\ku\clothe\lib"
+source_dist = r"D:\ku\clothe\dist"
+source_lib = r"D:\ku\clothe\lib"
 
 
 class Path(object):
@@ -40,5 +41,5 @@ def copy_dir(olddir_path,newdir_path):
 for i in arr:
     del_dir(i.dist)
     del_dir(i.lib)
-    copy_dir(source_path,i.dist)
-    copy_dir(source_path,i.lib)
+    copy_dir(source_dist,i.dist)
+    copy_dir(source_lib,i.lib)

@@ -15,25 +15,25 @@ let defaultProps = {
     },
   ],
   name: "options",
-  comp: null,
+  component: null,
   otherComp: [{
     title: "地区",
     field: "label",
     fill: true,
     width: 3,
-    comp: <Input/>
+    component: <Input/>
   }, {
     title: "值",
     field: "value",
     fill: true,
     width: 3,
-    comp: <Input/>
+    component: <Input/>
   }, {
     title: "值的",
     field: "extra",
     fill: true,
     width: 10,
-    comp: <Input/>
+    component: <Input/>
   }]
 }
 
@@ -42,7 +42,7 @@ function Index(prop, ref) {
   let props = {
     ...defaultProps, ...prop
   }
-  const {color, record, label, rules, name, isTextArea, clotheLang, comp, otherComp} = props;
+  const {color, record, label, rules, name, isTextArea, clotheLang, component, otherComp} = props;
 
   useEffect(() => {
     // Update the document title using the browser API
@@ -87,7 +87,7 @@ function Index(prop, ref) {
         rules={rules()}
         noStyle
       >
-        {data.comp ? data.comp : <Input
+        {data.component ? data.component : <Input
           placeholder={`${data.title}${index + 1}`}/>}
       </Form.Item>
     </div>)

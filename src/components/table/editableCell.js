@@ -22,7 +22,7 @@ let defaultProps = {
     // 是否在收起时显示
     isTop: true,
     fill: true,
-    comp: <Input placeholder="输入邮箱/管理者"/>,
+    component: <Input placeholder="输入邮箱/管理者"/>,
     editable: true
   },
     {
@@ -54,7 +54,7 @@ export default function Index(prop) {
                           editing,
                           dataIndex,
                           title,
-                          comp,
+                          component,
                           record,
                           index,
                           children,
@@ -76,7 +76,7 @@ export default function Index(prop) {
               ...other_set
             }}
           >
-            {comp ? (typeof comp === "function" ? comp(props.record) : comp) :
+            {component ? (typeof component === "function" ? component(props.record) : component) :
               <Input placeholder={`${clotheLang.form.pleaseEnter}${title}`} allowClear/>}
           </Form.Item>
         ) : (
@@ -171,7 +171,7 @@ export default function Index(prop) {
       onCell: (record) => ({
         record,
         fill: col.fill,
-        comp: col.comp,
+        component: col.component,
         dataIndex: col.field,
         title: col.title,
         editing: isEditing(record),

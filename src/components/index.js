@@ -45,7 +45,8 @@ import _CheckboxUpGroup from "./checkbox/group"
 import _transfer from "./transfer"
 import _urlTransfer from "./transfer/urlTransfer"
 import _modalUrlTransfer from "./transfer/modalUrlTransfer"
-import _cascader from "./cascader"
+import cascaderAjax from "./cascader"
+import cascader from "./cascader/cascader"
 import _tabSelectDom from "./select/tabSelectDom"
 import formCustomTwo from "./form/formCustomTwo"
 import dashboard from "./g2/dashboard"
@@ -116,7 +117,8 @@ export const Transfer = Hoc(_transfer)
 export const UrlTransfer = Hoc(_urlTransfer)
 export const ModalUrlTransfer = Hoc(_modalUrlTransfer)
 export const TabSelectDom = Hoc(_tabSelectDom)
-export const CascaderPro = Hoc(_cascader)
+export const CascaderPro = Hoc(cascader)
+export const CascaderAjaxPro = Hoc(cascaderAjax)
 export const FormCustomTwo = Hoc(formCustomTwo)
 export const Dashboard = Hoc(dashboard)
 export const Thermograph = Hoc(thermograph)

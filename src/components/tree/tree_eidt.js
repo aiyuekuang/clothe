@@ -198,7 +198,7 @@ export function Tree_form(prop) {
               ...data.other_set
             }}
           >
-            {data.comp ? data.comp : <Input placeholder={`请输入${data.title}`}/>}
+            {data.component ? data.component : <Input placeholder={`请输入${data.title}`}/>}
           </FormItem>}
       </Fragment>
     )

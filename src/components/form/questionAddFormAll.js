@@ -22,7 +22,7 @@ let defaultProps = {
         other_set: {
             valuePropName: 'checked'
         },
-        comp: <Switch checkedChildren="是" unCheckedChildren="否"/>
+        component: <Switch checkedChildren="是" unCheckedChildren="否"/>
     }, {
         //表单标题
         title: "标题",
@@ -30,7 +30,7 @@ let defaultProps = {
         field: "title",
         fill: true,
         //表单组件
-        comp: <Input/>,
+        component: <Input/>,
     }],
     //是否有选择
     hasOpt: true,
