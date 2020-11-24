@@ -102,7 +102,6 @@ export default class Index extends Component {
         }
       })
     }
-
   }
 
   IconFont = null
