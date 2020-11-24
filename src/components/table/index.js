@@ -60,7 +60,7 @@ export default class Index extends Component {
     //树的url，如果为null就是不需要树
     treeUrl: null,
     //表格的其他属性
-    tableSet: {},
+    config: {},
     //是否有分页
     hasPage: true,
     //判断是否可以被选中的函数，返回false就是这行不可以被选中
@@ -729,7 +729,7 @@ export default class Index extends Component {
               style={{width: "100%"}}
               size={size}
               rowKey={primaryKeyField}
-              {...this.props.tableSet}
+              {...this.props.config}
             />
           </div>
         </div>

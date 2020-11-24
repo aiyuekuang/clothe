@@ -73,7 +73,7 @@ function index(prop, ref) {
   }, [dataSource]);
 
   const formatData = (json) => {
-    return json.map((data, i) => {
+    return json && json.length && json.map((data, i) => {
       let _obj = {...data};
 
       _obj.label = data[dataSourceKey];

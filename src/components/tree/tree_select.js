@@ -42,7 +42,7 @@ export default class Index extends React.Component {
     form_value_string: false,
     //单选还是多选
     multiple: true,
-    other_set: {},
+    config: {},
     //单选时是否需要也是数组格式的返回
     isOutArr: false,
     //单选时是否可以选择父，默认不可以
@@ -110,7 +110,7 @@ export default class Index extends React.Component {
     // console.log(value, label, extra)
     let _value = value;
 
-    if (this.props.other_set.treeCheckStrictly) {
+    if (this.props.config.treeCheckStrictly) {
       _value.forEach((data, i) => {
         _value[i] = data.value;
       })
@@ -136,7 +136,7 @@ export default class Index extends React.Component {
   }
 
   render() {
-    const {treeData, width, value, other_set, multiple, clotheLang, form_value_string} = this.props
+    const {treeData, width, value, config, multiple, clotheLang, form_value_string} = this.props
     const {} = this.state
 
     return (
@@ -147,7 +147,7 @@ export default class Index extends React.Component {
         allowClear
         onChange={this.onChange}
         treeCheckable={multiple}
-        {...other_set}
+        {...config}
       >
         {this.renderTreeNodes(treeData)}
       </TreeSelect>

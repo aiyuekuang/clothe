@@ -60,7 +60,7 @@ export default function Index(prop) {
                           children,
                           fill,
                           rules,
-                          other_set,
+                          config,
                           ...restProps
                         }) => {
     return (
@@ -73,7 +73,7 @@ export default function Index(prop) {
               rules: [{
                 required: fill, message: `${clotheLang.form.pleaseEnter}${title}!`,
               }, ...(rules ? rules : [])],
-              ...other_set
+              ...config
             }}
           >
             {component ? (typeof component === "function" ? component(props.record) : component) :
@@ -194,7 +194,7 @@ export default function Index(prop) {
           addData={addData}
           setData={(data) => data.entity.records}
           setTotal={(data) => data.entity.totalCount}
-          tableSet={{
+          config={{
             components: {
               body: {
                 cell: EditableCell,

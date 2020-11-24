@@ -19,7 +19,7 @@ let defaultProps = {
         //其他提示
         extra: "",
         //表单组件
-        other_set: {
+        config: {
             valuePropName: 'checked'
         },
         component: <Switch checkedChildren="是" unCheckedChildren="否"/>

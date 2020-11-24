@@ -26,7 +26,7 @@ let defaultProps = {
   value: [],
   disabled:false,
   //antd文档的其他设置
-  otherSet: {},
+  config: {},
   //判断是否需要禁用的值
   disabledFun:(data)=>{
     return false
@@ -43,7 +43,7 @@ function index(prop,ref) {
   let props = {
     ...defaultProps, ...prop
   }
-  const {dataSource, label, labelValue, value, otherSet,clotheLang,disabled,disabledFun,dataSet} = props;
+  const {dataSource, label, labelValue, value, config,clotheLang,disabled,disabledFun,dataSet} = props;
 
   useEffect(() => {
 
@@ -85,7 +85,7 @@ function index(prop,ref) {
         return option.label.indexOf(inputValue) !== -1
       }}
       allowClear={true}
-      {...otherSet}
+      {...config}
     >
       {children}
     </Select>

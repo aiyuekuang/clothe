@@ -25,7 +25,7 @@ const defaultProps = {
     //默认值,可以是函数，(text,record)=>{}
     initValue: 1,
     //其他的规则对象设置
-    other_set: {},
+    config: {},
     //其他提示
     extra: "",
     //日期控件用到的format
@@ -303,7 +303,7 @@ export default function index(prop, ref) {
                 rules: [{
                   required: data.fill, message: `${clotheLang.form.pleaseEnter}${data.title}!`,
                 }, ...(data.rules ? data.rules : [])],
-                ...data.other_set
+                ...data.config
               }}
             >
               {data.component ? (typeof data.component === "function" ? data.component(props.record) : data.component) :

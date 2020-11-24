@@ -18,7 +18,7 @@ export default class Index extends Component {
         signature: 'ZGFob25nc2hhbw==',
         title:"点击上传",
         //其他设置
-        other_set: {},
+        config: {},
     }
 
     state = {
@@ -106,7 +106,7 @@ export default class Index extends Component {
     };
 
     render() {
-        const {title, value,other_set } = this.props;
+        const {title, value,config } = this.props;
         const props = {
             name: 'file',
             fileList: value,
@@ -116,7 +116,7 @@ export default class Index extends Component {
             transformFile: this.transformFile,
             data: this.getExtraData,
             beforeUpload: this.beforeUpload,
-            ...other_set
+            ...config
         };
         return (
             <Upload {...props}>

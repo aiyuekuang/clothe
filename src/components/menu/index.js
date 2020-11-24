@@ -9,6 +9,26 @@ import {createFromIconfontCN, AppstoreOutlined} from '@ant-design/icons';
 const {SubMenu} = Menu;
 
 
+//一套算法获取默认展开的父
+let _defaultOpenKeys = (value) => {
+  if (value === "" || value === "/") {
+    return []
+  }
+
+  let arr = [];
+  let result = arrDelNull(truncate(value.split("/"))).map((data, i) => {
+    return "/" + data
+  })
+  if (result && result.length) {
+    result = result.reduce((pre, next) => {
+      arr.push(pre);
+      return pre + next
+    })
+  }
+
+  arr.push(result)
+  return arr;
+};
 export default class Index extends Component {
 
   static defaultProps = {
@@ -50,7 +70,7 @@ export default class Index extends Component {
     hide: "hide",
     //菜单的路由支持阿里的iconfont，默认是antd的库，可以自定义
     iconFontUrl: "//at.alicdn.com/t/font_1835208_p8mpjnjx3ms.js",
-    otherSet: {},
+    config: {},
     //点击切换菜单按钮时的回调
     onChange:()=>{
 
@@ -65,26 +85,6 @@ export default class Index extends Component {
       scriptUrl: props.iconFontUrl,
     });
 
-    //一套算法获取默认展开的父
-    let _defaultOpenKeys = (value) => {
-      if (value === "" || value === "/") {
-        return []
-      }
-
-      let arr = [];
-      let result = arrDelNull(truncate(value.split("/"))).map((data, i) => {
-        return "/" + data
-      })
-      if (result && result.length) {
-        result = result.reduce((pre, next) => {
-          arr.push(pre);
-          return pre + next
-        })
-      }
-
-      arr.push(result)
-      return arr;
-    };
 
     this.state = {
       selectedKeys: [location.pathname],
@@ -136,7 +136,7 @@ export default class Index extends Component {
   }
 
   render() {
-    const {routeData, collapsed, lang, hide, otherSet} = this.props;
+    const {routeData, collapsed, lang, hide, config} = this.props;
     const {selectedKeys, defaultOpenKeys} = this.state;
 
     let menuLi = (routeData, parentPath = "") => routeData.map((data, i) => {
@@ -150,7 +150,6 @@ export default class Index extends Component {
             bool = hide.find((data,t)=>{
               return i[data]
             })
-
           }else {
             bool = i[hide]
           }
@@ -160,6 +159,7 @@ export default class Index extends Component {
           }
         }
       }
+
 
       let key_ = parentPath + data.path;
       let IconTemp;
@@ -213,7 +213,7 @@ export default class Index extends Component {
           defaultOpenKeys={defaultOpenKeys}
           onClick={this.itemFun}
           inlineCollapsed={collapsed}
-          {...otherSet}
+          {...config}
         >
           {menuLi(routeData)}
         </Menu>

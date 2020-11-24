@@ -11,7 +11,7 @@ export default class Index extends Component {
         //默认的动画效果
         type:"alpha",
         className:"",
-        otherSet:{
+        config:{
 
         }
     }
@@ -33,7 +33,7 @@ export default class Index extends Component {
 
     render() {
         return (
-            <QueueAnim {...this.props.otherSet} className={this.props.className+" ani_warp"}>
+            <QueueAnim {...this.props.config} className={this.props.className+" ani_warp"}>
                 {this.props.children}
             </QueueAnim>
         )

@@ -26,7 +26,7 @@ let defaultProps = {
   },
   value: [],
   //antd文档的其他设置
-  otherSet: {},
+  config: {},
   //是否需要使用按钮样式
   isButton: false,
   size:"default",
@@ -42,7 +42,7 @@ export default function Index(prop) {
   let props = {
     ...defaultProps, ...prop
   }
-  const {dataSource, label, labelValue, value, otherSet, isButton, disabledFun,size} = props;
+  const {dataSource, label, labelValue, value, config, isButton, disabledFun,size} = props;
 
   useEffect(() => {
 
@@ -70,7 +70,7 @@ export default function Index(prop) {
   });
 
   return (
-    <Radio.Group name={uid()} onChange={onChange} value={value} size={size} {...otherSet}>
+    <Radio.Group name={uid()} onChange={onChange} value={value} size={size} {...config}>
       {children}
     </Radio.Group>
   );

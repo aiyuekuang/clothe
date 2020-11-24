@@ -66,7 +66,7 @@ export default class Index extends Component {
     //其他anup上传组件的设置
     anupLoadSet: {},
     //其他的富文本的设置
-    other_set: {},
+    config: {},
     value: null,
     //是否返回raw格式的数据
     raw:false
@@ -130,7 +130,7 @@ export default class Index extends Component {
   }
 
   render() {
-    const {upload_url, upload_set, upload_size, image, video, audio, setData, is_true, other_set, clotheLang, anupLoadSet} = this.props
+    const {upload_url, upload_set, upload_size, image, video, audio, setData, is_true, config, clotheLang, anupLoadSet} = this.props
     const {editorState} = this.state
     const extendControls = [...(upload_url ? [{
       key: 'antd-uploader',
@@ -144,7 +144,7 @@ export default class Index extends Component {
           }}
           showUploadList={false}
           url={upload_url}
-          other_set={{
+          config={{
             data: {...upload_set},
           }}
           onChange={(data) => {
@@ -190,7 +190,7 @@ export default class Index extends Component {
             onBlur={this.blur}
             extendControls={extendControls}
             controls={this.props.controls.concat(this.props.extra_con)}
-            {...other_set}
+            {...config}
           />
         </div>
         {this.props.btn ? <div className="braft_warp_btn">

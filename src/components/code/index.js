@@ -15,7 +15,7 @@ let defaultProps = {
   value: null,
   //jsx，text/x-mysql
   mode: "text/x-mysql",
-  otherSet:{},
+  config:{},
   //主题有白色和黑色2种，白色是eclipse，黑色是monokai
   theme:"monokai",
   height:200,
@@ -31,7 +31,7 @@ function index(prop, ref) {
   let props = {
     ...defaultProps, ...prop
   }
-  const {value,mode,otherSet,theme,height,tip,onChange} = props;
+  const {value,mode,config,theme,height,tip,onChange} = props;
 
   useEffect(() => {
 
@@ -59,7 +59,7 @@ function index(prop, ref) {
           lineWrapping:true,
           gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
           // fullScreen: true,
-          ...otherSet
+          ...config
         }}
         onChange={(code)=>change(code)}
       />

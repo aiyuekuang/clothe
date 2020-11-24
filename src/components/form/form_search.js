@@ -156,10 +156,11 @@ export default function index(prop) {
         rules: [{
           required: data.fill, message: `${clotheLang.form.pleaseEnter}${data.title}!`,
         }, ...(data.rules ? data.rules : [])],
-        ...data.other_set
+        ...data.config
       }}
     >
-      {data.component ? data.component : <Input placeholder={`${clotheLang.form.pleaseEnter}${data.title}`} allowClear/>}
+      {data.component ? (typeof data.component === "function" ? data.component(props.record,form) : data.component) :
+        <Input placeholder={`${clotheLang.form.pleaseEnter}${data.title}`} allowClear/>}
     </FormItem>)
 
 

@@ -195,7 +195,7 @@ export function Tree_form(prop) {
               }, ...data.rules] : [{
                 required: data.fill, message: `请输入${data.title}!`,
               }],
-              ...data.other_set
+              ...data.config
             }}
           >
             {data.component ? data.component : <Input placeholder={`请输入${data.title}`}/>}

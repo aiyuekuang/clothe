@@ -10,7 +10,7 @@ let defaultProps={
     onChange:(bool)=>{
 
     },
-    otherSet:{}
+    config:{}
 }
 
 export default function Index(prop) {
@@ -19,7 +19,7 @@ export default function Index(prop) {
     let props={
         ...defaultProps,...prop
     }
-    const {children,value,onChange,otherSet} = props;
+    const {children,value,onChange,config} = props;
 
     useEffect(() => {
 
@@ -32,6 +32,6 @@ export default function Index(prop) {
     }
 
     return (
-      <Checkbox onChange={onChanges} checked={value} {...otherSet}>{children}</Checkbox>
+      <Checkbox onChange={onChanges} checked={value} {...config}>{children}</Checkbox>
     );
 }

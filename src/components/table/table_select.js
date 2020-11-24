@@ -61,7 +61,7 @@ export default class Index extends Component {
     //树的url，如果为null就是不需要树
     treeUrl: null,
     //表格的其他属性
-    other_set: {},
+    config: {},
     //是否有分页
     hasPage: true,
     //判断是否可以被点击
@@ -419,7 +419,7 @@ export default class Index extends Component {
                        className={table_className}
                        size={size}
                        rowKey={primaryKeyField}
-                       {...this.props.other_set}
+                       {...this.props.config}
                 />
               </div>
             </div>

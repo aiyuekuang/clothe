@@ -21,7 +21,7 @@ let defaultProps = {
   value: [],
   disabled: false,
   //antd文档的其他设置
-  otherSet: {},
+  config: {},
   field: "id",
   setData: (data) => {
     return data
@@ -45,7 +45,7 @@ export default function Index(prop) {
     ...defaultProps, ...prop
   }
 
-  const {label, labelValue, value, values, otherSet, clotheLang, disabled, ajax, url, field, setData, dataSourceKey, dataSourceValue, multiple, returnLastValue} = props;
+  const {label, labelValue, value, values, config, clotheLang, disabled, ajax, url, field, setData, dataSourceKey, dataSourceValue, multiple, returnLastValue} = props;
 
   const [dataSource, setDataSource] = useState([])
   const [fetching, setFetching] = useState(false)
@@ -109,7 +109,7 @@ export default function Index(prop) {
       style={{width: '100%'}}
       disabled={disabled}
       allowClear={true}
-      {...otherSet}
+      {...config}
     >
       {dataSource && dataSource.map(d => (
         <Option key={d.value} value={d.value}>{d.label}</Option>

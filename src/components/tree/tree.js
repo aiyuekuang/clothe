@@ -55,7 +55,7 @@ export default class UpTree extends React.Component {
     //数据的value值
     key_value: "value",
     //树的其他设置
-    otherSet: {},
+    config: {},
     //树编辑控件或者其他什么控件需要这个树的数据的时候可以使用和这个回调
     set_tree_data: (data) => {
     },
@@ -259,7 +259,7 @@ export default class UpTree extends React.Component {
 
   render() {
     const {searchValue, expandedKeys, autoExpandParent, loading, treeData, select_value, title} = this.state;
-    const {addFormSet, otherSet, className, tree_hide, maxHeight, clotheLang} = this.props;
+    const {addFormSet, config, className, tree_hide, maxHeight, clotheLang} = this.props;
 
     const loop = (data = treeData, father_item = null) => {
       //console.log(!data instanceof Array,data,[data])
@@ -320,7 +320,7 @@ export default class UpTree extends React.Component {
             onSelect={this.select}
             // switcherIcon={<DownOutlined/>}
             selectedKeys={select_value ? select_value : []}
-            {...otherSet}
+            {...config}
           >
             {loop()}
           </Tree> : <Empty image={Empty.PRESENTED_IMAGE_SIMPLE}/>)}
@@ -340,7 +340,7 @@ export default class UpTree extends React.Component {
             treeData={this.state.treeData}
             get_tree={this.get_tree}
             treeUrl={this.props.treeUrl}
-            other_set={addFormSet}
+            config={addFormSet}
             clotheLang={clotheLang}
           />
         </Modal>

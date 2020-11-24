@@ -6,7 +6,7 @@ import {Button, Switch, Transfer, Table, Tag} from "antd"
 import {isArrayop} from "esn";
 import difference from "lodash/difference";
 
-const TableTransfer = ({leftColumns, rightColumns,tableSet, ...restProps}) => (
+const TableTransfer = ({leftColumns, rightColumns,config, ...restProps}) => (
   <Transfer {...restProps} showSelectAll={false}>
     {({
         direction,
@@ -47,7 +47,7 @@ const TableTransfer = ({leftColumns, rightColumns,tableSet, ...restProps}) => (
               onItemSelect(key, !listSelectedKeys.includes(key));
             }
           })}
-          {...tableSet}
+          {...config}
           size="small"
         />
       );
@@ -92,7 +92,7 @@ let defaultProps = {
     console.log(99, value)
   },
   value: [],
-  tableSet:{}
+  config:{}
 }
 
 export default function Index(prop) {
@@ -100,7 +100,7 @@ export default function Index(prop) {
     ...defaultProps, ...prop
   }
   const [_dataSource, setDataSource] = useState([])
-  const {dataSource, disabledFun, primaryKeyField, value, disabled, searchField, columns, onChange,tableSet} = props;
+  const {dataSource, disabledFun, primaryKeyField, value, disabled, searchField, columns, onChange,config} = props;
 
   const [targetKeys, setTargetKeys] = useState(value);
 
@@ -158,7 +158,7 @@ export default function Index(prop) {
         }
         leftColumns={columns}
         rightColumns={columns}
-        tableSet={tableSet}
+        config={config}
       />
     </div>
   );

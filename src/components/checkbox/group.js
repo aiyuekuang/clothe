@@ -23,7 +23,7 @@ let defaultProps = {
   onChange: (data) => {
 
   },
-  otherSet: {},
+  config: {},
   //是否有全选按钮
   hasAll: true
 }
@@ -32,7 +32,7 @@ export default function Index(prop) {
   let props = {
     ...defaultProps, ...prop
   }
-  const {dataSource, children, value, onChange, otherSet, dataSourceLabel, dataSourceValue, clotheLang, hasAll} = props;
+  const {dataSource, children, value, onChange, config, dataSourceLabel, dataSourceValue, clotheLang, hasAll} = props;
 
   const [indeterminate, setIndeterminate] = useState(true);
   const [checkAll, setCheckAll] = useState(false);
@@ -93,7 +93,7 @@ export default function Index(prop) {
         options={_dataSource}
         value={checkedList}
         onChange={onChanges}
-        {...otherSet}
+        {...config}
       />
     </div>
   );

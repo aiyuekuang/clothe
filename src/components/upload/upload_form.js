@@ -31,7 +31,7 @@ export default class Index extends Component {
         //文件最大
         max_size: 1,
         //其他设置
-        other_set: {},
+        config: {},
         //上传文件的参数名
         name: "file",
         //接口数据处理
@@ -259,7 +259,7 @@ export default class Index extends Component {
             action: this.props.url,
             onChange: this.handleChange,
             name: this.props.name,
-            ...this.props.other_set
+            ...this.props.config
         };
         const headers = {}
         headers[Authorization]=token
