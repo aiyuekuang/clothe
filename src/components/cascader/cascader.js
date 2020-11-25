@@ -41,7 +41,8 @@ let defaultProps = {
   valueFun: () => {
     return null
   },
-  disabled: false
+  disabled: false,
+  style:{}
 }
 
 
@@ -50,7 +51,7 @@ function index(prop, ref) {
     ...defaultProps, ...prop
   }
 
-  const {dataSource, onChange, value, placeholder, url,ajax, setData,paramField, isLeafFun, isValueLabel, returnLastValue, returnString, values, dataSourceKey, dataSourceValue, valueFun, clotheLang, disabled, primaryKeyField} = props;
+  const {dataSource, onChange, value, placeholder, url,ajax, setData,paramField, isLeafFun, isValueLabel, returnLastValue, returnString, values, dataSourceKey, dataSourceValue, valueFun, clotheLang, disabled, primaryKeyField,style} = props;
 
   const [_dataSource, setDataSource] = useState([]);
   const [_value, setValue] = useState([]);
@@ -130,7 +131,7 @@ function index(prop, ref) {
           options={_dataSource}
           placeholder={valueRecord ? clotheLang.form.pleaseReSelect : placeholder}
           onChange={change}
-          style={{width: "100%"}}
+          style={style}
           allowClear
           disabled={disabled}
           // value={_value}

@@ -338,6 +338,7 @@ export default class Index extends Component {
   }) => {
     const {setTotal, hasPage, setData, loadingCallback} = this.props;
     const {otherSearchValues} = this.state;
+
     this.setState({
       loading: true,
     }, () => {

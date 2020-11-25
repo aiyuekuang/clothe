@@ -50,7 +50,8 @@ let defaultProps = {
   valueFun: () => {
     return null
   },
-  disabled:false
+  disabled:false,
+  style:{}
 }
 
 let count = 0
@@ -61,7 +62,7 @@ function index(prop, ref) {
     ...defaultProps, ...prop
   }
 
-  const {dataSource, onChange,  placeholder, ajax, paramField, url, setData, isLeafFun, isValueLabel, returnLastValue, returnString, values, initFieldValue, dataSourceKey, dataSourceValue, layer, valueFun, clotheLang,disabled} = props;
+  const {dataSource, onChange,  placeholder, ajax, paramField, url, setData, isLeafFun, isValueLabel, returnLastValue, returnString, values, initFieldValue, dataSourceKey, dataSourceValue, layer, valueFun, clotheLang,disabled,style} = props;
 
   const [_dataSource, setDataSource] = useState([]);
   const [_value, setValue] = useState([]);
@@ -178,7 +179,7 @@ function index(prop, ref) {
           loadData={loadDataFun}
           placeholder={valueRecord ? clotheLang.form.pleaseReSelect : placeholder}
           onChange={change}
-          style={{width: "100%"}}
+          style={style}
           allowClear
           disabled={disabled}
 
