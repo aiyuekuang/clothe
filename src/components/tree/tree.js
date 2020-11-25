@@ -69,7 +69,9 @@ export default class UpTree extends React.Component {
 //初始选中的值
     defaultValue: null,
     //是否首次选中第一个数据
-    selectFirstValue: null
+    selectFirstValue: null,
+    //是否搜索到之后第一个就自动选中
+    isSelectSearchValue:false
   }
 
 
@@ -97,7 +99,7 @@ export default class UpTree extends React.Component {
       this.props.ajax(this.props.treeUrl, this.props.param, (data) => {
         let value = this.props.getData(data);
 
-        if ((this.props.selectFirstValue && this.first) || !(select_value  && treeFindObjById(select_value[0],value,key_value))) {
+        if ((this.props.selectFirstValue && this.first) || (this.props.selectFirstValue && !(select_value  && treeFindObjById(select_value[0],value,key_value)))) {
           let _value =  value && value.length ? [value[0][key_value]] : []
           let _valueObj =  value && value.length ? value[0] : {}
 
@@ -209,6 +211,14 @@ export default class UpTree extends React.Component {
       }
       return null;
     }).filter((item, i, self) => item && self.indexOf(item) === i);
+
+    let _selectValue = this.dataList.filter((item) => {
+      return item[this.props.key_label].indexOf(value) > -1
+    })
+    if(_selectValue &&_selectValue.length && this.props.isSelectSearchValue ){
+      this._select(_selectValue[0][this.props.key_value],_selectValue[0],{})
+      this.setSelectedKeys([_selectValue[0][this.props.key_value]])
+    }
 
     this.setState({
       expandedKeys,

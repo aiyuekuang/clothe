@@ -3,7 +3,7 @@
  */
 import React, {Component, Fragment} from 'react';
 import {Button, Divider, Dropdown, Input, Menu, Modal, Table,} from 'antd';
-import {FormAdd,SearchTable,TreePro} from "../index"
+import {FormAdd, SearchTable, TreePro} from "../index"
 import {getTextByJs, ajax} from "../utils/common"
 import {CaretRightOutlined, DeleteOutlined, DownOutlined, PlusOutlined} from "@ant-design/icons"
 import {diffObj, isArrayop, uid} from "esn";
@@ -193,9 +193,11 @@ export default class Index extends Component {
     addCallback: () => {
     },
     //表格加载数据时的loading回调
-    loadingCallback:(loading)=>{},
+    loadingCallback: (loading) => {
+    },
     //删除之前的回调
-    deleteBefore:(id,record,fun)=>{}
+    deleteBefore: (id, record, fun) => {
+    }
   }
 
   constructor(props) {
@@ -322,23 +324,23 @@ export default class Index extends Component {
     return this.state.values
   }
 
-  setDataSource=(data = [],page=1,total=1)=>{
+  setDataSource = (data = [], page = 1, total = 1) => {
     const pagination = {...this.state.pagination};
     pagination.total = total;
     pagination.current = page;
     this.setState({
-      dataSource:data,pagination
+      dataSource: data, pagination
     })
   }
 
   //获取表格数据
   getData = (page = this.state.pagination.current, values = this.state.values, pageSize = this.state.pagination.pageSize, url = this.props.url, fun = () => {
   }) => {
-    const {setTotal, hasPage,setData,loadingCallback} = this.props;
+    const {setTotal, hasPage, setData, loadingCallback} = this.props;
     const {otherSearchValues} = this.state;
     this.setState({
       loading: true,
-    },()=>{
+    }, () => {
       loadingCallback(true)
     })
     //搜索框初始值的判断
@@ -566,7 +568,7 @@ export default class Index extends Component {
 
 
   render() {
-    const {actionWidth, treeSet, hasPage, ajax, deleteUrl, primaryKeyField, isActionFixed, hasEdit, addForm, size, searchPlaceholder, searchLabelField, hasDeleteBatch, searchWidth, setTotal, addUrl, deleteDisabledFun, addSubmitFun, otherSearchDom, clotheLang, modalTitle, otherBtn, hideSelectAll, addData, addText, otherSearchDomIsBottom, modalSet,deleteBefore} = this.props;
+    const {actionWidth, treeSet, hasPage, ajax, deleteUrl, primaryKeyField, isActionFixed, hasEdit, addForm, size, searchPlaceholder, searchLabelField, hasDeleteBatch, searchWidth, setTotal, addUrl, deleteDisabledFun, addSubmitFun, otherSearchDom, clotheLang, modalTitle, otherBtn, hideSelectAll, addData, addText, otherSearchDomIsBottom, modalSet, deleteBefore} = this.props;
     const {selectedRowKeys, record, tree_show, visible, values, dataSource, loading, otherSearchValues, isAddText, height} = this.state;
 
 
@@ -606,7 +608,7 @@ export default class Index extends Component {
         title: clotheLang.table.operation,
         dataIndex: 'action',
         width: actionWidth,
-        fixed: isActionFixed === true?"right":isActionFixed,
+        fixed: isActionFixed === true ? "right" : isActionFixed,
         render: (text, record) => {
           let has_edit_ = hasEdit && (addUrl || addSubmitFun);
           if (typeof hasEdit === "function") {
@@ -616,11 +618,10 @@ export default class Index extends Component {
             <Fragment>
               {this.props.actionComponent ? this.props.actionComponent(text, record) : null}
               {has_edit_ && addForm.length > 0 ?
-                <a onClick={this.showModal.bind(this, record, false)}>{clotheLang.table.edit}</a> : null }
+                <a onClick={this.showModal.bind(this, record, false)}>{clotheLang.table.edit}</a> : null}
               {has_edit_ || (deleteDisabledFun(record) && has_edit_) ? <Divider type="vertical"/> : null}
               {deleteUrl ? deleteDisabledFun(record) ?
-                <a
-                  onClick={deleteBefore?()=>deleteBefore(record[primaryKeyField], record,this.deleteAll):this.showDeleteConfirm.bind(this, record[primaryKeyField], record)}>{clotheLang.table.delete}</a> : null : null}
+                <a onClick={deleteBefore ? () => deleteBefore(record[primaryKeyField], record, this.deleteAll) : this.showDeleteConfirm.bind(this, record[primaryKeyField], record)}>{clotheLang.table.delete}</a> : null : null}
             </Fragment>
           )
         }
@@ -696,7 +697,7 @@ export default class Index extends Component {
               {otherBtn ? otherBtn(this.state.selectedRowKeys, this.onSelectChange, this.getData, {...values, ...otherSearchValues}) : null}
               {deleteUrl && hasDeleteBatch ?
                 <div><Button type="danger" disabled={selectedRowKeys.length === 0}
-                             onClick={deleteBefore?()=>deleteBefore(selectedRowKeys,null,this.deleteAll):this.showDeleteConfirm.bind(this, selectedRowKeys, null)}><DeleteOutlined/>{clotheLang.table.bulkDelete}
+                             onClick={deleteBefore ? () => deleteBefore(selectedRowKeys, null, this.deleteAll) : this.showDeleteConfirm.bind(this, selectedRowKeys, null)}><DeleteOutlined/>{clotheLang.table.bulkDelete}
                 </Button></div> : null}
               {searchLabelField ? <div>
                 <Search

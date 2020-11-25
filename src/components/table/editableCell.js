@@ -110,8 +110,7 @@ export default function Index(prop) {
       }
 
       setDisabled(true)
-      let values_temp = {};
-      values_temp = {...values, ...addFormSet.addParms};
+      let values_temp = {...values};
 
       if (editingKey && editingKey !== "addKey") {
         values_temp[primaryKeyField] = editingKey
