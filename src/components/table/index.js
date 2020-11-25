@@ -195,9 +195,9 @@ export default class Index extends Component {
     //表格加载数据时的loading回调
     loadingCallback: (loading) => {
     },
-    //删除之前的回调
-    deleteBefore: (id, record, fun) => {
-    }
+    //删除之前的回调(id, record, fun) => {
+    //     }
+    deleteBefore: null
   }
 
   constructor(props) {
