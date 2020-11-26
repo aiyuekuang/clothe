@@ -617,7 +617,7 @@ export default class Index extends Component {
           }
           return (
             <Fragment>
-              {this.props.actionComponent ? this.props.actionComponent(text, record) : null}
+              {this.props.actionComponent ? this.props.actionComponent(text, record,this.getData) : null}
               {has_edit_ && addForm.length > 0 ?
                 <a onClick={this.showModal.bind(this, record, false)}>{clotheLang.table.edit}</a> : null}
               {has_edit_ || (deleteDisabledFun(record) && has_edit_) ? <Divider type="vertical"/> : null}
