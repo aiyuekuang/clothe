@@ -50,8 +50,9 @@ let defaultProps = {
   valueFun: () => {
     return null
   },
-  disabled:false,
-  style:{}
+  disabled: false,
+  style: {},
+  urlArr: null
 }
 
 let count = 0
@@ -62,7 +63,7 @@ function index(prop, ref) {
     ...defaultProps, ...prop
   }
 
-  const {dataSource, onChange,  placeholder, ajax, paramField, url, setData, isLeafFun, isValueLabel, returnLastValue, returnString, values, initFieldValue, dataSourceKey, dataSourceValue, layer, valueFun, clotheLang,disabled,style} = props;
+  const {dataSource, onChange, placeholder, ajax, paramField, url, setData, isLeafFun, isValueLabel, returnLastValue, returnString, values, initFieldValue, dataSourceKey, dataSourceValue, layer, valueFun, clotheLang, disabled, style, urlArr} = props;
 
   const [_dataSource, setDataSource] = useState([]);
   const [_value, setValue] = useState([]);
@@ -80,15 +81,21 @@ function index(prop, ref) {
 
 
   useEffect(() => {
+    count = 0
+
     if (dataSource) {
-      count--
       setDataSource(formatData(dataSource.map((data, i) => {
         return {...data, isLeaf: isLeafFun(data)}
       })))
-    } else {
+    } else if (url) {
       let param = {...values}
       param[paramField] = initFieldValue
-      ajax(url, param, (json) => {
+      let _url = url
+      if (urlArr) {
+        _url = urlArr[0]
+      }
+
+      ajax(_url, param, (json) => {
         setDataSource(formatData(setData(json), true))
       })
     }
@@ -98,7 +105,6 @@ function index(prop, ref) {
   }, [dataSource]);
 
   const formatData = (json, first) => {
-    count--
     return json.map((data, i) => {
       let _obj = {...data};
       if (first) {
@@ -106,9 +112,12 @@ function index(prop, ref) {
       }
       _obj.label = data[dataSourceKey];
       _obj.value = data[dataSourceValue];
-      _obj.children = null;
-      if (count > 0 && !isLeafFun(data)) {
+      _obj.children = null
+      _obj.layer = count;
+      if (count < layer - 1 && !isLeafFun(data)) {
         _obj.isLeaf = false
+      } else {
+        _obj.isLeaf = true
       }
       return _obj
     })
@@ -150,18 +159,26 @@ function index(prop, ref) {
     targetOption.loading = true;
     let param = {...values}
     param[paramField] = targetOption.value
-    if (targetOption.first) {
-      count = layer - 1
+
+
+    let _url = url
+    if (urlArr) {
+      _url = urlArr[targetOption.layer]
     }
 
+    if (targetOption.layer === 0) {
+      count = 0
+    }
+    count++
 
-    ajax(url, param, (json) => {
+    ajax(_url, param, (json) => {
+      targetOption.loading = false;
       let arr = treeSetData(_dataSource, "children", formatData(setData(json)), "children", (data) => {
         return data.value === targetOption.value
       })
       setDataSource(arr)
-    },()=>{
-      targetOption.loading = false;
+    }, () => {
+      console.log(666)
     })
   }
 
@@ -176,7 +193,7 @@ function index(prop, ref) {
       <div className="anup_cascader_warp_r">
         <Cascader
           options={_dataSource}
-          loadData={loadDataFun}
+          loadData={url || urlArr ? loadDataFun : null}
           placeholder={valueRecord ? clotheLang.form.pleaseReSelect : placeholder}
           onChange={change}
           style={style}
