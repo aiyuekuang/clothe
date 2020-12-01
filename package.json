@@ -1,6 +1,6 @@
 {
   "name": "clothe",
-  "version": "0.0.33",
+  "version": "0.0.34",
   "description": "",
   "scripts": {
     "start": "webpack-dev-server --mode development",
@@ -52,7 +52,6 @@
     "mockjs": "^1.0.1-beta3",
     "node-sass": "5.0.0",
     "postcss-loader": "^3.0.0",
-
     "react-native-md5": "^1.0.0",
     "sass-loader": "10.1.0",
     "style-loader": "^1.2.1",
