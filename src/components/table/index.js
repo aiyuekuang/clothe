@@ -246,7 +246,7 @@ export default class Index extends Component {
       this.setState({
         values: _values
       }, () => {
-        this.getData(this.state.pagination.current, _values, this.state.pagination.pageSize)
+        this.getData(1, _values, this.state.pagination.pageSize)
       })
     }
     if (diffObj(nextProp.url, this.props.url)) {
@@ -420,13 +420,13 @@ export default class Index extends Component {
 
   //计算表格的宽度
   scroll = () => {
-    const {addUrl, editUrl, hideSelectAll, deleteUrl, hasDeleteBatch, otherBtn, rowAction, actionComponent} = this.props
+    const {addUrl, editUrl, hideSelectAll, deleteUrl, hasDeleteBatch, otherBtn, rowAction, actionComponent,columns} = this.props
     if (this.props.width) {
       return this.props.width
     }
 
     let kuan = (addUrl || editUrl || actionComponent ? this.props.actionWidth : 0) + ((rowAction || (deleteUrl && hasDeleteBatch) || otherBtn) && hideSelectAll ? 60 : 0);
-    for (let i of this.props.columns) {
+    for (let i of columns) {
       if (i.minWidth) {
         kuan += i.minWidth
       } else {
