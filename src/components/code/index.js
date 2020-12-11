@@ -3,7 +3,7 @@
  */
 import React, {createRef, forwardRef, Fragment, useEffect, useState} from 'react';
 import {Button} from "antd"
-import {UnControlled as CodeMirror} from 'react-codemirror2'
+import {Controlled  as CodeMirror} from 'react-codemirror2'
 import 'codemirror/addon/display/autorefresh';
 import 'codemirror/addon/comment/comment';
 import 'codemirror/addon/edit/matchbrackets';
@@ -24,31 +24,39 @@ let defaultProps = {
 
   }
 }
-
 function index(prop, ref) {
-  const [count, setCount] = useState(0);
+  const [value, setValue] = useState(0);
+
   let props = {
     ...defaultProps, ...prop
   }
-  const {value,mode,config,theme,height,tip,onChange} = props;
+  const {mode,config,theme,height,tip,onChange} = props;
+
+
   useEffect(() => {
+
     return () => {
     }
   }, []);
 
-  let change = (e)=>{
-    console.log(e.getValue())
-    onChange(e.getValue())
+  useEffect(() => {
+    setValue(props.value)
+    return () => {
+    }
+  }, [props.value]);
+
+  let change = (value)=>{
+    onChange(value)
+    setValue(value)
   }
 
 
-  console.log(789789,value)
 
   return (
     <div className="anup_code" >
       <CodeMirror
         value={value}
-        height={height}
+        editorDidMount={editor => { editor.setSize("",height); }}
         options={{
           theme: theme,
           tabSize: 2,
@@ -61,7 +69,10 @@ function index(prop, ref) {
           // fullScreen: true,
           ...config
         }}
-        onChange={(code)=>change(code)}
+        onBeforeChange={(editor, data, value) => {
+          change(value)
+        }}
+        // onChange={(code)=>change(code)}
       />
       <div className="anup_code_tip">
         {tip}
