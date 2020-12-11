@@ -42,6 +42,7 @@ function index(prop, ref) {
   }
 
 
+  console.log(789789,value)
 
   return (
     <div className="anup_code" >
