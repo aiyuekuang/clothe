@@ -4,6 +4,7 @@
 import React from 'react';
 import "../style/ztao.scss"
 import Table from "./table"
+import {CodePro} from "@components/index";
 
 
 export default class Index extends React.Component {
@@ -23,7 +24,7 @@ export default class Index extends React.Component {
   render() {
     return (
       <div className="up_index">
-        <Table/>
+        <CodePro/>
       </div>
     )
   }

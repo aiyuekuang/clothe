@@ -93,7 +93,7 @@ const defaultProps = {
   //额外需要的表单component
   otherForm: () => <div></div>,
   //form表单需要的设置
-  formSet: {},
+  config: {},
   //组件变化是否需要重置值
   formDataChangeRest: false,
   //编辑时有遇到hide字段，是否需要隐藏整个组件
@@ -157,7 +157,7 @@ export default function index(prop, ref) {
     ...prop
   };
 
-  const {li, className, formData, hasBtn, editUrl, otherForm, record, formSet, formDataChangeRest, hideParam, returnFormCallback, layoutHorizontal, renderFooter, visible, isVisibleRest, clotheLang, onValuesChange,disabledBtn,size,otherBtn,submitText,CustomSubmit} = props;
+  const {li, className, formData, hasBtn, editUrl, otherForm, record, config, formDataChangeRest, hideParam, returnFormCallback, layoutHorizontal, renderFooter, visible, isVisibleRest, clotheLang, onValuesChange,disabledBtn,size,otherBtn,submitText,CustomSubmit} = props;
 
 
   const [form] = Form.useForm();
@@ -325,7 +325,7 @@ export default function index(prop, ref) {
         setActData(allValues)
         onValuesChange(changedValues, allValues,form)
       }}
-      {...formSet}
+      {...config}
     >
       <div className={className} style={{width: "100%"}}>
         <div className="up_table_form_add_list" style={{gridTemplateColumns: `repeat(${li}, 1fr)`, gridColumnGap: li === 1 ? "0" : "2%"}}>

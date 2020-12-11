@@ -51,7 +51,7 @@ const defaultProps = {
   //是否需要无label的模式
   noLabel: false,
   //form表单需要的设置
-  formSet: {},
+  config: {},
   //实例运行时，返回一个form
   returnFormCallback: (form) => {
 
@@ -80,7 +80,7 @@ export default function index(prop) {
     ...prop
   };
 
-  const {searchLine, formData, noLabel, formSet, returnFormCallback, clotheLang, layoutHorizontal, onValuesChange, hasSubmit,hasRest,toggleCallback,restCallback} = props;
+  const {searchLine, formData, noLabel, config, returnFormCallback, clotheLang, layoutHorizontal, onValuesChange, hasSubmit,hasRest,toggleCallback,restCallback} = props;
 
   const [form] = Form.useForm();
   const [toogle, setToogle] = useState(true);
@@ -195,7 +195,7 @@ export default function index(prop) {
             }
           }}
           // className="ant-advanced-search-form"
-          {...formSet}
+          {...config}
     >
       <div className="up_table_form">
         {lists}

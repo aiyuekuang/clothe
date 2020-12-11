@@ -1,9 +1,9 @@
 /**
  * Created by zengtao on 2017/5/19.
  */
-import React, {forwardRef, Fragment, useEffect, useState} from 'react';
+import React, {createRef, forwardRef, Fragment, useEffect, useState} from 'react';
 import {Button} from "antd"
-import CodeMirror from '@uiw/react-codemirror';
+import {UnControlled as CodeMirror} from 'react-codemirror2'
 import 'codemirror/addon/display/autorefresh';
 import 'codemirror/addon/comment/comment';
 import 'codemirror/addon/edit/matchbrackets';
@@ -27,14 +27,11 @@ let defaultProps = {
 
 function index(prop, ref) {
   const [count, setCount] = useState(0);
-
   let props = {
     ...defaultProps, ...prop
   }
   const {value,mode,config,theme,height,tip,onChange} = props;
-
   useEffect(() => {
-
     return () => {
     }
   }, []);
@@ -44,11 +41,13 @@ function index(prop, ref) {
     onChange(e.getValue())
   }
 
+
+
   return (
     <div className="anup_code" >
       <CodeMirror
-        height={height}
         value={value}
+        height={height}
         options={{
           theme: theme,
           tabSize: 2,

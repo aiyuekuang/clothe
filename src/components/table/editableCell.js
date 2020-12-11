@@ -187,7 +187,7 @@ export default function Index(prop) {
                 addFormSet.onValuesChange(changedValues, allValues, form)
               }
             }}
-            {...addFormSet.formSet}>
+            {...addFormSet.config}>
         <TablePro
           ref={table}
           addData={addData}

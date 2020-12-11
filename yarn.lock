@@ -242,10 +242,10 @@
   resolved "http://npm-dmd.oppoer.me/@types%2fq/-/q-1.5.4.tgz#15925414e0ad2cd765bfef58842f7e26a7accb24"
   integrity sha1-FZJUFOCtLNdlv+9YhC9+JqesyyQ=
 
-"@uiw/react-codemirror@^3.0.1":
+"@uiw/react-codemirror@3.0.1":
   version "3.0.1"
-  resolved "https://registry.yarnpkg.com/@uiw/react-codemirror/-/react-codemirror-3.0.1.tgz#415096bba81be2d2398467f0bca23b80a1d64426"
-  integrity sha512-k4sc57i2jw15pwyT9io3boFDsr8I9jjC3cQg+pZFog7u8ZRrAsS+GzAz/1uzU1p9S2cfESwj/H0f2oqfIwqj6w==
+  resolved "http://npm-dmd.oppoer.me/@uiw%2freact-codemirror/-/react-codemirror-3.0.1.tgz#415096bba81be2d2398467f0bca23b80a1d64426"
+  integrity sha1-QVCWu6gb4tI5hGfwvKI7gKHWRCY=
   dependencies:
     "@babel/runtime" "7.11.2"
     codemirror "5.57.0"
@@ -2359,6 +2359,11 @@ codemirror@5.57.0:
   version "5.57.0"
   resolved "https://registry.yarnpkg.com/codemirror/-/codemirror-5.57.0.tgz#d26365b72f909f5d2dbb6b1209349ca1daeb2d50"
   integrity sha512-WGc6UL7Hqt+8a6ZAsj/f1ApQl3NPvHY/UQSzG6fB6l4BjExgVdhFaxd7mRTw1UCiYe/6q86zHP+kfvBQcZGvUg==
+
+codemirror@^5.58.3:
+  version "5.58.3"
+  resolved "http://npm-dmd.oppoer.me/codemirror/-/codemirror-5.58.3.tgz#3f0689854ecfbed5d4479a98b96148b2c3b79796"
+  integrity sha1-PwaJhU7PvtXUR5qYuWFIssO3l5Y=
 
 collection-visit@^1.0.0:
   version "1.0.0"
@@ -7727,6 +7732,11 @@ rc-virtual-list@^3.2.0:
     classnames "^2.2.6"
     rc-resize-observer "^0.2.3"
     rc-util "^5.0.7"
+
+react-codemirror2@^7.2.1:
+  version "7.2.1"
+  resolved "http://npm-dmd.oppoer.me/react-codemirror2/-/react-codemirror2-7.2.1.tgz#38dab492fcbe5fb8ebf5630e5bb7922db8d3a10c"
+  integrity sha1-ONq0kvy+X7jr9WMOW7eSLbjToQw=
 
 react-dom@^16.13.1:
   version "16.13.1"
