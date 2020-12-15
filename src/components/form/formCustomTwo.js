@@ -96,7 +96,7 @@ function Index(prop, ref) {
   return (
     <Fragment>
       <Form.List name={name}>
-        {(fields, {add, remove}) => {
+        {(fields, {add, remove,move}) => {
           return (
             <div>
               {fields.map((field, index) => {
