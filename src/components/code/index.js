@@ -51,13 +51,13 @@ function index(prop, ref) {
   }
 
 
-
   return (
     <div className="anup_code" >
       <CodeMirror
         value={value}
         editorDidMount={editor => { editor.setSize("",height); }}
         options={{
+          lineNumbers: true, //显示行号
           theme: theme,
           tabSize: 2,
           keyMap: 'sublime',

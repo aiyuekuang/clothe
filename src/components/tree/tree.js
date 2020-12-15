@@ -184,7 +184,7 @@ export default class UpTree extends React.Component {
     for (let i = 0; i < data.length; i++) {
       const node = data[i];
       const value = node[this.props.key_value];
-      let obj = {};
+      let obj = {...node};
       obj[key_label] = node[key_label]
       obj[key_value] = value
       this.dataList.push(obj);
