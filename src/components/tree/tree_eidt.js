@@ -68,7 +68,7 @@ export function Tree_form(prop) {
     ...prop
   };
 
-  const {key_label, key_value, name, primaryKeyField, parentId, change_pos, father_item, select_data, rootId, titleRule, tree_delect, move_url, value, treeEditUrl, treeData,onValuesChange} = props;
+  const {dataSourceKey, dataSourceValue, name, primaryKeyField, parentId, change_pos, father_item, select_data, rootId, titleRule, tree_delect, move_url, value, treeEditUrl, treeData,onValuesChange} = props;
 
 
   const [form] = Form.useForm();
@@ -90,7 +90,7 @@ export function Tree_form(prop) {
   };
 
   //我的资源分类_添加/修改我的资源分类
-  let eidt_tree = (values, id = select_data[key_value]) => {
+  let eidt_tree = (values, id = select_data[dataSourceValue]) => {
     let obj = {};
     obj[props.primaryKeyField] = id;
     let _url = props.tree_edit
@@ -110,7 +110,7 @@ export function Tree_form(prop) {
   };
 
   //删除我的资源分类
-  let delect_tree = (id = select_data[key_value]) => {
+  let delect_tree = (id = select_data[dataSourceValue]) => {
     let obj = {};
     obj[props.primaryKeyField] = id;
     props.ajax(tree_delect, obj, data => {
@@ -123,7 +123,7 @@ export function Tree_form(prop) {
   };
 
   //移动资源
-  let move_tree = (forward = "up", id = select_data[key_value]) => {
+  let move_tree = (forward = "up", id = select_data[dataSourceValue]) => {
     let obj = {};
     obj[props.primaryKeyField] = id;
     obj[props.orderForward] = forward
@@ -150,24 +150,24 @@ export function Tree_form(prop) {
       if (item.children && item.children.length > 0) {
         return (
           <TreeNode
-            title={item[key_label]}
-            key={item[key_value]}
-            value={item[key_value]}
+            title={item[dataSourceKey]}
+            key={item[dataSourceValue]}
+            value={item[dataSourceValue]}
             dataRef={item}
-            disabled={dis === item[key_value] || childisabled}
+            disabled={dis === item[dataSourceValue] || childisabled}
           >
-            {renderTreeNodes(item.children, dis, dis === item[key_value] || childisabled)}
+            {renderTreeNodes(item.children, dis, dis === item[dataSourceValue] || childisabled)}
           </TreeNode>
         );
       }
 
       return (
         <TreeNode
-          title={item[key_label]}
-          key={item[key_value]}
-          value={item[key_value]}
+          title={item[dataSourceKey]}
+          key={item[dataSourceValue]}
+          value={item[dataSourceValue]}
           dataRef={item}
-          disabled={dis === item[key_value] || childisabled}
+          disabled={dis === item[dataSourceValue] || childisabled}
         />
       );
     });
@@ -206,7 +206,7 @@ export function Tree_form(prop) {
 
   let tree_father = () => {
     if (father_item) {
-      return father_item[key_value];
+      return father_item[dataSourceValue];
     } else if (
       !isObjEmpty(select_data) &&
       father_item == null
@@ -217,10 +217,10 @@ export function Tree_form(prop) {
     }
   };
   let root = {children: props.treeData};
-  root[key_label] = "根目录";
-  root[key_value] = rootId;
+  root[dataSourceKey] = "根目录";
+  root[dataSourceValue] = rootId;
 
-  initialValues[name] = props.select_data[key_label]
+  initialValues[name] = props.select_data[dataSourceKey]
   initialValues[parentId] = tree_father()
 
   return (
@@ -246,7 +246,7 @@ export function Tree_form(prop) {
           placeholder="请选择上级目录"
           disabled={!change_pos && !(JSON.stringify(select_data) === "{}")}
         >
-          {renderTreeNodes([root], props.select_data[key_value])}
+          {renderTreeNodes([root], props.select_data[dataSourceValue])}
         </TreeSelect>
       </FormItem>
       {lists}
@@ -306,9 +306,9 @@ export default class TreeEidt extends React.Component {
     //树控件的删除地址
     tree_delect: null,
     //树的label
-    key_label: "label",
+    dataSourceKey: "label",
     //树的value
-    key_value: "value",
+    dataSourceValue: "value",
     //提交的本级的id
     primaryKeyField: "id",
     //上级树的id

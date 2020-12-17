@@ -72,9 +72,9 @@ export default class TreeEditAjax extends React.Component {
     //树控件的删除地址
     tree_delect: null,
     //树的label
-    key_label: "label",
+    dataSourceKey: "label",
     //树的value
-    key_value: "value",
+    dataSourceValue: "value",
     //提交的本级的id
     id: "id",
     //上级树的id
@@ -116,11 +116,11 @@ export default class TreeEditAjax extends React.Component {
 
   //选择的当前树
   onSelect = (value = {}, obj = {}, father_item = null) => {
-    const {key_value} = this.props;
+    const {dataSourceValue} = this.props;
     this.setState({
       select_data: value,
       father_item: father_item && father_item.length > 1 ? father_item.slice(-2)[0] : null,
-      value: value[key_value]
+      value: value[dataSourceValue]
     });
   };
 

@@ -7,9 +7,9 @@ const TreeNode = TreeSelect.TreeNode;
 export default class Index extends React.Component {
   static defaultProps = {
 //数据的label
-    key_label: "title",
+    dataSourceKey: "title",
     //数据的value值
-    key_value: "value",
+    dataSourceValue: "value",
     key_key: "id",
     //除非你的子也不叫children
     children: "children",
@@ -120,17 +120,17 @@ export default class Index extends React.Component {
   };
 
   renderTreeNodes = data => {
-    const {key_label, key_value, children, key_key, multiple, selectPrent} = this.props;
+    const {dataSourceKey, dataSourceValue, children, key_key, multiple, selectPrent} = this.props;
     return data.map((item, i) => {
       if (item[children] && item[children].length > 0) {
         return (
-          <TreeNode title={item[key_label]} key={item[key_value]} value={item[key_value]}
+          <TreeNode title={item[dataSourceKey]} key={item[dataSourceValue]} value={item[dataSourceValue]}
                     selectable={multiple || selectPrent} disableCheckbox={this.props.disableCheckbox(item)}>
             {this.renderTreeNodes(item[children])}
           </TreeNode>
         );
       }
-      return <TreeNode title={item[key_label]} key={item[key_value]} value={item[key_value]}
+      return <TreeNode title={item[dataSourceKey]} key={item[dataSourceValue]} value={item[dataSourceValue]}
                        disableCheckbox={this.props.disableCheckbox(item)}/>;
     });
   }

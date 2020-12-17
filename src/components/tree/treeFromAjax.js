@@ -17,9 +17,9 @@ import {uid} from "esn"
 let defaultProps = {
   ajax: ajax,
   //树的label
-  key_label: "name",
+  dataSourceKey: "name",
   //树的value
-  key_value: "id",
+  dataSourceValue: "id",
   //接口请求数据的时候，需要传递的标识参数，默认的是id
   primaryKeyField: "id",
   // 每一层需要请求的接口地址
@@ -80,7 +80,7 @@ function index(prop, ref) {
     ...defaultProps,
     ...prop
   }
-  const {treeUrl, onSelect, initTreeDate, ajax, setData, set_tree_data, key_label, key_value, primaryKeyField, isRandomKey} = props;
+  const {treeUrl, onSelect, initTreeDate, ajax, setData, set_tree_data, dataSourceKey, dataSourceValue, primaryKeyField, isRandomKey} = props;
   // 当前树的数据
   const [treeData, setTreeData] = useState([]);
 
@@ -113,7 +113,7 @@ function index(prop, ref) {
       }
 
       let param = {}
-      param[primaryKeyField] = data[key_value]
+      param[primaryKeyField] = data[dataSourceValue]
       ajax(treeUrl[data.level], param, (json) => {
 
         let resultData = setData(json);
@@ -124,8 +124,8 @@ function index(prop, ref) {
           let _level = data.level || data.level === 0 ? data.level + 1 : 0
           return {
             ...e,
-            title: e[key_label],
-            key: isRandomKey ? uid() : e[key_value],
+            title: e[dataSourceKey],
+            key: isRandomKey ? uid() : e[dataSourceValue],
             id: e[primaryKeyField],
             level: _level,
             ...(!treeUrl[_level] ? {

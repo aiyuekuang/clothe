@@ -7,7 +7,7 @@ import {Modal} from "antd"
 
 
 let defaultProps = {
-  title: "日志",
+  title: "提示",
   //弹窗中的内容
   className: "inlineBlock",
   //弹窗根据antd的其他设置
@@ -19,7 +19,7 @@ let defaultProps = {
   close: () => {
   },
   width:800,
-  Component:(props) => {
+  Component:({visible,setVisible}) => {
     return(
       <div>dd</div>
     )

@@ -51,22 +51,22 @@ export default class UpTree extends React.Component {
     //是否直接从上个界面传递已获取的输数据
     //treeData:null,
     //数据的label
-    key_label: "label",
+    dataSourceKey: "label",
     //数据的value值
-    key_value: "value",
+    dataSourceValue: "value",
     //树的其他设置
     config: {},
-    //树编辑控件或者其他什么控件需要这个树的数据的时候可以使用和这个回调
+    //树编辑控件或者其他什么控件需要这个树的数据的时候可以使用和这个回调l
     set_tree_data: (data) => {
     },
     //tree的样式
     className: "up_tree_warp",
-    tree_hide: null,
+    treeHide: null,
     //树控件的最大高度
     maxHeight: 500,
     onChange: (data,obj) => {
     },
-//初始选中的值
+    //初始选中的值
     defaultValue: null,
     //是否首次选中第一个数据
     selectFirstValue: null,
@@ -83,7 +83,7 @@ export default class UpTree extends React.Component {
 
 
   get_tree = () => {
-    const {key_value,onChange} = this.props;
+    const {dataSourceValue,onChange} = this.props;
     const {select_value} = this.state;
     // if(this.props.treeData){
     //     this.setState({
@@ -99,8 +99,8 @@ export default class UpTree extends React.Component {
       this.props.ajax(this.props.treeUrl, this.props.param, (data) => {
         let value = this.props.getData(data);
 
-        if ((this.props.selectFirstValue && this.first) || (this.props.selectFirstValue && !(select_value  && treeFindObjById(select_value[0],value,key_value)))) {
-          let _value =  value && value.length ? [value[0][key_value]] : []
+        if ((this.props.selectFirstValue && this.first) || (this.props.selectFirstValue && !(select_value  && treeFindObjById(select_value[0],value,dataSourceValue)))) {
+          let _value =  value && value.length ? [value[0][dataSourceValue]] : []
           let _valueObj =  value && value.length ? value[0] : {}
 
           this.setState({
@@ -138,8 +138,8 @@ export default class UpTree extends React.Component {
       const node = tree[i];
       if (node.children) {
         if (node.children.length > 0) {
-          if (node.children.some(item => item[this.props.key_value] === value)) {
-            parentKey = node[this.props.key_value];
+          if (node.children.some(item => item[this.props.dataSourceValue] === value)) {
+            parentKey = node[this.props.dataSourceValue];
           } else if (this.getParentKey(value, node.children)) {
             parentKey = this.getParentKey(value, node.children);
           }
@@ -161,8 +161,8 @@ export default class UpTree extends React.Component {
     for (let i = 0; i < tree.length; i++) {
       const node = tree[i];
       if (node.children) {
-        if (node.children.some(item => item[this.props.key_value] === key)) {
-          parentKey = node[this.props.key_value];
+        if (node.children.some(item => item[this.props.dataSourceValue] === key)) {
+          parentKey = node[this.props.dataSourceValue];
         } else if (this.getParentKey(key, node.children)) {
           parentKey = this.getParentKey(key, node.children);
         }
@@ -180,13 +180,13 @@ export default class UpTree extends React.Component {
 
   dataList = [];
   generateList = (data) => {
-    const {key_label, key_value} = this.props;
+    const {dataSourceKey, dataSourceValue} = this.props;
     for (let i = 0; i < data.length; i++) {
       const node = data[i];
-      const value = node[this.props.key_value];
+      const value = node[this.props.dataSourceValue];
       let obj = {...node};
-      obj[key_label] = node[key_label]
-      obj[key_value] = value
+      obj[dataSourceKey] = node[dataSourceKey]
+      obj[dataSourceValue] = value
       this.dataList.push(obj);
       if (node.children) {
         if (node.children.length > 0) {
@@ -206,18 +206,18 @@ export default class UpTree extends React.Component {
       return
     }
     const expandedKeys = this.dataList.map((item) => {
-      if (item[this.props.key_label].indexOf(value) > -1) {
-        return this.getParentKey(item[this.props.key_value], this.state.treeData);
+      if (item[this.props.dataSourceKey].indexOf(value) > -1) {
+        return this.getParentKey(item[this.props.dataSourceValue], this.state.treeData);
       }
       return null;
     }).filter((item, i, self) => item && self.indexOf(item) === i);
 
     let _selectValue = this.dataList.filter((item) => {
-      return item[this.props.key_label].indexOf(value) > -1
+      return item[this.props.dataSourceKey].indexOf(value) > -1
     })
     if(_selectValue &&_selectValue.length && this.props.isSelectSearchValue ){
-      this._select(_selectValue[0][this.props.key_value],_selectValue[0],{})
-      this.setSelectedKeys([_selectValue[0][this.props.key_value]])
+      this._select(_selectValue[0][this.props.dataSourceValue],_selectValue[0],{})
+      this.setSelectedKeys([_selectValue[0][this.props.dataSourceValue]])
     }
 
     this.setState({
@@ -269,7 +269,7 @@ export default class UpTree extends React.Component {
 
   render() {
     const {searchValue, expandedKeys, autoExpandParent, loading, treeData, select_value, title} = this.state;
-    const {addFormSet, config, className, tree_hide, maxHeight, clotheLang} = this.props;
+    const {addFormSet, config, className, treeHide, maxHeight, clotheLang} = this.props;
 
     const loop = (data = treeData, father_item = null) => {
       //console.log(!data instanceof Array,data,[data])
@@ -279,9 +279,9 @@ export default class UpTree extends React.Component {
         data = [data]
       }
       return data.map((item, i) => {
-        const index = item[this.props.key_label].indexOf(searchValue);
-        const beforeStr = item[this.props.key_label].substr(0, index);
-        const afterStr = item[this.props.key_label].substr(index + searchValue.length);
+        const index = item[this.props.dataSourceKey].indexOf(searchValue);
+        const beforeStr = item[this.props.dataSourceKey].substr(0, index);
+        const afterStr = item[this.props.dataSourceKey].substr(index + searchValue.length);
         const title = index > -1 ? (
           <span key={i}>
                         {beforeStr}
@@ -290,16 +290,16 @@ export default class UpTree extends React.Component {
                         </span>
             {afterStr}
                     </span>
-        ) : <span key={i}>{item[this.props.key_label]}</span>;
+        ) : <span key={i}>{item[this.props.dataSourceKey]}</span>;
         if (item.children && item.children.length > 0) {
           return (
-            <TreeNode key={item[this.props.key_value]} title={title} dataRef={item}
+            <TreeNode key={item[this.props.dataSourceValue]} title={title} dataRef={item}
                       father_item={father_item}>
               {loop(item.children, item)}
             </TreeNode>
           );
         }
-        return <TreeNode key={item[this.props.key_value]} title={title} dataRef={item}
+        return <TreeNode key={item[this.props.dataSourceValue]} title={title} dataRef={item}
                          father_item={father_item}/>;
       });
     }
@@ -313,7 +313,7 @@ export default class UpTree extends React.Component {
           {this.props.add ? <div>
             <a onClick={this.showModal}>{clotheLang.form.add}/{clotheLang.tree.modify}</a>
           </div> : null}
-          {tree_hide ? <div onClick={tree_hide.bind(this, false)}>
+          {treeHide ? <div onClick={treeHide.bind(this, false)}>
             <div className="up_tree_head_show">
               <CaretRightOutlined/>
             </div>
