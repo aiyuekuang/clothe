@@ -56,8 +56,8 @@ export default class UpTree extends React.Component {
     dataSourceValue: "value",
     //树的其他设置
     config: {},
-    //树编辑控件或者其他什么控件需要这个树的数据的时候可以使用和这个回调l
-    set_tree_data: (data) => {
+    //树编辑控件或者其他什么控件需要这个树的数据的时候可以使用和这个回调
+    getTreeData: (data) => {
     },
     //tree的样式
     className: "up_tree_warp",
@@ -114,7 +114,7 @@ export default class UpTree extends React.Component {
           treeData: this.props.getData(data),
           loading: false
         })
-        this.props.set_tree_data(this.props.getData(data))
+        this.props.getTreeData(this.props.getData(data))
         this.generateList(this.props.getData(data));
       }, () => {
         this.first = false

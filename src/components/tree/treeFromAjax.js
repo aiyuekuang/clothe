@@ -44,7 +44,7 @@ let defaultProps = {
     return data.entity.Records
   },
   //数据更新之后的回调
-  set_tree_data: (data) => {
+  getTreeData: (data) => {
 
   },
   //是否需要随机生成key
@@ -80,7 +80,7 @@ function index(prop, ref) {
     ...defaultProps,
     ...prop
   }
-  const {treeUrl, onSelect, initTreeDate, ajax, setData, set_tree_data, dataSourceKey, dataSourceValue, primaryKeyField, isRandomKey} = props;
+  const {treeUrl, onSelect, initTreeDate, ajax, setData, getTreeData, dataSourceKey, dataSourceValue, primaryKeyField, isRandomKey} = props;
   // 当前树的数据
   const [treeData, setTreeData] = useState([]);
 
@@ -91,7 +91,7 @@ function index(prop, ref) {
   }, []);
 
   useEffect(() => {
-    set_tree_data(treeData)
+    getTreeData(treeData)
 
     return () => {
     }

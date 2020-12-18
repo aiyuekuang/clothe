@@ -383,7 +383,7 @@ export default class TreeEidt extends React.Component {
     this.up_tree.current.get_tree();
   }
 
-  set_tree_data = (treeData) => {
+  getTreeData = (treeData) => {
     this.setState({
       treeData
     })
@@ -400,7 +400,7 @@ export default class TreeEidt extends React.Component {
           <Up_Tree
             ref={this.up_tree}
             select={this.onSelect}
-            set_tree_data={this.set_tree_data}
+            getTreeData={this.getTreeData}
             {...this.props}
           />
         </div>

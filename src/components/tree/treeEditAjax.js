@@ -143,7 +143,7 @@ export default class TreeEditAjax extends React.Component {
     this.up_tree.current.onLoadData();
   }
 
-  set_tree_data = (treeDataProps) => {
+  getTreeData = (treeDataProps) => {
     this.setState({
       treeDataProps
     })
@@ -160,7 +160,7 @@ export default class TreeEditAjax extends React.Component {
           <UpTree
             ref={this.up_tree}
             onSelect={this.onSelect}
-            set_tree_data={this.set_tree_data}
+            getTreeData={this.getTreeData}
             {...this.props}
             isRandomKey={false}
           />
