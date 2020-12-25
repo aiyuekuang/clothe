@@ -57,6 +57,7 @@ import editableCell from "./table/editableCell"
 import nav from "./nav"
 import date from "./date"
 import code from "./code"
+import treeInForm from "./tree/treeInForm"
 
 // import _excel from "./excel"
 
@@ -129,6 +130,7 @@ export const ModalPro = Hoc(modalUp)
 export const NavPro = Hoc(nav)
 export const DatePro = Hoc(date)
 export const CodePro = Hoc(code)
+export const TreeInForm = Hoc(treeInForm)
 
 // export const Excel = Hoc(_excel)
 

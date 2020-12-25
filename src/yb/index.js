@@ -1,13 +1,14 @@
 /**
  * Created by zengtao on 2017/5/19.
  */
-import React, {Fragment, useEffect , useState } from 'react';
+import React, {Fragment, useEffect , useState,forwardRef } from 'react';
 import {Button} from "antd"
+import index from "@components/tree/treeInForm";
 
 
 let defaultProps={}
 
-export default function Index(prop) {
+function index(prop, ref) {
     const [count, setCount] = useState(0);
 
     let props={
@@ -29,3 +30,4 @@ export default function Index(prop) {
         </div>
     );
 }
+export default forwardRef(index)
