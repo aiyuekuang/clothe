@@ -145,29 +145,15 @@ $up_tree_head_height: 38px;
   @include hp();
 }
 
-%up_table_form_common {
-  @include hp3(23%, 40px, 1%, 0);
-
-  > div {
-    animation: show 1s;
-    will-change: transform;
-    display: flex;
-    align-items: center;
-
-    > div {
-      width: 100%;
-    }
-  }
-}
 
 .up_table_form {
-  //@include hp2();
-  //>div{
-  //  min-width: 23%;
-  //  flex: 1;
-  //  margin-right: 2%;
-  //}
-  @extend %up_table_form_common;
+  @include hp2();
+  >div{
+    min-width: 200px;
+    flex: 1;
+    margin-right: 2%;
+    max-width: 400px;
+  }
 
   .ant-form-item-label-left {
     text-align-last: justify;

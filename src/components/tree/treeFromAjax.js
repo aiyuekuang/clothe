@@ -119,8 +119,6 @@ function index(prop, ref) {
         let resultData = setData(json);
         resolve();
         let treeData = resultData.map((e) => {
-
-
           let _level = data.level || data.level === 0 ? data.level + 1 : 0
           return {
             ...e,
@@ -133,7 +131,6 @@ function index(prop, ref) {
             } : {})
           }
         })
-
 
         setTreeData(origin => origin && origin.length ? updateTreeData(origin, data.key, treeData) : treeData);
       })

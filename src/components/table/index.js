@@ -622,7 +622,7 @@ export default class Index extends Component {
                 <a onClick={this.showModal.bind(this, record, false)}>{clotheLang.table.edit}</a> : null}
               {has_edit_ || (deleteDisabledFun(record) && has_edit_) ? <Divider type="vertical"/> : null}
               {deleteUrl ? deleteDisabledFun(record) ?
-                <a onClick={deleteBefore ? () => deleteBefore(record[primaryKeyField], record, this.deleteAll) : this.showDeleteConfirm.bind(this, record[primaryKeyField], record)}>{clotheLang.table.delete}</a> : null : null}
+                <a className="hongzi" onClick={deleteBefore ? () => deleteBefore(record[primaryKeyField], record, this.deleteAll) : this.showDeleteConfirm.bind(this, record[primaryKeyField], record)}>{clotheLang.table.delete}</a> : null : null}
             </Fragment>
           )
         }
