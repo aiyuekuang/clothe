@@ -198,9 +198,9 @@ export default function index(prop, ref) {
     if (record) {
       form.setFieldsValue(record)
     } else {
-      if (count > 1) {
+      // if (count > 1) {
         form.resetFields()
-      }
+      // }
     }
     return () => {
     }

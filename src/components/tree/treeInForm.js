@@ -36,7 +36,6 @@ let defaultProps={
 }
 
 function index(prop, ref) {
-
     let props={
         ...defaultProps,...prop
     }
