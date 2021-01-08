@@ -1,6 +1,6 @@
 {
   "name": "clothe",
-  "version": "0.0.46",
+  "version": "0.0.47",
   "description": "",
   "scripts": {
     "start": "webpack-dev-server --mode development",
