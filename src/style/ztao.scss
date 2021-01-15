@@ -2,7 +2,8 @@
 @import "./rest";
 @import "./xiangmude";
 @import "static/anim";
-@import "../../node_modules/nprogress/nprogress.css";
+@import "~nprogress/nprogress.css";
+@import "~codemirror/lib/codemirror.css";
 
 .up_index {
   background:#fff;

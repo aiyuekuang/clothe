@@ -25,7 +25,7 @@ let defaultProps = {
   }
 }
 function index(prop, ref) {
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState("wewewe");
 
   let props = {
     ...defaultProps, ...prop
