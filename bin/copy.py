@@ -13,7 +13,7 @@ class Path(object):
         self.lib = path +"/lib"
 
 
-arr = [Path('D:/oppo_pro/esa-admin/node_modules/clothe'),Path('D:/auto/zhWeb/node_modules/clothe')]
+arr = [Path('D:/oppo_pro/esa-admin/node_modules/clothe'),Path('D:/auto/zhWeb/node_modules/clothe'),Path('D:/oppo_pro/ddp_online/node_modules/clothe')]
 
 
 

@@ -30,6 +30,7 @@
   "license": "MIT",
   "devDependencies": {
     "antd": "4.8.4",
+    "@ant-design/icons": "^4.0.0",
     "autoprefixer": "^9.4.2",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
@@ -63,7 +64,6 @@
     "x-data-spreadsheet": "1.1.4"
   },
   "dependencies": {
-    "@ant-design/icons": "^4.0.0",
     "@antv/data-set": "^0.10.1",
     "@uiw/react-codemirror": "3.0.1",
     "axios": "^0.19.1",
