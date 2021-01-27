@@ -29,6 +29,8 @@
   "author": "ztao",
   "license": "MIT",
   "devDependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "antd": "4.8.4",
     "@ant-design/icons": "^4.0.0",
     "autoprefixer": "^9.4.2",
@@ -83,8 +85,6 @@
     "nprogress": "^0.2.0",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
     "rc-queue-anim": "^1.6.10",
-    "react": "^16.13.1",
-    "react-codemirror2": "7.2.1",
-    "react-dom": "^16.13.1"
+    "react-codemirror2": "7.2.1"
   }
 }
