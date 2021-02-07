@@ -314,7 +314,6 @@ export default function index(prop, ref) {
     )
   })
 
-
   return (
     <Form
       onFinish={handleSubmit}
@@ -339,10 +338,10 @@ export default function index(prop, ref) {
             <Col {...formItemLayout().labelCol}/>
             <Col {...formItemLayout().wrapperCol}>
               <div className="up_table_form_add_btn">
-                {otherBtn({form})}
                 {CustomSubmit?<CustomSubmit form={form} submit={form.submit}/>:<div>
                   <Button disabled={disabled || disabledBtn} type="primary" htmlType="submit">{submitText?submitText:clotheLang.form.submit}</Button>
                 </div>}
+                {otherBtn({form})}
                 {!props.record ? <div>
                   <Button disabled={disabled} onClick={rest}
                   >
