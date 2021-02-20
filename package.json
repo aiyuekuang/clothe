@@ -12,7 +12,9 @@
     "fabu": "npm run npm && npm run git && npm version patch && npm publish",
     "npm": "npm set registry https://registry.npmjs.org",
     "git": "python ./bin/release.py",
-    "copy": "python ./bin/copy.py"
+    "copy": "python ./bin/copy.py",
+    "doc": "styleguidist server",
+    "docBu": "styleguidist build"
   },
   "main": "./lib/index.js",
   "files": [
@@ -29,10 +31,8 @@
   "author": "ztao",
   "license": "MIT",
   "devDependencies": {
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "antd": "4.8.4",
     "@ant-design/icons": "^4.0.0",
+    "antd": "4.8.4",
     "autoprefixer": "^9.4.2",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
@@ -43,7 +43,7 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "copy-webpack-plugin": "^4.6.0",
-    "cross-env": "^5.2.0",
+    "cross-env": "^7.0.3",
     "crypto-js": "^3.1.9-1",
     "css-loader": "^0.28.10",
     "dom-to-image": "^2.6.0",
@@ -56,6 +56,8 @@
     "mockjs": "^1.0.1-beta3",
     "node-sass": "5.0.0",
     "postcss-loader": "^3.0.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "react-native-md5": "^1.0.0",
     "sass-loader": "10.1.0",
     "style-loader": "^1.2.1",
@@ -80,11 +82,15 @@
     "cssnano": "^4.1.10",
     "esn": "^2.0.18",
     "extract-text-webpack-plugin": "^3.0.2",
+    "github-markdown-css": "^4.0.0",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
     "nprogress": "^0.2.0",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "prop-types": "^15.7.2",
     "rc-queue-anim": "^1.6.10",
-    "react-codemirror2": "7.2.1"
+    "react-codemirror2": "7.2.1",
+    "react-markdown": "^5.0.3",
+    "react-styleguidist": "^11.1.5"
   }
 }
