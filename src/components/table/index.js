@@ -257,6 +257,9 @@ export default class Index extends Component {
   //移除
   componentWillUnmount() {
     //离开页面消除所有接口请求
+    this.setState = (state, callback) => {
+      return;
+    };
   }
 
   //计算表格的高度

@@ -8,6 +8,8 @@ import React, {forwardRef, useEffect, useState} from 'react';
 import {DatePicker} from 'antd';
 import moment from "moment"
 import {createMap} from "esn";
+import PropTypes from "prop-types";
+import Button from "../../yb";
 
 let dateFormat = createMap([{
   label: "date",
@@ -27,16 +29,7 @@ let dateFormat = createMap([{
 },])
 
 
-let defaultProps = {
-  defaultValue: null,
-  picker: "date"
-}
-
-function Index(prop, ref) {
-
-  let props = {
-    ...defaultProps, ...prop
-  }
+const DatePro = forwardRef((props,ref) => {
 
   const [value, setValue] = useState(valueFormat(props.value));
 
@@ -72,6 +65,19 @@ function Index(prop, ref) {
       <DatePicker {...props} onChange={(date, dateString) => onChange_(date, dateString)} value={value}/>
     </React.Fragment>
   )
-}
+})
 
-export default forwardRef(Index);
+DatePro.propTypes = {
+  /** 默认值*/
+  defaultValue: PropTypes.any,
+  /** 参考antd的方式*/
+  picker: PropTypes.string
+};
+DatePro.defaultProps = {
+  /** 默认值*/
+  defaultValue: null,
+  /** 参考antd的方式*/
+  picker: "date"
+};
+
+export default DatePro;

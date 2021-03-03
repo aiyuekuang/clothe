@@ -5,63 +5,18 @@ import React, {forwardRef, Fragment, useEffect, useImperativeHandle, useState} f
 import {Button, Cascader} from "antd"
 import {ajax} from "../utils/common";
 import {arrLast, cloneop, treeSetData} from "esn";
+import PropTypes from "prop-types";
 
 
 let defaultProps = {
-  ajax: ajax,
-  //筛选的数据源
-  dataSource: null,
-  //数据源的名称
-  dataSourceKey: "label",
-  //数据源对应的值的字段名
-  dataSourceValue: "value",
-  //表单中用到的控制的值
-  value: null,
-  //选择框变化时的事件，会返回值和对象
-  onChange: (value) => {
 
-  },
-  //点击后的颜色
-  placeholder: "请选择",
-  //每层请求用的url，每层必须使用相同的url，不支持不同层级用不同的
-  url: null,
-  //参数用到的上级带的字段
-  paramField: "id",
-  //第一次加载数据时的id值
-  initFieldValue: null,
-  //接口获取新数据之后，设置数据的使用
-  setData: (data) => {
-    return data
-  },
-  //什么规则的数据是不需要请求下级的
-  isLeafFun: (data) => {
-    return false
-  },
-  //是否返回值使用label
-  isValueLabel: false,
-  //onchange的时候返回最后选择的值
-  returnLastValue: false,
-  //change是否返回字符串
-  returnString: false,
-  //其他接口参数
-  values: {},
-  //总共有几层
-  layer: 2,
-  valueFun: () => {
-    return null
-  },
-  disabled: false,
-  style: {},
-  urlArr: null
 }
 
 let count = 0
 
 
-function index(prop, ref) {
-  let props = {
-    ...defaultProps, ...prop
-  }
+let cascaderAjax = forwardRef((props, ref)=>{
+
 
   const {dataSource, onChange, placeholder, ajax, paramField, url, setData, isLeafFun, isValueLabel, returnLastValue, returnString, values, initFieldValue, dataSourceKey, dataSourceValue, layer, valueFun, clotheLang, disabled, style, urlArr} = props;
 
@@ -125,7 +80,7 @@ function index(prop, ref) {
   }
 
   const change = (data, option) => {
-    // setValue(data)
+    //setValue(data)
     let _data = cloneop(data);
     let _option = cloneop(option);
     if (returnLastValue && data && data.length) {
@@ -200,11 +155,109 @@ function index(prop, ref) {
           allowClear
           disabled={disabled}
 
-          // value={_value}
+
         />
       </div>
     </div>
   );
-}
+})
 
-export default forwardRef(index);
+cascaderAjax.propTypes = {
+  /** 通用的ajax实现*/
+  ajax:  PropTypes.func,
+  /** 筛选的数据源*/
+  dataSource:  PropTypes.object,
+  /** 数据源的名称*/
+  dataSourceKey:  PropTypes.string,
+  /** 数据源对应的值的字段名*/
+  dataSourceValue:  PropTypes.string,
+  /** 表单中用到的控制的值*/
+  value: null,
+  /** 选择框变化时的事件，会返回值和对象*/
+  onChange:  PropTypes.func,
+  /** 点击后的颜色*/
+  placeholder:  PropTypes.string,
+  /** 每层请求用的url，每层必须使用相同的url，不支持不同层级用不同的*/
+  url:  PropTypes.string,
+  /** 参数用到的上级带的字段*/
+  paramField:  PropTypes.string,
+  /** 第一次加载数据时的id值*/
+  initFieldValue: null,
+  /** 接口获取新数据之后，设置数据的使用*/
+  setData:  PropTypes.func,
+  /** 什么规则的数据是不需要请求下级的*/
+  isLeafFun:  PropTypes.func,
+  /** 是否返回值使用label*/
+  isValueLabel:  PropTypes.bool,
+  /** onchange的时候返回最后选择的值*/
+  returnLastValue:  PropTypes.bool,
+  /** change是否返回字符串*/
+  returnString:  PropTypes.bool,
+  /** 其他接口参数*/
+  values:  PropTypes.object,
+  /** 总共有几层*/
+  layer:  PropTypes.number,
+
+  valueFun:  PropTypes.func,
+  /** 禁用组件*/
+
+  disabled:  PropTypes.bool,
+  /** 样式*/
+  style: PropTypes.object,
+  /** url的数组，逐层的层级*/
+  urlArr:  PropTypes.array
+};
+cascaderAjax.defaultProps = {
+  /** 通用的ajax实现*/
+  ajax: ajax,
+  /** 筛选的数据源*/
+  dataSource: null,
+  /** 数据源的名称*/
+  dataSourceKey: "label",
+  /** 数据源对应的值的字段名*/
+  dataSourceValue: "value",
+  /** 表单中用到的控制的值*/
+  value: null,
+  /** 选择框变化时的事件，会返回值和对象*/
+  onChange: (value) => {
+
+  },
+  /** 点击后的颜色*/
+  placeholder: "请选择",
+  /** 每层请求用的url，每层必须使用相同的url，不支持不同层级用不同的*/
+  url: null,
+  /** 参数用到的上级带的字段*/
+  paramField: "id",
+  /** 第一次加载数据时的id值*/
+  initFieldValue: null,
+  /** 接口获取新数据之后，设置数据的使用*/
+  setData: (data) => {
+    return data
+  },
+  /** 什么规则的数据是不需要请求下级的*/
+  isLeafFun: (data) => {
+    return false
+  },
+  /** 是否返回值使用label*/
+  isValueLabel: false,
+  /** onchange的时候返回最后选择的值*/
+  returnLastValue: false,
+  /** change是否返回字符串*/
+  returnString: false,
+  /** 其他接口参数*/
+  values: {},
+  /** 总共有几层*/
+  layer: 2,
+
+  valueFun: () => {
+    return null
+  },
+  /** 禁用组件*/
+
+  disabled: false,
+  /** 样式*/
+  style: {},
+  /** url的数组，逐层的层级*/
+  urlArr: null
+}
+export default cascaderAjax;

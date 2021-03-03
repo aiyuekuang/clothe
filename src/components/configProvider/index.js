@@ -1,19 +1,17 @@
 /**
  * Created by zengtao on 2017/5/19.
  */
-import React, {Fragment, useEffect , useState } from 'react';
+import React, {forwardRef, Fragment, useEffect, useState} from 'react';
 import { ConfigProvider } from 'antd';
+import Button from "../../yb";
 //本项目的模板页面
 
 
-let defaultProps={}
 
-export default function Index(prop) {
+const ConfigProviderPro = forwardRef((props,ref) => {
+
     // Declare a new state variable, which we'll call "count"
 
-    let props={
-        ...defaultProps,...prop
-    }
     const {children} = props;
 
 
@@ -22,4 +20,5 @@ export default function Index(prop) {
           {children}
       </ConfigProvider>
     );
-}
+})
+export default ConfigProviderPro;

@@ -1,37 +1,14 @@
 /**
  * Created by zengtao on 2017/5/19.
  */
-import React, {Fragment, useEffect, useState} from 'react';
+import React, {forwardRef, Fragment, useEffect, useState} from 'react';
 import {Checkbox} from "antd"
+import PropTypes from "prop-types";
 
 const CheckboxGroup = Checkbox.Group;
 
-let defaultProps = {
-  dataSource: [
-    {
-      name: "11",
-      id: 1
-    },
-    {
-      name: "22",
-      id: 2
-    }
-  ],
-  dataSourceLabel: "name",
-  dataSourceValue: "id",
-  value: [],
-  onChange: (data) => {
+let CheckboxProGroup = forwardRef((props, ref)=>{
 
-  },
-  config: {},
-  //是否有全选按钮
-  hasAll: true
-}
-
-export default function Index(prop) {
-  let props = {
-    ...defaultProps, ...prop
-  }
   const {dataSource, children, value, onChange, config, dataSourceLabel, dataSourceValue, clotheLang, hasAll} = props;
 
   const [indeterminate, setIndeterminate] = useState(true);
@@ -97,4 +74,50 @@ export default function Index(prop) {
       />
     </div>
   );
-}
+})
+
+CheckboxProGroup.propTypes = {
+  /** 数据源 */
+  dataSource: PropTypes.array,
+  /** 数据源的label字段 */
+  dataSourceLabel: PropTypes.string,
+  /** 数据源的value字段 */
+  dataSourceValue: PropTypes.string,
+  /** antd form的值 */
+  value: PropTypes.array,
+  /** antd form的值改变的回调 */
+  onChange: PropTypes.func,
+  /** antd的其他设置 */
+  config: PropTypes.object,
+  /** 是否有全选按钮 */
+  hasAll: PropTypes.bool
+};
+CheckboxProGroup.defaultProps = {
+  /** 数据源 */
+  dataSource: [
+    {
+      name: "11",
+      id: 1
+    },
+    {
+      name: "22",
+      id: 2
+    }
+  ],
+  /** 数据源的label字段 */
+  dataSourceLabel: "name",
+  /** 数据源的value字段 */
+  dataSourceValue: "id",
+  /** antd form的值 */
+  value: [],
+  /** antd form的值改变的回调 */
+  onChange: (data) => {
+
+  },
+  /** antd的其他设置 */
+  config: {},
+  /** 是否有全选按钮 */
+  hasAll: true
+};
+
+export default CheckboxProGroup;

@@ -2,18 +2,14 @@
  * Created by zengtao on 2017/5/19.
  */
 import React, {Fragment, useEffect , useState,forwardRef } from 'react';
-import {Button} from "antd"
-import index from "@components/tree/treeInForm";
+import PropTypes from "prop-types";
 
 
 let defaultProps={}
 
-function index(prop, ref) {
+const Button = forwardRef((props,ref) => {
     const [count, setCount] = useState(0);
 
-    let props={
-        ...defaultProps,...prop
-    }
     const {} = props;
 
     useEffect(() => {
@@ -29,5 +25,26 @@ function index(prop, ref) {
 
         </div>
     );
-}
-export default forwardRef(index)
+})
+
+Button.propTypes = {
+    /** Button label */
+    children: PropTypes.node.isRequired,
+    /** The color for the button */
+    color: PropTypes.string,
+    /** The size of the button */
+    size: PropTypes.oneOf(['small', 'normal', 'large']),
+    /** Disable button */
+    disabled: PropTypes.bool,
+    /** Gets called when the user clicks on the button */
+    onClick: PropTypes.func,
+};
+Button.defaultProps = {
+    color: '#333',
+    size: 'normal',
+    onClick: event => {
+        // eslint-disable-next-line no-console
+        console.log('You have clicked me!', event.target);
+    },
+};
+export default Button;

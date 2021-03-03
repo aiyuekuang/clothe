@@ -7,19 +7,11 @@
 import React, {forwardRef, useEffect, useState} from 'react';
 import {DatePicker} from 'antd';
 import moment from "moment"
+import PropTypes from "prop-types";
 
 const {MonthPicker, RangePicker, WeekPicker} = DatePicker;
 
-let defaultProps = {
-  format: "YYYY-MM",
-  defaultValue: null
-}
-
-function Index(prop,ref) {
-
-  let props = {
-    ...defaultProps, ...prop
-  }
+const MonthSelect = forwardRef((props,ref) => {
 
   const [value, setValue] = useState(valueFormat(props.value));
 
@@ -59,5 +51,18 @@ function Index(prop,ref) {
       <MonthPicker {...props} onChange={(date, dateString) => onChange_(date, dateString)} value={value}/>
     </React.Fragment>
   )
-}
-export default forwardRef(Index);
+})
+
+MonthSelect.propTypes = {
+  /** 默认值*/
+  defaultValue: PropTypes.any,
+  /** 参考antd的方式*/
+  format: PropTypes.string
+};
+MonthSelect.defaultProps = {
+  /** 默认值*/
+  defaultValue: null,
+  /** 格式化*/
+  format: "YYYY-MM",
+};
+export default MonthSelect;

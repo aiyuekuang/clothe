@@ -5,52 +5,9 @@ import React, {forwardRef, useEffect, useImperativeHandle, useState} from 'react
 import {Cascader} from "antd"
 import {arrLast, cloneop} from "esn";
 import {ajax} from "../utils/common";
+import PropTypes from "prop-types";
 
-
-let defaultProps = {
-  ajax: ajax,
-  //筛选的数据源
-  dataSource: null,
-  //数据源的名称
-  dataSourceKey: "label",
-  //数据源对应的值的字段名
-  dataSourceValue: "value",
-  primaryKeyField: "id",
-  //表单中用到的控制的值
-  value: null,
-  //选择框变化时的事件，会返回值和对象
-  onChange: (value) => {
-
-  },
-  //点击后的颜色
-  placeholder: "请选择",
-  //每层请求用的url，每层必须使用相同的url，不支持不同层级用不同的
-  url: null,
-  //接口获取新数据之后，设置数据的使用
-  setData: (data) => {
-    return data
-  },
-  //是否返回值使用label
-  isValueLabel: false,
-  //onchange的时候返回最后选择的值
-  returnLastValue: false,
-  //change是否返回字符串
-  returnString: false,
-  //其他接口参数
-  values: {},
-  valueFun: () => {
-    return null
-  },
-  disabled: false,
-  style:{}
-}
-
-
-function index(prop, ref) {
-  let props = {
-    ...defaultProps, ...prop
-  }
-
+let CascaderPro = forwardRef((props, ref)=>{
   const {dataSource, onChange, value, placeholder, url,ajax, setData,paramField, isLeafFun, isValueLabel, returnLastValue, returnString, values, dataSourceKey, dataSourceValue, valueFun, clotheLang, disabled, primaryKeyField,style} = props;
 
   const [_dataSource, setDataSource] = useState([]);
@@ -87,7 +44,7 @@ function index(prop, ref) {
   }
 
   const change = (data, option) => {
-    // setValue(data)
+    /**  setValue(data)*/
     let _data = cloneop(data);
     let _option = cloneop(option);
     if (returnLastValue && data && data.length) {
@@ -134,11 +91,88 @@ function index(prop, ref) {
           style={style}
           allowClear
           disabled={disabled}
-          // value={_value}
         />
       </div>
     </div>
   );
+})
+
+CascaderPro.propTypes = {
+  /** 通用的ajax实现*/
+  ajax: PropTypes.func,
+  /** 筛选的数据源*/
+  dataSource: PropTypes.array,
+  /** 数据源的名称*/
+  dataSourceKey: PropTypes.string,
+  /** 数据源对应的值的字段名*/
+  dataSourceValue: PropTypes.string,
+  /** 主键的字段*/
+  primaryKeyField: PropTypes.string,
+  /** 表单中用到的控制的值*/
+  value: null,
+  /** 选择框变化时的事件，会返回值和对象*/
+  onChange: PropTypes.func,
+  /** 点击后的颜色*/
+  placeholder:PropTypes.string,
+  /** 每层请求用的url，每层必须使用相同的url，不支持不同层级用不同的*/
+  url: null,
+  /** 接口获取新数据之后，设置数据的使用*/
+  setData: PropTypes.func,
+  /** 是否返回值使用label*/
+  isValueLabel: PropTypes.bool,
+  /** onchange的时候返回最后选择的值*/
+  returnLastValue: PropTypes.bool,
+  /** change是否返回字符串*/
+  returnString: PropTypes.bool,
+  /** 其他接口参数*/
+  values: PropTypes.object,
+
+  valueFun: PropTypes.func,
+  /** 禁用组件*/
+
+  disabled: PropTypes.bool,
+  /** 样式*/
+
+  style:PropTypes.object
+};
+
+CascaderPro.defaultProps = {
+  /** 通用的ajax实现*/
+  ajax: ajax,
+  /** 筛选的数据源*/
+  dataSource: null,
+  /** 数据源的名称*/
+  dataSourceKey: "label",
+  /** 数据源对应的值的字段名*/
+  dataSourceValue: "value",
+  primaryKeyField: "id",
+  /** 表单中用到的控制的值*/
+  value: null,
+  /** 选择框变化时的事件，会返回值和对象*/
+  onChange: (value) => {
+
+  },
+  /** 点击后的颜色*/
+  placeholder: "请选择",
+  /** 每层请求用的url，每层必须使用相同的url，不支持不同层级用不同的*/
+  url: null,
+  /** 接口获取新数据之后，设置数据的使用*/
+  setData: (data) => {
+    return data
+  },
+  /** 是否返回值使用label*/
+  isValueLabel: false,
+  /** onchange的时候返回最后选择的值*/
+  returnLastValue: false,
+  /** change是否返回字符串*/
+  returnString: false,
+  /** 其他接口参数*/
+  values: {},
+  valueFun: () => {
+    return null
+  },
+  disabled: false,
+  style:{}
 }
 
-export default forwardRef(index);
+export default CascaderPro;

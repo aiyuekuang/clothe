@@ -6,17 +6,16 @@ import { Button, Input, Modal,DatePicker} from 'antd';
 import {cuns} from 'esn'
 const {MonthPicker, RangePicker, WeekPicker} = DatePicker;
 import moment from "moment"
-export default class Index extends Component {
+import PropTypes from "prop-types";
+export default class Dayselect extends Component {
+
+    static propTypes = {
+        /** 默认的动画延迟时间 */
+        format:PropTypes.string
+    }
 
     static defaultProps = {
         format:"YYYY-MM-DD"
-    }
-
-    static getDerivedStateFromProps(nextProps) {
-        // Should be a controlled component.
-        // if ('value' in nextProps) {
-        // }
-        return null;
     }
 
     constructor(props) {

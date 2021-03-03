@@ -8,8 +8,9 @@ const packageFile = require(packagePath)
 
 
 module.exports = {
-    webpackConfig: require('./webpack.config.babel'), // webpack 路径,可以用项目里的,也可以用webpack-blocks创建
+    webpackConfig: require('./webpack.config.js'), // webpack 路径,可以用项目里的,也可以用webpack-blocks创建
     components: 'src/components/**/**.js', // 写入对应目录的文档
+    // defaultExample: true,
     verbose: true, // 打印详细信息
     updateDocs(docs, file) {
         if (docs.doclets.version) {
@@ -24,5 +25,6 @@ module.exports = {
     version: packageFile.version, // 同上 使用 package.json 的 version
     usageMode: 'expand', // 自动打开文档的缩放
     pagePerSection: true, // 是否每页一个组件显示
-    title: "文档名" // 文档名
+    title: "文档名", // 文档名
+    exampleMode: 'expand',
 }

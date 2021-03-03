@@ -1,17 +1,11 @@
 {
   "presets": [
-    [
-      "env",
-      {
-        "modules": false
-      }
-    ],
-    "stage-0",
-    "react"
+    "@babel/env",
+    "@babel/react"
   ],
   "plugins": [
-    "transform-runtime",
-    "transform-decorators-legacy",
+    "@babel/plugin-transform-runtime",
+    "transform-class-properties",
     [
       "import",
       {

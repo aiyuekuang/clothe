@@ -7,6 +7,7 @@ import {cuns} from 'esn'
 
 const {MonthPicker, RangePicker, WeekPicker} = DatePicker;
 import moment from "moment"
+import PropTypes from "prop-types";
 
 export function disabledDate(current,disabledStart,disabledEnd,disabledRang,formatData) {
   // Can not select days before today and today
@@ -28,27 +29,40 @@ export function disabledDate(current,disabledStart,disabledEnd,disabledRang,form
 }
 
 
-export default class Index extends Component {
+export default class RangSelect extends Component {
 
-  static defaultProps = {
-    format: "YYYY-MM-DD",
-    string: true,
-    showTime: true,
-    //这个时间之前的时间不可选,字符串即可
-    disabledStart: null,
-    //这个时间之后的时间不能选
-    disabledEnd: null,
-    //这个时间范围内的不能选
-    disabledRang: null,
-    //只能选择几天
-    limitNum: null
+  static propTypes = {
+    /** 格式化 */
+    format: PropTypes.string,
+    /** 返回字符串数据还是数组 */
+    string: PropTypes.bool,
+    /** 是否展示时间 */
+    showTime: PropTypes.bool,
+    /** 这个时间之前的时间不可选,字符串即可 */
+    disabledStart: PropTypes.string,
+    /** 这个时间之后的时间不能选 */
+    disabledEnd: PropTypes.string,
+    /** 这个时间范围内的不能选，数组[开始时间字符串,结束时间] */
+    disabledRang: PropTypes.array,
+    /** 只能选择几天 */
+    limitNum: PropTypes.number
   }
 
-  static getDerivedStateFromProps(nextProps) {
-    // Should be a controlled component.
-    // if ('value' in nextProps) {
-    // }
-    return null;
+  static defaultProps = {
+    /** 格式化 */
+    format: "YYYY-MM-DD",
+    /** 返回字符串数据还是数组 */
+    string: true,
+    /** 是否展示时间 */
+    showTime: true,
+    /** 这个时间之前的时间不可选,字符串即可 */
+    disabledStart: null,
+    /** 这个时间之后的时间不能选 */
+    disabledEnd: null,
+    /** 这个时间范围内的不能选 */
+    disabledRang: null,
+    /** 只能选择几天 */
+    limitNum: null
   }
 
   constructor(props) {

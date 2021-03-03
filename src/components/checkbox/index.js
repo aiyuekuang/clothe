@@ -1,24 +1,11 @@
 /**
  * Created by zengtao on 2017/5/19.
  */
-import React, {Fragment, useEffect , useState } from 'react';
+import React, {forwardRef, Fragment, useEffect, useState} from 'react';
 import {Checkbox} from "antd"
-const CheckboxGroup = Checkbox.Group;
+import PropTypes from "prop-types";
 
-let defaultProps={
-    value:false,
-    onChange:(bool)=>{
-
-    },
-    config:{}
-}
-
-export default function Index(prop) {
-    const [count, setCount] = useState(0);
-
-    let props={
-        ...defaultProps,...prop
-    }
+let CheckboxPro = forwardRef((props, ref)=>{
     const {children,value,onChange,config} = props;
 
     useEffect(() => {
@@ -34,4 +21,26 @@ export default function Index(prop) {
     return (
       <Checkbox onChange={onChanges} checked={value} {...config}>{children}</Checkbox>
     );
-}
+})
+
+CheckboxPro.propTypes = {
+    /** 单个checkbox是否选中状态 */
+    value:PropTypes.bool,
+    /** 单个checkbox变化的回调 */
+    onChange:PropTypes.func,
+    /** antd checkbox其他设置 */
+    config:PropTypes.object
+};
+CheckboxPro.defaultProps = {
+    /** 单个checkbox是否选中状态 */
+    value:false,
+    /** 单个checkbox变化的回调 */
+    onChange:(bool)=>{
+
+    },
+    /** antd checkbox其他设置 */
+    config:{}
+};
+
+
+export default CheckboxPro;

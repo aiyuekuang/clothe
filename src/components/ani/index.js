@@ -5,12 +5,16 @@ import React, { Component } from 'react';
 import QueueAnim from 'rc-queue-anim';
 import PropTypes from 'prop-types'
 
-export default class Index extends Component {
+export default class Ani extends Component {
     static propTypes = {
-        /** Description of prop "foo". */
+        /** 默认的动画延迟时间 */
         duration: PropTypes.number,
+        /** css的类名 */
+        className: PropTypes.string,
+        /** antd的设置*/
+        config: PropTypes.object,
         /** Description of prop "baz". */
-        type: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+        type: PropTypes.string
     }
     static defaultProps = {
         /**默认的动画延迟时间*/
