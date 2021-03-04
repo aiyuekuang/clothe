@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 import QueueAnim from 'rc-queue-anim';
 import PropTypes from 'prop-types'
 
+/** 自定义的列表动画组件 */
 export default class Ani extends Component {
     static propTypes = {
         /** 默认的动画延迟时间 */

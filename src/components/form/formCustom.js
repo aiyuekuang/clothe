@@ -2,32 +2,16 @@ import {Form, Input, Button, Checkbox} from 'antd';
 import {MinusCircleOutlined, PlusOutlined, ArrowUpOutlined, ArrowDownOutlined} from '@ant-design/icons';
 import React, {Fragment, useEffect, useState, useImperativeHandle, forwardRef} from 'react';
 import {formItemLayoutFun} from "./form_adds";
+import PropTypes from "prop-types";
 
 const {TextArea} = Input
 
-let defaultProps = {
-  color: "#1DA57A",
-  formItemLayout: [6, 16],
-  multiple: false,
-  record: null,
-  label: "选项",
-  rules: [
-    {
-      required: true,
-      whitespace: true,
-      message: "不能为空",
-    },
-  ],
-  name: "options",
-  isTextArea: false
-}
 
-function Index(prop, ref) {
+
+const FormCustom = forwardRef((props,ref) => {
   const [arr, setArr] = useState([]);
 
-  let props = {
-    ...defaultProps, ...prop
-  }
+
   const {color, record, label, rules, name, isTextArea, clotheLang} = props;
 
   useEffect(() => {
@@ -133,6 +117,41 @@ function Index(prop, ref) {
       </Form.List>
     </Fragment>
   );
+});
+
+FormCustom.propTypes = {
+  /** 整个组件的主色调，比如箭头图标等 */
+  color:PropTypes.string,
+  /** 标题和组件的比例 */
+  formItemLayout: PropTypes.array,
+  /** 标题 */
+  label: PropTypes.string,
+  /** 组件的antd规则 */
+  rules: PropTypes.array,
+  /** 组件的提交的字段 */
+  name: PropTypes.string,
+  /** 是文本框还是要输入框 */
+  isTextArea: PropTypes.bool
+};
+FormCustom.defaultProps = {
+  /** 整个组件的主色调，比如箭头图标等 */
+  color: "#1DA57A",
+  /** 标题和组件的比例 */
+  formItemLayout: [6, 16],
+  /** 标题 */
+  label: "选项",
+  /** 组件的规则 */
+  rules: [
+    {
+      required: true,
+      whitespace: true,
+      message: "不能为空",
+    },
+  ],
+  /** 组件的提交的字段 */
+  name: "options",
+  /** 是文本框还是要输入框 */
+  isTextArea: false
 };
 
-export default Index = forwardRef(Index)
+export default FormCustom

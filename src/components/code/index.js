@@ -97,7 +97,9 @@ CodePro.defaultProps = {
     height:200,
     /** 下方的提示语 */
     tip:"(按住Ctrl会自动提示补全)",
-    /** 写入变化后的回调 */
+    /** 写入变化后的回调 (code)=>{
+
+    }*/
     onChange:(code)=>{
 
     }

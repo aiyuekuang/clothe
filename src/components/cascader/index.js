@@ -15,7 +15,7 @@ let defaultProps = {
 let count = 0
 
 
-let cascaderAjax = forwardRef((props, ref)=>{
+let CascaderAjaxPro = forwardRef((props, ref)=>{
 
 
   const {dataSource, onChange, placeholder, ajax, paramField, url, setData, isLeafFun, isValueLabel, returnLastValue, returnString, values, initFieldValue, dataSourceKey, dataSourceValue, layer, valueFun, clotheLang, disabled, style, urlArr} = props;
@@ -162,7 +162,7 @@ let cascaderAjax = forwardRef((props, ref)=>{
   );
 })
 
-cascaderAjax.propTypes = {
+CascaderAjaxPro.propTypes = {
   /** 通用的ajax实现*/
   ajax:  PropTypes.func,
   /** 筛选的数据源*/
@@ -173,7 +173,9 @@ cascaderAjax.propTypes = {
   dataSourceValue:  PropTypes.string,
   /** 表单中用到的控制的值*/
   value: null,
-  /** 选择框变化时的事件，会返回值和对象*/
+  /** 选择框变化时的事件，会返回值和对象 (value) => {
+
+  }*/
   onChange:  PropTypes.func,
   /** 点击后的颜色*/
   placeholder:  PropTypes.string,
@@ -185,7 +187,9 @@ cascaderAjax.propTypes = {
   initFieldValue: null,
   /** 接口获取新数据之后，设置数据的使用*/
   setData:  PropTypes.func,
-  /** 什么规则的数据是不需要请求下级的*/
+  /** 什么规则的数据是不需要请求下级的(data) => {
+    return false
+  }*/
   isLeafFun:  PropTypes.func,
   /** 是否返回值使用label*/
   isValueLabel:  PropTypes.bool,
@@ -207,7 +211,7 @@ cascaderAjax.propTypes = {
   /** url的数组，逐层的层级*/
   urlArr:  PropTypes.array
 };
-cascaderAjax.defaultProps = {
+CascaderAjaxPro.defaultProps = {
   /** 通用的ajax实现*/
   ajax: ajax,
   /** 筛选的数据源*/
@@ -260,4 +264,4 @@ cascaderAjax.defaultProps = {
   /** url的数组，逐层的层级*/
   urlArr: null
 }
-export default cascaderAjax;
+export default CascaderAjaxPro;

@@ -2,25 +2,16 @@ import {Form, Input, Button, Checkbox} from 'antd';
 import {MinusCircleOutlined, PlusOutlined, ArrowUpOutlined, ArrowDownOutlined} from '@ant-design/icons';
 import React, {Fragment, useEffect, useState, useImperativeHandle, forwardRef} from 'react';
 import {cloneop} from "esn";
+import PropTypes from "prop-types";
 
 
 let defaultProps = {
-    color: "#1DA57A",
-    formItemLayout: [6, 16],
-    multiple: false,
-    record: null,
-    //
-    isEmpty: "isEmpty",
-    //是否需要禁用新增，主要是编辑时不给新增用来禁用
-    disabledAdd:false
+
 }
 
-function Index(prop, ref) {
+const QuestionAddFormIn = forwardRef((props,ref) => {
     const [arr, setArr] = useState([]);
 
-    let props = {
-        ...defaultProps, ...prop
-    }
 
     const {color, record, isEmpty,disabledAdd,clotheLang} = props;
 
@@ -160,6 +151,32 @@ function Index(prop, ref) {
             </Form.List>
         </Fragment>
     );
+});
+
+QuestionAddFormIn.propTypes = {
+    /** 整个组件的主色调，比如箭头图标等 */
+    color: PropTypes.string,
+    /** 标题和组件的比例 */
+    formItemLayout: PropTypes.array,
+    /** 写入表单数据 */
+    record: PropTypes.object,
+    /** 是否空的字段 */
+    isEmpty: PropTypes.string,
+    /** 是否需要禁用新增，主要是编辑时不给新增用来禁用 */
+    disabledAdd:PropTypes.bool
+};
+QuestionAddFormIn.defaultProps = {
+    /** 整个组件的主色调，比如箭头图标等 */
+    color: "#1DA57A",
+    /** 标题和组件的比例 */
+    formItemLayout: [6, 16],
+    /** 写入表单数据 */
+    record: null,
+    /** 是否空的字段 */
+    isEmpty: "isEmpty",
+    /** 是否需要禁用新增，主要是编辑时不给新增用来禁用 */
+    disabledAdd:false
 };
 
-export default Index = forwardRef(Index)
+
+export default QuestionAddFormIn

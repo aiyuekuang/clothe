@@ -3,7 +3,7 @@
  */
 import React, {Component, Fragment} from 'react';
 import {Button, Divider, Dropdown, Input, Menu, Modal, Table,} from 'antd';
-import {FormAdd, SearchTable, TreePro} from "../index"
+import {FormAdd, SearchFrom, TreePro} from "../index"
 import {getTextByJs, ajax} from "../utils/common"
 import {CaretRightOutlined, DeleteOutlined, DownOutlined, PlusOutlined} from "@ant-design/icons"
 import {diffObj, isArrayop, uid} from "esn";
@@ -287,7 +287,7 @@ export default class Index extends Component {
   //搜索组件
   table_search = (submit) => {
     return (
-      <SearchTable
+      <SearchFrom
         toggleCallback={() => {
           this.getHeight()
         }}

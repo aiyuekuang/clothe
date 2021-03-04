@@ -7,17 +7,48 @@ import {cuns} from 'esn'
 import {G2, Chart, Geom, Axis, Tooltip, Legend, Coord, Guide} from 'bizcharts';
 import DataSet from '@antv/data-set';
 import Nodataicon from "../icon/no_data"
+import PropTypes from "prop-types";
+
 //G2.Global.renderer = 'svg'
 
-export default class Index extends Component {
+export default class ChartPro extends Component {
+    static propTypes = {
+        /** 宽度 */
+        width: PropTypes.number,
+        /** 高度 */
+        height: PropTypes.number,
+        /** 间距 */
+        padding: PropTypes.string,
+        /** 数据源 */
+        data:PropTypes.array,
+        /** x的字段名 */
+        x: PropTypes.string,
+        /** y的字段名 */
+        y: PropTypes.string,
+        /** x的名称 */
+        xName:PropTypes.string,
+        /** y的名称 */
+        yName:PropTypes.string,
+        /** 标题 */
+        title: PropTypes.string,
+        /** 描述 */
+        info: PropTypes.string,
+        /** 横过来 */
+        transpose:PropTypes.bool,
+        /** legend的位置 */
+        position:PropTypes.string,
+        /** y的位移 */
+        dy:PropTypes.number
+    }
 
     static defaultProps = {
-        //固定宽高
+        /** 宽度 */
         width: null,
-        //高度必填，不然就报错
+        /** 高度 */
         height: null,
+        /** 间距 */
         padding:"auto",
-        // 数据源
+        /** 数据源 */
         data: [
             {
                 country: "中国",
@@ -40,20 +71,23 @@ export default class Index extends Component {
                 population: 18203
             }
         ],
-        //x的名称
+        /** x的字段名 */
         x: "country",
-        //y的名称
+        /** y的字段名 */
         y: "population",
+        /** x的名称 */
         xName:"日期时间",
+        /** y的名称 */
         yName:"数量",
-        //标题
+        /** 标题 */
         title: null,
-        //描述
+        /** 描述 */
         info: null,
-        //横过来
+        /** 横过来 */
         transpose:false,
-        //legend的位置
+        /** legend的位置 */
         position:"top",
+        /** y的位移 */
         dy:-20
     }
     constructor(props) {

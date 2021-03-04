@@ -5,7 +5,7 @@ import React, {Fragment, useEffect , useState,forwardRef } from 'react';
 import PropTypes from "prop-types";
 
 
-let defaultProps={}
+
 
 const Button = forwardRef((props,ref) => {
     const [count, setCount] = useState(0);

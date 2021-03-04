@@ -9,14 +9,15 @@ import DataSet from '@antv/data-set';
 import Slider from "bizcharts-plugin-slider";
 import moment from "moment"
 //G2.Global.renderer = 'svg'
-export default class Index extends Component {
+export default class Line extends Component {
 
     static defaultProps = {
-        //固定宽高
+        /** 宽度 */
         width: null,
-        //高度必填，不然就报错
+        /** 高度 */
         height: null,
-        padding: "auto",
+        /** 间距 */
+        padding:"auto",
         // 数据源
         data: [
             {

@@ -85,7 +85,9 @@ CheckboxProGroup.propTypes = {
   dataSourceValue: PropTypes.string,
   /** antd form的值 */
   value: PropTypes.array,
-  /** antd form的值改变的回调 */
+  /** antd form的值改变的回调 onChange: (data) => {
+
+  }*/
   onChange: PropTypes.func,
   /** antd的其他设置 */
   config: PropTypes.object,

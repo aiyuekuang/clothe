@@ -1,9 +1,11 @@
 /**
  * Created by zengtao on 2017/5/19.
  */
-import React, {useEffect, useState} from 'react';
+import React, {forwardRef, useEffect, useState} from 'react';
 import {Axis, Chart, Coord, Geom, Guide, Shape} from 'bizcharts';
 import Nodataicon from "../icon/no_data"
+import PropTypes from "prop-types";
+import Button from "../../yb";
 //G2.Global.renderer = 'svg'
 const {Html, Arc} = Guide;
 
@@ -44,29 +46,13 @@ Shape.registerShape('point', 'pointer', {
 
 
 let defaultProps = {
-  //固定宽高
-  width: 400,
-  //高度必填，不然就报错
-  height: 200,
-  padding: "auto",
-  fontSize: 14,
-  // 数据源
-  value: 8,
-  //标题
-  title: "完成率",
-  //legend的位置
-  position: "top",
-  color: ['#F5222D', '#FFBF00', '#0086FA', '#23b89c'],
-  max: 10,
-  company: "%"
+
 }
-export default function Index(prop) {
+const Dashboard = forwardRef((props,ref) => {
+
   const [data, setData] = useState([]);
   const [lineWidth, setLineWidth] = useState(25);
 
-  let props = {
-    ...defaultProps, ...prop
-  }
   const {x, y, title, fontSize, width, height, padding, transpose, position, dy, xName, yName, value, color, max, company} = props
   const cols = {
     value: {
@@ -214,5 +200,50 @@ export default function Index(prop) {
       </div>}
     </div>
   );
-}
+})
 
+Dashboard.propTypes = {
+  /** 固定宽 */
+  width: PropTypes.number,
+  /** 高度必填，不然就报错 */
+  height: PropTypes.number,
+  /** 间距 */
+  padding: PropTypes.string,
+  /** 字体大小 */
+  fontSize: PropTypes.number,
+  /** 数据源 */
+  value: PropTypes.number,
+  /** 标题 */
+  title: PropTypes.string,
+  /** legend的位置 */
+  position: PropTypes.string,
+  /** 各个指标的颜色 */
+  color: PropTypes.array,
+  /** 最大值 */
+  max: PropTypes.number,
+  /** 单位 */
+  company: PropTypes.string
+};
+Dashboard.defaultProps = {
+  /** 固定宽 */
+  width: 400,
+  /** 高度必填，不然就报错 */
+  height: 200,
+  /** 间距 */
+  padding: "auto",
+  /** 字体大小 */
+  fontSize: 14,
+  /** 数据源 */
+  value: 8,
+  /** 标题 */
+  title: "完成率",
+  /** legend的位置 */
+  position: "top",
+  /** 各个指标的颜色 */
+  color: ['#F5222D', '#FFBF00', '#0086FA', '#23b89c'],
+  /** 最大值 */
+  max: 10,
+  /** 单位 */
+  company: "%"
+};
+export default Dashboard;

@@ -26,7 +26,9 @@ let CheckboxPro = forwardRef((props, ref)=>{
 CheckboxPro.propTypes = {
     /** 单个checkbox是否选中状态 */
     value:PropTypes.bool,
-    /** 单个checkbox变化的回调 */
+    /** 单个checkbox变化的回调 onChange:(bool)=>{
+
+    }*/
     onChange:PropTypes.func,
     /** antd checkbox其他设置 */
     config:PropTypes.object

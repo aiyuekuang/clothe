@@ -59,6 +59,7 @@ import date from "./date"
 import code from "./code"
 import treeInForm from "./tree/treeInForm"
 import loading from "./loading"
+import iconSvg from "./icon"
 
 // import _excel from "./excel"
 
@@ -81,7 +82,7 @@ export const clotheInit = (data = {}) => {
 
 export const TablePro = Hoc(table);
 export const FormAdd = Hoc(formAdd)
-export const SearchTable = Hoc(searchTable)
+export const SearchFrom = Hoc(searchTable)
 export const TreePro = Hoc(upTree)
 export const TreeEdit = Hoc(TreeEidt)
 export const UEditorPro = Hoc(Ueditor_)
@@ -133,6 +134,7 @@ export const DatePro = Hoc(date)
 export const CodePro = Hoc(code)
 export const TreeInForm = Hoc(treeInForm)
 export const Loading = Hoc(loading)
+export const IconSvg = Hoc(iconSvg)
 
 // export const Excel = Hoc(_excel)
 

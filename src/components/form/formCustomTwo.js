@@ -1,47 +1,11 @@
 import {Form, Input, Button, Checkbox, Space} from 'antd';
 import {MinusCircleOutlined, PlusOutlined, ArrowUpOutlined, ArrowDownOutlined} from '@ant-design/icons';
 import React, {Fragment, useEffect, useState, useImperativeHandle, forwardRef} from 'react';
+import PropTypes from "prop-types";
 
-let defaultProps = {
-  color: "#1DA57A",
-  formItemLayout: [6, 16],
-  multiple: false,
-  record: null,
-  rules: [
-    {
-      required: true,
-      whitespace: true,
-      message: "不能为空",
-    },
-  ],
-  name: "options",
-  component: null,
-  otherComp: [{
-    title: "地区",
-    field: "label",
-    fill: true,
-    width: 3,
-    component: <Input/>
-  }, {
-    title: "值",
-    field: "value",
-    fill: true,
-    width: 3,
-    component: <Input/>
-  }, {
-    title: "值的",
-    field: "extra",
-    fill: true,
-    width: 10,
-    component: <Input/>
-  }]
-}
+const FormCustomTwo = forwardRef((props,ref) => {
 
-function Index(prop, ref) {
 
-  let props = {
-    ...defaultProps, ...prop
-  }
   const {color, record, label, rules, name, isTextArea, clotheLang, component, otherComp} = props;
 
   useEffect(() => {
@@ -162,6 +126,64 @@ function Index(prop, ref) {
       </Form.List>
     </Fragment>
   );
-};
+});
 
-export default Index = forwardRef(Index)
+FormCustomTwo.propTypes = {
+  /** 整个组件的主色调，比如箭头图标等 */
+  color:PropTypes.string,
+  /** 标题和组件的比例 */
+  formItemLayout: PropTypes.array,
+  /** 组件的antd规则 */
+  rules: PropTypes.array,
+  /** 组件的提交的字段 */
+  name: PropTypes.string,
+  /** 组件，默认是input */
+  component: PropTypes.elementType,
+  /** 其他需要的组件
+   * title----名称
+   * field----对应的字段
+   * fill----是否必填
+   * width----所占宽度，比例
+   * component----所用的组件
+   * */
+  otherComp: PropTypes.array
+};
+FormCustomTwo.defaultProps = {
+  /** 整个组件的主色调，比如箭头图标等 */
+  color: "#1DA57A",
+  /** 标题和组件的比例 */
+  formItemLayout: [6, 16],
+  /** 组件的antd规则 */
+  rules: [
+    {
+      required: true,
+      whitespace: true,
+      message: "不能为空",
+    },
+  ],
+  /** 组件的提交的字段 */
+  name: "options",
+  /** 组件，默认是input */
+  component: null,
+  /** 其他需要的组件 */
+  otherComp: [{
+    title: "地区",
+    field: "label",
+    fill: true,
+    width: 3,
+    component: <Input/>
+  }, {
+    title: "值",
+    field: "value",
+    fill: true,
+    width: 3,
+    component: <Input/>
+  }, {
+    title: "值的",
+    field: "extra",
+    fill: true,
+    width: 10,
+    component: <Input/>
+  }]
+};
+export default FormCustomTwo;
