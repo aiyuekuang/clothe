@@ -21,15 +21,12 @@ function str_cut(str, length) {
   return str;
 }
 
-const Search = Input.Search;
-const confirm = Modal.confirm;
 
-
-export default class Index extends Component {
+export default class TableSelect extends Component {
 
   static defaultProps = {
     ajax: ajax,
-    //表格结构数据
+    /** 表格结构数据 */
     columns: [{
       title: '编号',
       dataIndex: 'id',
@@ -42,78 +39,78 @@ export default class Index extends Component {
       width: 200,
     }],
     dataSource: null,
-    //接口连接
+    /** 接口连接 */
     url: "/shishi",
-    //额外的需要加入的参数
+    /** 额外的需要加入的参数 */
     values: {},
-    //数据获取方式
+    /** 数据获取方式 */
     setData: (data) => {
       return data.entity.pageItems
     },
-    //获取分页总数的方式
+    /** 获取分页总数的方式 */
     setTotal: (data) => {
       return data.records.total
     },
-    //整个table的外边距
+    /** 整个table的外边距 */
     margin: 0,
-    //树的搜索字段
+    /** 树的搜索字段 */
     getTreeField: "getTreeField",
-    //树的url，如果为null就是不需要树
+    /** 树的url，如果为null就是不需要树 */
     treeUrl: null,
-    //表格的其他属性
+    /** 表格的其他属性 */
     config: {},
-    //是否有分页
+    /** 是否有分页 */
     hasPage: true,
-    //判断是否可以被点击
+    /** 判断是否可以被点击 */
     rowDisabledFun: (record) => {
       return false
     },
-    //批量操作的对象
+    /** 批量操作的对象 */
     rowAction: null,
-    //主键id
+    /** 主键id */
     primaryKeyField: "id",
-    //其他按钮组件
+    /** 其他按钮组件 */
     otherBtn: (selectedRowKeys, onSelectChange, getData) => {
     },
-    //搜索组件的form对象
+    /** 搜索组件的form对象 */
     searchForm: [],
 
-    //其他搜索组件的参数
+    /** 其他搜索组件的参数 */
     searchFormSet: {},
-    //树的其它选项
+    /** 树的其它选项 */
     treeSet: {},
 
-    //外面的需要用到这个表格请求的数据的话，可以用这个方法
+    /** 外面的需要用到这个表格请求的数据的话，可以用这个方法 */
     tableDataCallback: (data) => {
 
     },
     onSearchChange: (values) => {
     },
-    //表格的样式
+    /** 表格的样式 */
     table_className: "table_className",
-    //表格的是什么型的默认是紧凑型的
+    /** 表格的是什么型的默认是紧凑型的 */
     size: "middle",
-    //搜索的标题字段
+    /** 搜索的标题字段 */
     searchPlaceholder: "请输入关键词",
     searchLabelField: null,
-    //搜索框的宽度
+    /** 搜索框的宽度 */
     searchWidth: 200,
-    //树控件点击后的回调
+    /** 树控件点击后的回调 */
     treeClick: (data) => {
     },
     onChange: (value) => {
     },
-    //弹窗的设置
+    /** 弹窗的设置 */
     modalSet: {},
-    //弹窗的标题
+    /** 弹窗的标题 */
     title: null,
     value: [],
-    //是否需要重新打开时已选数据还在
+    /** 是否需要重新打开时已选数据还在 */
     isKeepSelectedRowKeys: true,
-    //是否需要重新打开时界面重新初始化
+    /** 是否需要重新打开时界面重新初始化 */
     isShowNewTable: false,
     pageSize:10,
-    //首次加载组件是否请求数据
+    /** 首次加载组件是否请求数据 */
     firstLoadData: true,
   }
 
