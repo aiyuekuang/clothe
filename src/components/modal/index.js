@@ -3,6 +3,7 @@
  */
 import React, {Fragment, Component, PureComponent, useState, useImperativeHandle, forwardRef} from 'react';
 import {Button, Input, Modal} from 'antd';
+import PropTypes from "prop-types";
 
 const {confirm} = Modal;
 
@@ -32,11 +33,8 @@ const defaultProps = {
   className: ""
 }
 
-function Index(prop, ref) {
-  // Declare a new state variable, which we'll call "count"
-  let props = {
-    ...defaultProps, ...prop
-  }
+const ModalSimple = forwardRef((props,ref) => {
+
 
   const {modalType, className} = props;
   let _props = {...props}
@@ -56,8 +54,28 @@ function Index(prop, ref) {
       </div>
     </Fragment>
   );
-}
+})
 
-export default Index;
+ModalSimple.propTypes = {
+  /** Button label */
+  children: PropTypes.node.isRequired,
+  /** The color for the button */
+  color: PropTypes.string,
+  /** The size of the button */
+  size: PropTypes.oneOf(['small', 'normal', 'large']),
+  /** Disable button */
+  disabled: PropTypes.bool,
+  /** Gets called when the user clicks on the button */
+  onClick: PropTypes.func,
+};
+ModalSimple.defaultProps = {
+  color: '#333',
+  size: 'normal',
+  onClick: event => {
+    // eslint-disable-next-line no-console
+    console.log('You have clicked me!', event.target);
+  },
+};
+export default ModalSimple;
 
 

@@ -1,7 +1,7 @@
 /**
  * Created by zengtao on 2017/5/19.
  */
-import React, {Fragment, useEffect, useRef, useState} from 'react';
+import React, {forwardRef, Fragment, useEffect, useRef, useState} from 'react';
 import {Button, Input, InputNumber, Form, Table, Popconfirm} from "antd"
 import {TablePro} from "../index"
 import {
@@ -10,36 +10,15 @@ import {
   ExclamationCircleOutlined,
   RightOutlined,
 } from "@ant-design/icons";
+import PropTypes from "prop-types";
 
 
 let defaultProps = {
-  primaryKeyField: "id",
-  addFormSet: {},
-  columns: [{
-    // 表单标题
-    title: "搜索",
-    field: "title",
-    // 是否在收起时显示
-    isTop: true,
-    fill: true,
-    component: <Input placeholder="输入邮箱/管理者"/>,
-    editable: true
-  },
-    {
-      // 表单标题
-      title: "所属省份",
-      field: "title2",
-      fill: true,
-      editable: true
 
-      // 是否在收起时显示
-    }]
 }
 
-export default function Index(prop) {
-  let props = {
-    ...defaultProps, ...prop
-  }
+const EditableCell = forwardRef((props,ref) => {
+
 
   const {primaryKeyField, clotheLang, columns, addUrl, addFormSet, editUrl} = props;
 
@@ -249,4 +228,53 @@ export default function Index(prop) {
     </div>
   );
 
-}
+})
+
+EditableCell.propTypes = {
+  /** 主键的字段 */
+  primaryKeyField: PropTypes.string,
+  /** 新增表单组件（FormAdd）的其他设置 */
+  addFormSet: PropTypes.object,
+  /** 表格和表单公用的模型对象
+   * title----名称
+   * field----名称的字段
+   * isTop----是否在收起时显示
+   * fill----是否必填
+   * component----表单模式时的组件
+   * editable----是否可以被编辑
+   * */
+  columns: PropTypes.array
+};
+EditableCell.defaultProps = {
+  /** 主键的字段 */
+  primaryKeyField: "id",
+  /** 新增表单组件（FormAdd）的其他设置 */
+  addFormSet: {},
+  /** 表格和表单公用的模型对象
+   * title----名称
+   * field----名称的字段
+   * isTop----是否在收起时显示
+   * fill----是否必填
+   * component----表单模式时的组件
+   * editable----是否可以被编辑
+   * */
+  columns: [{
+    // 表单标题
+    title: "搜索",
+    field: "title",
+    isTop: true,
+    fill: true,
+    component: <Input placeholder="输入邮箱/管理者"/>,
+    editable: true
+  },
+    {
+      // 表单标题
+      title: "所属省份",
+      field: "title2",
+      fill: true,
+      editable: true
+
+      // 是否在收起时显示
+    }]
+};
+export default EditableCell;

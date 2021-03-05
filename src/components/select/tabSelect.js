@@ -2,49 +2,15 @@
  * Created by zengtao on 2017/5/19.
  */
 import React, {forwardRef, Fragment, useEffect, useImperativeHandle, useState} from 'react';
-import {Button} from "antd"
+import PropTypes from "prop-types";
 
 
 let defaultProps = {
-  disabled: false,
-  className: "",
-  //左侧的选项名称
-  label: "选项",
-  //筛选的数据源
-  dataSource: [
-    {
-      title: "第一",
-      value: 1
-    }, {
-      title: "第二",
-      value: 2
-    }, {
-      title: "第三",
-      value: 3
-    }
-  ],
-  //数据源的名称
-  dataSourceKey: "label",
-  //数据源对应的值的字段名
-  dataSourceValue: "value",
-  defaultValue: null,
-  //表单中用到的控制的值
-  value: null,
-  //选择框变化时的事件，会返回值和对象
-  onChange: (value, data) => {
 
-  },
-  //点击后的颜色
-  color: "#666666",
-  //是否需要必选
-  isRequired: false
 }
 
-function index(prop, ref) {
+const TabSelect = forwardRef((props,ref) => {
 
-  let props = {
-    ...defaultProps, ...prop
-  }
   const {className, label, dataSource, dataSourceKey, dataSourceValue, onChange, value, color, disabled, isRequired, defaultValue} = props;
   const [selectValue, setSelectValue] = useState(defaultValue);
 
@@ -109,6 +75,67 @@ function index(prop, ref) {
       </div>
     </div>
   );
-}
+})
 
-export default forwardRef(index)
+TabSelect.propTypes = {
+  /** 禁用 */
+  disabled: PropTypes.bool,
+  /** 样式名 */
+  className: PropTypes.string,
+  /** 左侧的选项名称 */
+  label: PropTypes.string,
+  /** 筛选的数据源 */
+  dataSource:PropTypes.array,
+  /** 数据源的名称 */
+  dataSourceKey: PropTypes.string,
+  /** 数据源对应的值的字段名 */
+  dataSourceValue: PropTypes.string,
+  /** 默认值 */
+  defaultValue: null,
+  /** 表单中用到的控制的值 */
+  value: null,
+  /** 选择框变化时的事件，会返回值和对象 (value, data) => {}，value是主键的值，data是对象*/
+  onChange: (value, data) => {},
+  /** 点击后的颜色 */
+  color: "#666666",
+  /** 是否需要必选 */
+  isRequired: false
+};
+TabSelect.defaultProps = {
+  /** 禁用 */
+  disabled: false,
+  /** 样式名 */
+  className: "",
+  /** 左侧的选项名称 */
+  label: "选项",
+  /** 筛选的数据源 */
+  dataSource: [
+    {
+      title: "第一",
+      value: 1
+    }, {
+      title: "第二",
+      value: 2
+    }, {
+      title: "第三",
+      value: 3
+    }
+  ],
+  /** 数据源的名称 */
+  dataSourceKey: "label",
+  /** 数据源对应的值的字段名 */
+  dataSourceValue: "value",
+  /** 默认值 */
+  defaultValue: null,
+  /** 表单中用到的控制的值 */
+  value: null,
+  /** 选择框变化时的事件，会返回值和对象 (value, data) => {}，value是主键的值，data是对象*/
+  onChange: (value, data) => {
+
+  },
+  /** 点击后的颜色 */
+  color: "#666666",
+  /** 是否需要必选 */
+  isRequired: false
+};
+export default TabSelect;

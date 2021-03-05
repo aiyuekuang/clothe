@@ -5,6 +5,7 @@ import React, {Fragment, Component, PureComponent} from 'react';
 import {Button, Input, Menu} from 'antd';
 import {arrAdd, arrDelNull, isArrayop, truncate} from 'esn';
 import {createFromIconfontCN, AppstoreOutlined} from '@ant-design/icons';
+import PropTypes from "prop-types";
 //本项目的模板页面
 const {SubMenu} = Menu;
 
@@ -29,12 +30,41 @@ let _defaultOpenKeys = (value) => {
   arr.push(result)
   return arr;
 };
-export default class Index extends Component {
+
+
+export default class MenuPro extends Component {
+  static propTypes = {
+    /** react-Router的history对象用来处理跳转等 */
+    history: PropTypes.object,
+    /** 路由数据对象
+     * name---名称
+     * zh_CN---中文名称，与name意思一样
+     * en_US---英文名称
+     * icon---antd的图标组件
+     * path---路由名称
+     * component---对应的react页面组件名称，一般用于对接react-router-pro
+     * */
+    routeData: PropTypes.array,
+    /** 对菜单进行缩小展开的控制 */
+    collapsed: PropTypes.bool,
+    /** 语言的字段，当项目切换语言时，请同步lang字段对应数据中的字段 */
+    lang:  PropTypes.string,
+    /** 路由数据中，需要跳转网页路由，所对应的字段，routeData中可以写url字段，url字段有值的话，点击会跳转新的tab网页 */
+    url: PropTypes.string,
+    /** 需要对当前路由进行隐藏时，对应的路由的字段,可以传递数组["hide","show"] */
+    hide: PropTypes.string,
+    /** 菜单的路由支持阿里的iconfont，默认是antd的库，可以自定义 */
+    iconFontUrl: PropTypes.string,
+    /** antd的menu的其他设置 */
+    config: PropTypes.object,
+    /** 点击切换菜单按钮时的回调()=>{} */
+    onChange:PropTypes.func
+  }
 
   static defaultProps = {
-    //react-Router的history对象用来处理跳转等
+    /** react-Router的history对象用来处理跳转等 */
     history: {},
-    //路由数据对象
+    /** 路由数据对象 */
     routeData: [{
       name: "搜索",
       zh_CN: "搜索",
@@ -60,18 +90,19 @@ export default class Index extends Component {
         }
       ]
     }],
-    //对菜单进行缩小展开的控制
+    /** 对菜单进行缩小展开的控制 */
     collapsed: false,
-    //语言的字段，当项目切换语言时，请同步lang字段对应数据中的字段
+    /** 语言的字段，当项目切换语言时，请同步lang字段对应数据中的字段 */
     lang: "name",
-    //路由数据中，需要跳转网页路由，所对应的字段
+    /** 路由数据中，需要跳转网页路由，所对应的字段 */
     url: "url",
-    //需要对当前路由进行隐藏时，对应的路由的字段,可以传递数组["hide","show"]
+    /** 需要对当前路由进行隐藏时，对应的路由的字段,可以传递数组["hide","show"] */
     hide: "hide",
-    //菜单的路由支持阿里的iconfont，默认是antd的库，可以自定义
+    /** 菜单的路由支持阿里的iconfont，默认是antd的库，可以自定义 */
     iconFontUrl: "//at.alicdn.com/t/font_1835208_p8mpjnjx3ms.js",
+    /** antd的menu的其他设置 */
     config: {},
-    //点击切换菜单按钮时的回调
+    /** 点击切换菜单按钮时的回调 */
     onChange:()=>{
 
     }

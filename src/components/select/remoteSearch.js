@@ -1,49 +1,23 @@
 /**
  * Created by zengtao on 2017/5/19.
  */
-import React, {useEffect, useState} from 'react';
+import React, {forwardRef, useEffect, useState} from 'react';
 import {Select, Spin} from "antd"
 import {arrLast, cloneop, isString} from "esn";
 import debounce from 'lodash/debounce';
 import {ajax} from "../utils/common";
+import PropTypes from "prop-types";
 //本项目的模板页面
 
 const {Option} = Select;
 
 let defaultProps = {
-  ajax: ajax,
-  url: null,
-  label: "name",
-  labelValue: "id",
-  onChange: (value) => {
-    console.log(6677, value)
-  },
-  value: [],
-  disabled: false,
-  //antd文档的其他设置
-  config: {},
-  field: "id",
-  setData: (data) => {
-    return data
-  },
-  //数据源的名称
-  dataSourceKey: "label",
-  //数据源对应的值的字段名
-  dataSourceValue: "value",
-  //是否多选
-  multiple: true,
-  values: {},
-  //onchange的时候返回最后选择的值
-  returnLastValue: false
+
 }
 let lastFetchId = 0;
 
-export default function Index(prop) {
-  // Declare a new state variable, which we'll call "count"
+const RemoteSearch = forwardRef((props,ref) => {
 
-  let props = {
-    ...defaultProps, ...prop
-  }
 
   const {label, labelValue, value, values, config, clotheLang, disabled, ajax, url, field, setData, dataSourceKey, dataSourceValue, multiple, returnLastValue} = props;
 
@@ -116,4 +90,66 @@ export default function Index(prop) {
       ))}
     </Select>
   );
-}
+})
+
+RemoteSearch.propTypes = {
+  /** ajax的实现函数 */
+  ajax: PropTypes.func,
+  /** url地址 */
+  url: PropTypes.string,
+  /** 改变后的回调 */
+  onChange:PropTypes.func,
+  /** 组件的value值 */
+  value:PropTypes.any,
+  /** 组件的禁用 */
+  disabled: PropTypes.bool,
+  /** antd文档的其他设置 */
+  config: PropTypes.object,
+  /** 主键的字段 */
+  field: PropTypes.string,
+  /** 获取数据之后返回数据源数据的函数 (data) => {return data},data就是ajax后返回的值*/
+  setData: PropTypes.func,
+  /** 数据源对应的label的字段 */
+  dataSourceKey: PropTypes.string,
+  /** 数据源对应的value的字段 */
+  dataSourceValue: PropTypes.string,
+  /** 是否多选 */
+  multiple: PropTypes.bool,
+  /** 其他ajax时的参数 */
+  values: PropTypes.object,
+  /** onchange的时候是否需要返回最后选择的值 */
+  returnLastValue: PropTypes.bool
+};
+RemoteSearch.defaultProps = {
+  /** ajax的实现函数 */
+  ajax: ajax,
+  /** url地址 */
+  url: null,
+  /** 改变后的回调 */
+  onChange: (value) => {
+    console.log(6677, value)
+  },
+  /** 组件的value值 */
+  value: [],
+  /** 组件的禁用 */
+  disabled: false,
+  /** antd文档的其他设置 */
+  config: {},
+  /** 主键的字段 */
+  field: "id",
+  /** 获取数据之后返回数据源数据的函数 */
+  setData: (data) => {
+    return data
+  },
+  /** 数据源对应的label的字段 */
+  dataSourceKey: "label",
+  /** 数据源对应的value的字段 */
+  dataSourceValue: "value",
+  /** 是否多选 */
+  multiple: true,
+  /** 其他ajax时的参数 */
+  values: {},
+  /** onchange的时候是否需要返回最后选择的值 */
+  returnLastValue: false
+};
+export default RemoteSearch;

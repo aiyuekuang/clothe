@@ -1,26 +1,20 @@
 /**
  * Created by zengtao on 2017/5/19.
  */
-import React, {useEffect, useState} from 'react';
+import React, {forwardRef, useEffect, useState} from 'react';
 import {Breadcrumb, Tabs} from "antd"
+import PropTypes from "prop-types";
 
 const {TabPane} = Tabs;
 
 let defaultProps = {
-    routerActData: [],
-    routerMinusDispatch: () => {
-    },
-    history: {},
-    escClose: true,
-    hasBreadcrumb: true
+
 }
 
 let listen = true;
 
-export default function Index(prop) {
-    let props = {
-        ...defaultProps, ...prop
-    }
+const NavPro = forwardRef((props,ref) => {
+
     const {routerActData, routerMinusDispatch, history, hasBreadcrumb} = props;
     const [remove, setRemove] = useState(false);
 
@@ -97,4 +91,31 @@ export default function Index(prop) {
             </Tabs>
         </div>
     );
-}
+})
+
+NavPro.propTypes = {
+    /** react-router-pro对应的缓存路由的值 */
+    routerActData:PropTypes.array,
+    /** 点击nav上的x的处理函数，配合react-router-pro使用的，将react-router-pro的routerMinusDispatch函数传递进来就可以了 */
+    routerMinusDispatch: PropTypes.func,
+    /** react-router-pro的history对象传递进来 */
+    history: PropTypes.object,
+    /** 是否通过esc按钮进行关闭tab */
+    escClose: PropTypes.bool,
+    /** 是否有面包屑 */
+    hasBreadcrumb: PropTypes.bool
+};
+NavPro.defaultProps = {
+    /** react-router-pro对应的缓存路由的值 */
+    routerActData: [],
+    /** 点击nav上的x的处理函数，配合react-router-pro使用的，将react-router-pro的routerMinusDispatch函数传递进来就可以了 */
+    routerMinusDispatch: (data) => {
+    },
+    /** react-router-pro的history对象传递进来 */
+    history: {},
+    /** 是否通过esc按钮进行关闭tab */
+    escClose: true,
+    /** 是否有面包屑 */
+    hasBreadcrumb: true
+};
+export default NavPro;

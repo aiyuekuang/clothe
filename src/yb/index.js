@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 
 
 
-const Button = forwardRef((props,ref) => {
+const Buttons = forwardRef((props,ref) => {
     const [count, setCount] = useState(0);
 
     const {} = props;
@@ -18,8 +18,6 @@ const Button = forwardRef((props,ref) => {
         }
     },[]);
 
-
-
     return (
         <div>
 
@@ -27,7 +25,7 @@ const Button = forwardRef((props,ref) => {
     );
 })
 
-Button.propTypes = {
+Buttons.propTypes = {
     /** Button label */
     children: PropTypes.node.isRequired,
     /** The color for the button */
@@ -39,7 +37,7 @@ Button.propTypes = {
     /** Gets called when the user clicks on the button */
     onClick: PropTypes.func,
 };
-Button.defaultProps = {
+Buttons.defaultProps = {
     color: '#333',
     size: 'normal',
     onClick: event => {
@@ -47,4 +45,4 @@ Button.defaultProps = {
         console.log('You have clicked me!', event.target);
     },
 };
-export default Button;
+export default Buttons;
