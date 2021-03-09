@@ -5,7 +5,7 @@ import React,{Fragment,Component,PureComponent} from 'react';
 import { Button, Input, Modal,Pagination } from 'antd';
 import {cuns} from 'esn'
 
-export default class Index extends Component {
+export default class Page extends Component {
 
     static defaultProps={
         //居中还是居左居右

@@ -91,15 +91,15 @@ TabSelect.propTypes = {
   /** 数据源对应的值的字段名 */
   dataSourceValue: PropTypes.string,
   /** 默认值 */
-  defaultValue: null,
+  defaultValue: PropTypes.any,
   /** 表单中用到的控制的值 */
-  value: null,
+  value: PropTypes.any,
   /** 选择框变化时的事件，会返回值和对象 (value, data) => {}，value是主键的值，data是对象*/
-  onChange: (value, data) => {},
+  onChange: PropTypes.func,
   /** 点击后的颜色 */
-  color: "#666666",
+  color: PropTypes.string,
   /** 是否需要必选 */
-  isRequired: false
+  isRequired: PropTypes.bool
 };
 TabSelect.defaultProps = {
   /** 禁用 */

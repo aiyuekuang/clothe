@@ -1,19 +1,44 @@
 import React from 'react';
 import {TreeSelect} from 'antd';
 import {diffObj, isArrayop} from "esn";
+import PropTypes from "prop-types";
 
 const TreeNode = TreeSelect.TreeNode;
 
 export default class Index extends React.Component {
+
+  static propTypes = {
+    /** 数据的label */
+    dataSourceKey: PropTypes.string,
+    /** 数据的value值 */
+    dataSourceValue: PropTypes.string,
+    /** 除非你的子也不叫children */
+    children: PropTypes.string,
+    /** 数据源 */
+    treeData:PropTypes.array,
+    /** 宽度，可以是数字，也可以是字符串 */
+    width: PropTypes.any,
+    /** 是否需要将值转换成字符串形式 */
+    formValueString: PropTypes.bool,
+    /** 单选还是多选 */
+    multiple: PropTypes.bool,
+    config: PropTypes.object,
+    /** 单选时是否需要也是数组格式的返回 */
+    isOutArr: PropTypes.bool,
+    /** 单选时是否可以选择父，默认不可以 */
+    selectPrent: PropTypes.bool,
+    /** checkbox状态时，判断是否需要禁用checkbox的函数 (data) => {}*/
+    disableCheckbox: PropTypes.func
+  }
+
   static defaultProps = {
-//数据的label
+    /** 数据的label */
     dataSourceKey: "title",
-    //数据的value值
+    /** 数据的value值 */
     dataSourceValue: "value",
-    key_key: "id",
-    //除非你的子也不叫children
+    /** 除非你的子也不叫children */
     children: "children",
-    //数据源
+    /** 数据源 */
     treeData: [
       {
         title: 'Node1',
@@ -38,16 +63,18 @@ export default class Index extends React.Component {
         key: '0-1',
       },
     ],
+    /** 宽度 */
     width: "100%",
-    form_value_string: false,
-    //单选还是多选
+    /** 是否需要将值转换成字符串形式 */
+    formValueString: false,
+    /** 单选还是多选 */
     multiple: true,
     config: {},
-    //单选时是否需要也是数组格式的返回
+    /** 单选时是否需要也是数组格式的返回 */
     isOutArr: false,
-    //单选时是否可以选择父，默认不可以
+    /** 单选时是否可以选择父，默认不可以 */
     selectPrent: false,
-    //checkbox状态时，判断是否需要禁用checkbox的函数
+    /** checkbox状态时，判断是否需要禁用checkbox的函数 */
     disableCheckbox: (data) => {
     }
   }
@@ -61,11 +88,11 @@ export default class Index extends React.Component {
 
 
   handleDataSet = (value) => {
-    const {multiple, form_value_string, isOutArr} = this.props;
+    const {multiple, formValueString, isOutArr} = this.props;
     let _value = value;
 
     if (multiple) {
-      if (form_value_string) {
+      if (formValueString) {
         if(_value){
           _value = _value.split(",")
         }else {
@@ -86,7 +113,7 @@ export default class Index extends React.Component {
   }
 
   handleData = (value) => {
-    const {multiple, form_value_string, isOutArr} = this.props;
+    const {multiple, formValueString, isOutArr} = this.props;
     let _value = value;
 
     if (!_value) {
@@ -94,7 +121,7 @@ export default class Index extends React.Component {
     }
 
     if (multiple) {
-      if (form_value_string) {
+      if (formValueString) {
         _value = _value.join(",")
       }
     } else {
@@ -120,23 +147,23 @@ export default class Index extends React.Component {
   };
 
   renderTreeNodes = data => {
-    const {dataSourceKey, dataSourceValue, children, key_key, multiple, selectPrent} = this.props;
+    const {dataSourceKey, dataSourceValue, children, multiple, selectPrent,disableCheckbox} = this.props;
     return data.map((item, i) => {
       if (item[children] && item[children].length > 0) {
         return (
           <TreeNode title={item[dataSourceKey]} key={item[dataSourceValue]} value={item[dataSourceValue]}
-                    selectable={multiple || selectPrent} disableCheckbox={this.props.disableCheckbox(item)}>
+                    selectable={multiple || selectPrent} disableCheckbox={disableCheckbox(item)}>
             {this.renderTreeNodes(item[children])}
           </TreeNode>
         );
       }
       return <TreeNode title={item[dataSourceKey]} key={item[dataSourceValue]} value={item[dataSourceValue]}
-                       disableCheckbox={this.props.disableCheckbox(item)}/>;
+                       disableCheckbox={disableCheckbox(item)}/>;
     });
   }
 
   render() {
-    const {treeData, width, value, config, multiple, clotheLang, form_value_string} = this.props
+    const {treeData, width, value, config, multiple, clotheLang} = this.props
     const {} = this.state
 
     return (

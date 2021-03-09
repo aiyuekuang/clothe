@@ -23,7 +23,7 @@ import DataSet from '@antv/data-set';
 const { Html } = Guide;
 //G2.Global.renderer = 'svg'
 const {DataView} = DataSet;
-export default class Index extends Component {
+export default class Circle extends Component {
 
     static defaultProps = {
         //固定宽高

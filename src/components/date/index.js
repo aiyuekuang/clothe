@@ -9,7 +9,6 @@ import {DatePicker} from 'antd';
 import moment from "moment"
 import {createMap} from "esn";
 import PropTypes from "prop-types";
-import Button from "../../yb";
 
 let dateFormat = createMap([{
   label: "date",

@@ -78,7 +78,7 @@ let defaultProps = {
   tipTitle: "热度",
   hasLegend: false
 }
-export default function Index(prop) {
+export default function Radar(prop) {
 
   let props = {
     ...defaultProps, ...prop

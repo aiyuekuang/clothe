@@ -10,7 +10,7 @@ let defaultProps = {
   columns:[]
 }
 
-export default function Index(prop) {
+export default function Excel(prop) {
   const [count, setCount] = useState(0);
 
   let props = {

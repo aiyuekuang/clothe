@@ -7,7 +7,7 @@ import DataSet from '@antv/data-set';
 
 //G2.Global.renderer = 'svg'
 
-export default class Index extends Component {
+export default class GroupChart extends Component {
 
     static defaultProps = {
         //固定宽高

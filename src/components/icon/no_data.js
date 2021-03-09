@@ -5,18 +5,11 @@ import React, {Fragment, Component, PureComponent} from 'react';
 import {Button, Input, Modal} from 'antd';
 import {cuns} from 'esn'
 
-export default class Index extends Component {
+export default class NoData extends Component {
 
     static defaultProps = {
         size:"26px",
         color: "#666666"
-    }
-
-    static getDerivedStateFromProps(nextProps) {
-        // Should be a controlled component.
-        // if ('value' in nextProps) {
-        // }
-        return null;
     }
 
     constructor(props) {

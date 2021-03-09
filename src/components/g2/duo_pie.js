@@ -11,7 +11,7 @@ import {
 
 const {Text} = Guide;
 //G2.Global.renderer = 'svg'
-export default class Index extends Component {
+export default class PieSmall extends Component {
 
     static defaultProps = {
         //固定宽高

@@ -8,6 +8,7 @@ const TreeNode = Tree.TreeNode;
 import Tree_eidt from "./tree_eidt"
 import {isValEmpty, treeFindObjById} from "esn"
 import {DownOutlined, CaretRightOutlined} from "@ant-design/icons"
+import PropTypes from "prop-types";
 
 
 export default class UpTree extends React.Component {
@@ -25,52 +26,93 @@ export default class UpTree extends React.Component {
     this.first = true
   }
 
+  static propTypes = {
+    /** ajax的实现 */
+    ajax: PropTypes.func,
+    /** 调用者选择后的回调value是key的数组，obj是属性的数组 (value, obj) => {console.log(value, obj)}*/
+    select: PropTypes.func,
+    /** 是否显示按钮，默认不显示 */
+    btn: PropTypes.bool,
+    /** 标题 */
+    title:PropTypes.string,
+    /** 去除添加,默认去除 */
+    add: PropTypes.bool,
+    /** 调用树数据的参数 */
+    param: PropTypes.object,
+    /** 是否显示搜索，默认显示 */
+    search: PropTypes.bool,
+    /** 树的url，如果为null就是不需要树 */
+    treeUrl: PropTypes.string,
+    /** 获取树数据的接口返回 (data) => {return data.entity;}*/
+    getData:PropTypes.func ,
+    /** 数据的label */
+    dataSourceKey: PropTypes.string,
+    /** 数据的value值 */
+    dataSourceValue: PropTypes.string,
+    /** 树的其他设置 */
+    config: PropTypes.object,
+    /** 树编辑控件或者其他什么控件需要这个树的数据的时候可以使用和这个回调 (data) => {}*/
+    getTreeData: PropTypes.func,
+    /** tree的样式 */
+    className: PropTypes.string,
+    /** 树形需要隐藏时点击的按钮，如果需要就传递一个控制的函数 */
+    treeHide: PropTypes.func,
+    /** 树控件的最大高度 */
+    maxHeight: PropTypes.any,
+    /** 树控件的最大高度 (data,obj) => {}*/
+    onChange: PropTypes.func,
+    /** 初始选中的值 */
+    defaultValue: PropTypes.array,
+    /** 是否首次选中第一个数据 ,默认是null,可以传递布尔值*/
+    selectFirstValue: PropTypes.any,
+    /** 是否搜索到之后第一个就自动选中 */
+    isSelectSearchValue:PropTypes.bool
+  }
+
   static defaultProps = {
     ajax: () => {
     },
-    //调用者选择后的回调value是key的数组，obj是属性的数组
+    /** 调用者选择后的回调value是key的数组，obj是属性的数组 */
     select: (value, obj) => {
-      // console.log(value, obj)
+       console.log(value, obj)
     },
-    //是否显示按钮，默认不显示
+    /** 是否显示按钮，默认不显示 */
     btn: false,
-    //标题
+    /** 标题 */
     title: "资源目录",
-    //去除添加,默认去除
+    /** 去除添加,默认去除 */
     add: false,
-    //调用树数据的参数
+    /** 调用树数据的参数 */
     param: {},
-    //是否显示搜索，默认显示
+    /** 是否显示搜索，默认显示 */
     search: false,
-    //树的url，如果为null就是不需要树
+    /** 树的url，如果为null就是不需要树 */
     treeUrl: "/tree",
-    //获取树数据的接口返回
+    /** 获取树数据的接口返回 */
     getData: (data) => {
       return data.entity;
     },
-    //是否直接从上个界面传递已获取的输数据
-    //treeData:null,
-    //数据的label
+    /** 数据的label */
     dataSourceKey: "label",
-    //数据的value值
+    /** 数据的value值 */
     dataSourceValue: "value",
-    //树的其他设置
+    /** 树的其他设置 */
     config: {},
-    //树编辑控件或者其他什么控件需要这个树的数据的时候可以使用和这个回调
+    /** 树编辑控件或者其他什么控件需要这个树的数据的时候可以使用和这个回调 */
     getTreeData: (data) => {
     },
-    //tree的样式
+    /** tree的样式 */
     className: "up_tree_warp",
     treeHide: null,
-    //树控件的最大高度
+    /** 树控件的最大高度 */
     maxHeight: 500,
     onChange: (data,obj) => {
     },
-    //初始选中的值
+    /** 初始选中的值 */
     defaultValue: null,
-    //是否首次选中第一个数据
+    /** 是否首次选中第一个数据 */
     selectFirstValue: null,
-    //是否搜索到之后第一个就自动选中
+    /** 是否搜索到之后第一个就自动选中 */
     isSelectSearchValue:false
   }
 
@@ -78,11 +120,11 @@ export default class UpTree extends React.Component {
   componentDidMount() {
     //必须在这里声明，所以 ref 回调可以引用它
     //this.props.onRef(this)
-    this.get_tree();
+    this.getTree();
   }
 
 
-  get_tree = () => {
+  getTree = () => {
     const {dataSourceValue,onChange} = this.props;
     const {select_value} = this.state;
     // if(this.props.treeData){
@@ -348,7 +390,7 @@ export default class UpTree extends React.Component {
         >
           <Tree_eidt
             treeData={this.state.treeData}
-            get_tree={this.get_tree}
+            getTree={this.getTree}
             treeUrl={this.props.treeUrl}
             config={addFormSet}
             clotheLang={clotheLang}

@@ -5,7 +5,6 @@ import React, {forwardRef, useEffect, useState} from 'react';
 import {Axis, Chart, Coord, Geom, Guide, Shape} from 'bizcharts';
 import Nodataicon from "../icon/no_data"
 import PropTypes from "prop-types";
-import Button from "../../yb";
 //G2.Global.renderer = 'svg'
 const {Html, Arc} = Guide;
 

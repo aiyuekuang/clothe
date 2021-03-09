@@ -1,10 +1,11 @@
 /**
  * Created by zengtao on 2017/5/19.
  */
-import React, {Fragment, useEffect, useState} from 'react';
-import {Button, Switch, Transfer, Table, Tag} from "antd"
+import React, {forwardRef, useEffect, useState} from 'react';
+import {Transfer, Table, Tag} from "antd"
 import {isArrayop} from "esn";
 import difference from "lodash/difference";
+import PropTypes from "prop-types";
 
 const TableTransfer = ({leftColumns, rightColumns,config, ...restProps}) => (
   <Transfer {...restProps} showSelectAll={false}>
@@ -56,49 +57,8 @@ const TableTransfer = ({leftColumns, rightColumns,config, ...restProps}) => (
 );
 
 
-let defaultProps = {
-  //数据源
-  dataSource: [{
-    id: 1,
-    title: "第一",
-    value: 1
-  }, {
-    id: 2,
-    title: "第二",
-    value: 2
-  }, {
-    id: 3,
-    title: "第三",
-    value: 3
-  }],
-  columns: [{
-    dataIndex: 'title',
-    title: 'Name',
-  }, {
-    dataIndex: 'value',
-    title: 'value',
-  }],
-  //需要禁用的选项的函数判断
-  disabledFun: (data) => {
-    return false
-  },
-  //key值取的数据源字段
-  primaryKeyField: "id",
-  //禁用整个组件
-  disabled: false,
-  //根据那个字段进行搜索
-  searchField: "title",
-  onChange: (value) => {
-    console.log(99, value)
-  },
-  value: [],
-  config:{}
-}
+const TransferPro = forwardRef((props,ref) => {
 
-export default function Index(prop) {
-  let props = {
-    ...defaultProps, ...prop
-  }
   const [_dataSource, setDataSource] = useState([])
   const {dataSource, disabledFun, primaryKeyField, value, disabled, searchField, columns, onChange,config} = props;
 
@@ -162,4 +122,65 @@ export default function Index(prop) {
       />
     </div>
   );
-}
+})
+
+TransferPro.propTypes = {
+  /** 数据源 */
+  dataSource: PropTypes.array,
+  /** 需要禁用的选项的函数判断 (data) => {return false}*/
+  disabledFun: PropTypes.func,
+  /** key值取的数据源字段 */
+  primaryKeyField: PropTypes.string,
+  /** 禁用整个组件 */
+  disabled:  PropTypes.bool,
+  /** 根据那个字段进行搜索 */
+  searchField:  PropTypes.string,
+  /** 组件值变化的回调函数 (value) => {console.log(99, value)}*/
+  onChange: PropTypes.func,
+  /** 组件值 */
+  value: PropTypes.object,
+  /** Transfer的其他设置 */
+  config:PropTypes.object
+};
+TransferPro.defaultProps = {
+  /** 数据源 */
+  dataSource: [{
+    id: 1,
+    title: "第一",
+    value: 1
+  }, {
+    id: 2,
+    title: "第二",
+    value: 2
+  }, {
+    id: 3,
+    title: "第三",
+    value: 3
+  }],
+  columns: [{
+    dataIndex: 'title',
+    title: 'Name',
+  }, {
+    dataIndex: 'value',
+    title: 'value',
+  }],
+  /** 需要禁用的选项的函数判断 */
+  disabledFun: (data) => {
+    return false
+  },
+  /** key值取的数据源字段 */
+  primaryKeyField: "id",
+  /** 禁用整个组件 */
+  disabled: false,
+  /** 根据那个字段进行搜索 */
+  searchField: "title",
+  /** 组件值变化的回调函数 */
+  onChange: (value) => {
+    console.log(99, value)
+  },
+  /** 组件值 */
+  value: [],
+  /** Transfer的其他设置 */
+  config:{}
+};
+export default TransferPro;

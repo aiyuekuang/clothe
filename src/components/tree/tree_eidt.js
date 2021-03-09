@@ -1,14 +1,15 @@
 /**
  * Created by zengtao on 2017/5/19.
  */
-import React, {createRef, Fragment, useEffect, useState} from 'react';
+import React, {createRef, forwardRef, Fragment, useEffect, useState} from 'react';
 
 import {Button, Form, Input, message, Radio, Tree, TreeSelect} from "antd";
 import {isObjEmpty} from "esn";
-import Up_Tree from "./tree";
+import {TreePro} from "../index";
 import {ajax} from "../utils/common";
 import {up_confirm} from "../modal"
 import {ArrowDownOutlined, ArrowUpOutlined, EditOutlined, PlusOutlined, RestOutlined} from "@ant-design/icons";
+import PropTypes from "prop-types";
 
 const TreeNode = Tree.TreeNode;
 
@@ -44,21 +45,20 @@ const defaultProps = {
   //树数据
   treeData: [],
   //重新更新树
-  get_tree: () => {
+  getTree: () => {
   },
   //删除树之后，刚刚删的树的数据也要重置
-  rest_select_data: () => {
+  restSelectData: () => {
   },
   //选中的树
-  select_data: {},
+  selectData: {},
   //树控件新增、修改的接口地址
-  tree_edit: "",
+  treeEdit: "",
   //树控件的删除地址
-  tree_delect: "",
+  treeDelete: "",
   treeEditUrl: null,
   values:{},
   onValuesChange:()=>{}
-
 }
 
 
@@ -68,7 +68,7 @@ export function Tree_form(prop) {
     ...prop
   };
 
-  const {dataSourceKey, dataSourceValue, name, primaryKeyField, parentId, change_pos, father_item, select_data, rootId, titleRule, tree_delect, move_url, value, treeEditUrl, treeData,onValuesChange} = props;
+  const {dataSourceKey, dataSourceValue, name, primaryKeyField, parentId, isChangePos, father_item, selectData, rootId, titleRule, treeDelete, move_url, value, treeEditUrl, treeData,onValuesChange} = props;
 
 
   const [form] = Form.useForm();
@@ -82,7 +82,7 @@ export function Tree_form(prop) {
 
     }
 
-  }, [select_data, value]);
+  }, [selectData, value]);
 
   let handleSubmit = values => {
     console.log("Received values of form: ", values);
@@ -90,10 +90,10 @@ export function Tree_form(prop) {
   };
 
   //我的资源分类_添加/修改我的资源分类
-  let eidt_tree = (values, id = select_data[dataSourceValue]) => {
+  let eidt_tree = (values, id = selectData[dataSourceValue]) => {
     let obj = {};
     obj[props.primaryKeyField] = id;
-    let _url = props.tree_edit
+    let _url = props.treeEdit
     if (treeEditUrl && id) {
       _url = treeEditUrl
     }
@@ -102,7 +102,7 @@ export function Tree_form(prop) {
     props.ajax(_url, {...values, ...obj}, data => {
       message.success(props.msg(data));
       props.onSelect();
-      props.get_tree();
+      props.getTree();
       form.resetFields();
       setLoading(false)
 
@@ -110,27 +110,27 @@ export function Tree_form(prop) {
   };
 
   //删除我的资源分类
-  let delect_tree = (id = select_data[dataSourceValue]) => {
+  let delect_tree = (id = selectData[dataSourceValue]) => {
     let obj = {};
     obj[props.primaryKeyField] = id;
-    props.ajax(tree_delect, obj, data => {
+    props.ajax(treeDelete, obj, data => {
       message.success(props.msg(data));
-      props.get_tree();
+      props.getTree();
       props.onSelect();
-      // props.rest_select_data();
+      // props.restSelectData();
       form.resetFields();
     });
   };
 
   //移动资源
-  let move_tree = (forward = "up", id = select_data[dataSourceValue]) => {
+  let move_tree = (forward = "up", id = selectData[dataSourceValue]) => {
     let obj = {};
     obj[props.primaryKeyField] = id;
     obj[props.orderForward] = forward
     props.ajax(move_url, obj, data => {
       message.success(props.msg(data));
-      props.get_tree();
-      // props.rest_select_data();
+      props.getTree();
+      // props.restSelectData();
       // props.form.resetFields(props.name);
     });
   };
@@ -176,14 +176,14 @@ export function Tree_form(prop) {
   let initialValues = {}
 
   let lists = props.formData.map((data, i) => {
-    initialValues[data.field] = props.select_data ?
+    initialValues[data.field] = props.selectData ?
       data.init_warp ?
-        data.init_warp(props.select_data[data.field])
-        : props.select_data[data.field]
+        data.init_warp(props.selectData[data.field])
+        : props.selectData[data.field]
       : data.initValue
     return (
       <Fragment key={i}>
-        {props.select_data && data.hide ? null :
+        {props.selectData && data.hide ? null :
           <FormItem
             {...formItemLayout}
             label={data.title}
@@ -208,7 +208,7 @@ export function Tree_form(prop) {
     if (father_item) {
       return father_item[dataSourceValue];
     } else if (
-      !isObjEmpty(select_data) &&
+      !isObjEmpty(selectData) &&
       father_item == null
     ) {
       return rootId;
@@ -220,7 +220,7 @@ export function Tree_form(prop) {
   root[dataSourceKey] = "根目录";
   root[dataSourceValue] = rootId;
 
-  initialValues[name] = props.select_data[dataSourceKey]
+  initialValues[name] = props.selectData[dataSourceKey]
   initialValues[parentId] = tree_father()
 
   return (
@@ -244,9 +244,9 @@ export function Tree_form(prop) {
           allowClear
           dropdownStyle={{maxHeight: 400, overflow: "auto"}}
           placeholder="请选择上级目录"
-          disabled={!change_pos && !(JSON.stringify(select_data) === "{}")}
+          disabled={!isChangePos && !(JSON.stringify(selectData) === "{}")}
         >
-          {renderTreeNodes([root], props.select_data[dataSourceValue])}
+          {renderTreeNodes([root], props.selectData[dataSourceValue])}
         </TreeSelect>
       </FormItem>
       {lists}
@@ -256,19 +256,19 @@ export function Tree_form(prop) {
             <Button
               type="primary"
               htmlType="submit"
-              disabled={!props.tree_edit || loading}
+              disabled={!props.treeEdit || loading}
             >
               {
-                Object.keys(props.select_data).length === 0
+                Object.keys(props.selectData).length === 0
                   ? <PlusOutlined/>
                   : <EditOutlined/>
               }{" "}
-              {Object.keys(props.select_data).length === 0
+              {Object.keys(props.selectData).length === 0
                 ? "新增"
                 : "修改"}
             </Button>
           </div>
-          {Object.keys(props.select_data).length !== 0 ? (
+          {Object.keys(props.selectData).length !== 0 ? (
             <Fragment>
               <div>
                 <Button type="primary" shape="circle"
@@ -279,7 +279,7 @@ export function Tree_form(prop) {
                         onClick={move.bind(this, "down")}><ArrowDownOutlined style={{color: "#fff"}}/></Button>
               </div>
               <div>
-                <Button type="danger" onClick={delect} disabled={!props.tree_delect}>
+                <Button type="danger" onClick={delect} disabled={!props.treeDelete}>
                   <RestOutlined/> 删除
                 </Button>
               </div>
@@ -292,56 +292,94 @@ export function Tree_form(prop) {
 };
 
 
-export default class TreeEidt extends React.Component {
+export default class TreeEdit extends React.Component {
   constructor(props) {
     super(props);
-    //React16.3中创建Ref的方法
     this.up_tree = createRef();
   }
 
+  static propTypes = {
+    /** ajax的实现 */
+    ajax: PropTypes.func.isRequired,
+    /** 树数据的新增与编辑地址 */
+    treeEdit: PropTypes.string,
+    /** 树控件的删除地址 */
+    treeDelete: PropTypes.string,
+    /** 树的label */
+    dataSourceKey:PropTypes.string,
+    /** 树的value */
+    dataSourceValue: PropTypes.string,
+    /** 提交的本级的id */
+    primaryKeyField: PropTypes.string,
+    /** 上级树的id */
+    parentId:PropTypes.string,
+    /** 分类名称 */
+    name:PropTypes.string,
+    /** 修改或删除成功后的提示 (data) => {return "操作成功"}*/
+    msg: PropTypes.func,
+    /** 是否可以换位置 */
+    isChangePos: PropTypes.bool,
+    /** 上移下移url */
+    move_url: PropTypes.string,
+    /** 上移下移的接口标示 */
+    orderForward: PropTypes.string,
+    /** 获取树的url */
+    treeUrl: PropTypes.string,
+    /** 根目录的id，默认是-1 */
+    rootId: PropTypes.number,
+    /** 其他需要写入的树表单字段 */
+    formData: PropTypes.array,
+    /** 标题校验规则 */
+    titleRule: PropTypes.array,
+    minWidth: PropTypes.string,
+    /** 切换新增和修改的时候的事件 (isAdd)=>{}*/
+    changeAdd:PropTypes.func
+  };
+
   static defaultProps = {
+    /** ajax的实现 */
     ajax: ajax,
-    //树数据的新增与编辑地址
-    tree_edit: null,
-    //树控件的删除地址
-    tree_delect: null,
-    //树的label
+    /** 树数据的新增与编辑地址 */
+    treeEdit: null,
+    /** 树控件的删除地址 */
+    treeDelete: null,
+    /** 树的label */
     dataSourceKey: "label",
-    //树的value
+    /** 树的value */
     dataSourceValue: "value",
-    //提交的本级的id
+    /** 提交的本级的id */
     primaryKeyField: "id",
-    //上级树的id
+    /** 上级树的id */
     parentId: "parentId",
-    //分类名称
+    /** 分类名称 */
     name: "name",
-    //修改或删除成功后的提示
+    /** 修改或删除成功后的提示 */
     msg: (data) => {
       return "操作成功"
     },
-    //是否可以换位置
-    change_pos: true,
-    //上移下移url
+    /** 是否可以换位置 */
+    isChangePos: true,
+    /** 上移下移url */
     move_url: "",
-    //上移下移的接口标示
+    /** 上移下移的接口标示 */
     orderForward: "orderForward",
-    //获取树的url
+    /** 获取树的url */
     treeUrl: "",
-    //根目录的id，默认是-1
+    /** 根目录的id，默认是-1 */
     rootId: -1,
-    //其他需要写入的树表单字段
+    /** 其他需要写入的树表单字段 */
     formData: [],
-    //标题校验规则
+    /** 标题校验规则 */
     titleRule: [],
     minWidth: "auto",
-    //切换新增和修改的时候的事件
+    /** 切换新增和修改的时候的事件 */
     changeAdd:(isAdd)=>{
 
     }
   };
 
   state = {
-    select_data: {},
+    selectData: {},
     father_item: null,
     //从界面传来的树的数据
     treeData: null,
@@ -357,16 +395,16 @@ export default class TreeEidt extends React.Component {
   onSelect = (value = null, obj = {}, father_item = null) => {
     this.up_tree.current.setSelectedKeys();
     this.setState({
-      select_data: obj,
+      selectData: obj,
       father_item,
       value
     });
   };
 
   //删除树之后，刚刚删的树的数据也要重置
-  rest_select_data = (value = {}) => {
+  restSelectData = (value = {}) => {
     this.setState({
-      select_data: value
+      selectData: value
     });
   };
 
@@ -379,8 +417,8 @@ export default class TreeEidt extends React.Component {
   };
 
   //更新数据的方法
-  get_tree = () => {
-    this.up_tree.current.get_tree();
+  getTree = () => {
+    this.up_tree.current.getTree();
   }
 
   getTreeData = (treeData) => {
@@ -391,13 +429,13 @@ export default class TreeEidt extends React.Component {
 
   render() {
     const {minWidth, clotheLang} = this.props;
-    const {treeData, select_data, value} = this.state
+    const {treeData, selectData, value} = this.state
 
     return (
       <div className="up_tree_eidt_warp">
 
         <div className="up_tree_eidt_warp_l" style={{minWidth: minWidth}}>
-          <Up_Tree
+          <TreePro
             ref={this.up_tree}
             select={this.onSelect}
             getTreeData={this.getTreeData}
@@ -415,10 +453,10 @@ export default class TreeEidt extends React.Component {
             </RadioGroup>
           </div>
           <Tree_form
-            select_data={this.state.select_data}
-            rest_select_data={this.rest_select_data}
+            selectData={this.state.selectData}
+            restSelectData={this.restSelectData}
             father_item={this.state.father_item}
-            get_tree={this.get_tree}
+            getTree={this.getTree}
             treeData={treeData}
             onSelect={this.onSelect}
             value={value}

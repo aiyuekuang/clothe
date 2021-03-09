@@ -66,7 +66,7 @@ export default class TablePro extends Component {
         /** 是否有批量删除 */
         hasDeleteBatch: PropTypes.bool,
         /** 对删除进行判断，哪些可以删除，哪些不可以删除 (record) => {return true;}*/
-        deleteDisabledFun: PropTypes.string,
+        deleteDisabledFun: PropTypes.func,
         /** 其他操作的组件 */
         actionComponent: PropTypes.func,
         /** 弹框的设置 */
@@ -80,7 +80,7 @@ export default class TablePro extends Component {
         /** 新增编辑的提交函数，formAdd的自定义提交 */
         addSubmitFun: PropTypes.func,
         /** 编辑新增的提交url */
-        addUrl: PropTypes.url,
+        addUrl: PropTypes.string,
         /** 搜索组件的form对象 */
         searchForm: PropTypes.array,
         /** 操作的宽度 */
@@ -100,7 +100,7 @@ export default class TablePro extends Component {
         /** 删除接口时用到的id，一般是跟主键保持一致都是id，我们也建议使用id */
         deleteIdField: PropTypes.string,
         /** 操作选项是否固定 */
-        isActionFixed: PropTypes.bool,
+        isActionFixed: PropTypes.any,
         /** 外面的需要用到这个表格请求的数据的话，可以用这个方法 (data) => {}*/
         tableDataCallback: PropTypes.func,
         /** 批量删除需要的额外的参数 */
@@ -111,8 +111,8 @@ export default class TablePro extends Component {
         searchPlaceholder: PropTypes.string,
         /** 关键字搜索接口中用到的字段 */
         searchLabelField: PropTypes.string,
-        /** 删除前confirm的提示文字 */
-        deleteConfirmText: PropTypes.string,
+        /** 删除前confirm的提示文字 (record) => {}*/
+        deleteConfirmText: PropTypes.any,
         /** 搜索框的宽度 */
         searchWidth: PropTypes.number,
         /** 树控件点击后的回调 (data) => {}*/

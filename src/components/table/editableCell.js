@@ -273,7 +273,6 @@ EditableCell.defaultProps = {
       field: "title2",
       fill: true,
       editable: true
-
       // 是否在收起时显示
     }]
 };

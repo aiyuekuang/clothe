@@ -87,20 +87,20 @@ export let getTextByJs = (arr) => {
 }
 
 //数组根据字段判断是不是需要转成字符串
-export let form_value = (list,form_value_string,props) => {
-    let str = form_value_string?"":[];
+export let form_value = (list,formValueString,props) => {
+    let str = formValueString?"":[];
     if (list && list.length > 0) {
         for (let i of list) {
-            if (i.response && props.api_key(i.response)) {
-                if(form_value_string){
-                    str += (str.length > 2 ? "," : "") + props.api_set(i.response)
+            if (i.response && props.apiKey(i.response)) {
+                if(formValueString){
+                    str += (str.length > 2 ? "," : "") + props.apiSet(i.response)
                 }else {
-                    str.push(props.api_set(i.response))
+                    str.push(props.apiSet(i.response))
                 }
             }
         }
     }
-    console.log(list,form_value_string,str)
+    console.log(list,formValueString,str)
     return str;
 }
 

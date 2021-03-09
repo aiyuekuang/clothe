@@ -25,7 +25,7 @@ let defaultProps = {
   tipTitle: "热度",
   hasLegend: false
 }
-export default function Index(prop) {
+export default function Thermograph(prop) {
 
   let props = {
     ...defaultProps, ...prop

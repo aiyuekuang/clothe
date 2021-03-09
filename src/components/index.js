@@ -9,7 +9,7 @@ import formAdd from "./form/form_adds"
 import searchTable from "./form/form_search"
 import table from "./table"
 import upTree from "./tree/tree"
-import TreeEidt from "./tree/tree_eidt"
+import treeEdit from "./tree/tree_eidt"
 import Ueditor_ from "./ueditor"
 import Upbraft from "./ueditor/braft"
 import UPupload from "./upload/upload_form"
@@ -84,7 +84,7 @@ export const TablePro = Hoc(table);
 export const FormAdd = Hoc(formAdd)
 export const SearchFrom = Hoc(searchTable)
 export const TreePro = Hoc(upTree)
-export const TreeEdit = Hoc(TreeEidt)
+export const TreeEdit = Hoc(treeEdit)
 export const UEditorPro = Hoc(Ueditor_)
 export const UploadPro = Hoc(UPupload)
 export const Page = Hoc(Pagin_)

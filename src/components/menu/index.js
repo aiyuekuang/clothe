@@ -52,7 +52,7 @@ export default class MenuPro extends Component {
     /** 路由数据中，需要跳转网页路由，所对应的字段，routeData中可以写url字段，url字段有值的话，点击会跳转新的tab网页 */
     url: PropTypes.string,
     /** 需要对当前路由进行隐藏时，对应的路由的字段,可以传递数组["hide","show"] */
-    hide: PropTypes.string,
+    hide: PropTypes.any,
     /** 菜单的路由支持阿里的iconfont，默认是antd的库，可以自定义 */
     iconFontUrl: PropTypes.string,
     /** antd的menu的其他设置 */

@@ -26,8 +26,8 @@ const Buttons = forwardRef((props,ref) => {
 })
 
 Buttons.propTypes = {
-    /** Button label */
-    children: PropTypes.node.isRequired,
+    /** ajax的实现函数 */
+    children: PropTypes.func.isRequired,
     /** The color for the button */
     color: PropTypes.string,
     /** The size of the button */

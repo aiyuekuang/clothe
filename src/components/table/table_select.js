@@ -2,8 +2,8 @@
  * Created by zengtao on 2018/8/1.
  */
 import React, {Component, Fragment} from 'react';
-import {Button, Input, Modal, Table,} from 'antd';
-import Up_Tree from "../tree/tree"
+import {Button, Modal, Table,} from 'antd';
+import {TreePro} from "../index";
 import Search_table from "../form/form_search"
 import {diff, ajax} from "../utils/common"
 import {CaretRightOutlined} from "@ant-design/icons"
@@ -382,7 +382,7 @@ export default class TableSelect extends Component {
             <div className="up_table_warp_bottom">
               {this.props.treeUrl ?
                 <div className={tree_show ? "up_table_warp_bottom_l" : "up_table_warp_bottom_l gybxs"}>
-                  <Up_Tree tree_hide={this.tree_hide} ajax={ajax} select={this.select}
+                  <TreePro tree_hide={this.tree_hide} ajax={ajax} select={this.select}
                            treeUrl={this.props.treeUrl} {...treeSet} clotheLang={this.props.clotheLang}/>
                 </div> : null}
               <div
