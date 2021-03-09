@@ -166,13 +166,13 @@ CascaderAjaxPro.propTypes = {
   /** 通用的ajax实现*/
   ajax:  PropTypes.func,
   /** 筛选的数据源*/
-  dataSource:  PropTypes.object,
+  dataSource:  PropTypes.array,
   /** 数据源的名称*/
   dataSourceKey:  PropTypes.string,
   /** 数据源对应的值的字段名*/
   dataSourceValue:  PropTypes.string,
   /** 表单中用到的控制的值*/
-  value: null,
+  value:  PropTypes.any,
   /** 选择框变化时的事件，会返回值和对象 (value) => {
 
   }*/
@@ -184,7 +184,7 @@ CascaderAjaxPro.propTypes = {
   /** 参数用到的上级带的字段*/
   paramField:  PropTypes.string,
   /** 第一次加载数据时的id值*/
-  initFieldValue: null,
+  initFieldValue: PropTypes.any,
   /** 接口获取新数据之后，设置数据的使用*/
   setData:  PropTypes.func,
   /** 什么规则的数据是不需要请求下级的(data) => {
@@ -201,10 +201,8 @@ CascaderAjaxPro.propTypes = {
   values:  PropTypes.object,
   /** 总共有几层*/
   layer:  PropTypes.number,
-
   valueFun:  PropTypes.func,
   /** 禁用组件*/
-
   disabled:  PropTypes.bool,
   /** 样式*/
   style: PropTypes.object,
