@@ -1,6 +1,6 @@
 {
   "name": "clothe",
-  "version": "0.0.54",
+  "version": "0.0.55",
   "description": "",
   "scripts": {
     "start": "webpack-dev-server --mode development",
@@ -15,8 +15,8 @@
     "copy": "python ./bin/copy.py",
     "doc": "styleguidist server",
     "docBu": "styleguidist build",
-    "predeploy":"npm run docBu",
-    "deploy":"gh-pages -d styleguide"
+    "predeploy": "npm run docBu",
+    "deploy": "gh-pages -d styleguide"
   },
   "main": "./lib/index.js",
   "files": [
