@@ -4,12 +4,9 @@
 import React, {createRef} from 'react';
 
 import {Form, Radio, Tree} from "antd";
-import {TreeFromAjax} from "../index";
+import {TreeFromAjax,TreeEdit} from "../index";
 import {ajax} from "../utils/common";
-import Tree_form from "./tree_eidt";
 import PropTypes from "prop-types";
-
-const TreeNode = Tree.TreeNode;
 
 const RadioGroup = Radio.Group;
 const RadioButton = Radio.Button;
@@ -69,7 +66,7 @@ export default class TreeEditAjax extends React.Component {
         /** 是否可以换位置 */
         isChangePos: PropTypes.bool,
         /** 上移下移url */
-        move_url: PropTypes.string,
+        moveUrl: PropTypes.string,
         /** 上移下移的接口标示 */
         orderForward: PropTypes.string,
         /** 根目录的id，默认是-1 */
@@ -79,7 +76,7 @@ export default class TreeEditAjax extends React.Component {
         /** 标题校验规则 */
         titleRule: PropTypes.array,
         /** 最小宽度 */
-        minWidth: PropTypes.string,
+        minWidth: PropTypes.any,
     };
 
     static defaultProps = {
@@ -106,7 +103,7 @@ export default class TreeEditAjax extends React.Component {
         /** 是否可以换位置 */
         isChangePos: true,
         /** 上移下移url */
-        move_url: "",
+        moveUrl: "",
         /** 上移下移的接口标示 */
         orderForward: "orderForward",
         /** 根目录的id，默认是-1 */
@@ -169,8 +166,9 @@ export default class TreeEditAjax extends React.Component {
 
 
     render() {
-        const {minWidth} = this.props;
-        const {treeDataProps, selectData, value, clotheLang} = this.state
+        const {minWidth,clotheLang} = this.props;
+        const {treeDataProps, selectData, value} = this.state
+
 
         return (
             <div className="up_tree_eidt_warp">
@@ -193,7 +191,7 @@ export default class TreeEditAjax extends React.Component {
                             <RadioButton disabled={value == null} value="b">{clotheLang.tree.modify}</RadioButton>
                         </RadioGroup>
                     </div>
-                    <Tree_form
+                    <TreeEdit
                         selectData={this.state.selectData}
                         restSelectData={this.restSelectData}
                         father_item={this.state.father_item}

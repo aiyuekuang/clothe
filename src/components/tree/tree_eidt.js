@@ -68,7 +68,7 @@ export function Tree_form(prop) {
     ...prop
   };
 
-  const {dataSourceKey, dataSourceValue, name, primaryKeyField, parentId, isChangePos, father_item, selectData, rootId, titleRule, treeDelete, move_url, value, treeEditUrl, treeData,onValuesChange} = props;
+  const {dataSourceKey, dataSourceValue, name, primaryKeyField, parentId, isChangePos, father_item, selectData, rootId, titleRule, treeDelete, moveUrl, value, treeEditUrl, treeData,onValuesChange} = props;
 
 
   const [form] = Form.useForm();
@@ -127,7 +127,7 @@ export function Tree_form(prop) {
     let obj = {};
     obj[props.primaryKeyField] = id;
     obj[props.orderForward] = forward
-    props.ajax(move_url, obj, data => {
+    props.ajax(moveUrl, obj, data => {
       message.success(props.msg(data));
       props.getTree();
       // props.restSelectData();
@@ -320,7 +320,7 @@ export default class TreeEdit extends React.Component {
     /** 是否可以换位置 */
     isChangePos: PropTypes.bool,
     /** 上移下移url */
-    move_url: PropTypes.string,
+    moveUrl: PropTypes.string,
     /** 上移下移的接口标示 */
     orderForward: PropTypes.string,
     /** 获取树的url */
@@ -331,7 +331,7 @@ export default class TreeEdit extends React.Component {
     formData: PropTypes.array,
     /** 标题校验规则 */
     titleRule: PropTypes.array,
-    minWidth: PropTypes.string,
+    minWidth: PropTypes.any,
     /** 切换新增和修改的时候的事件 (isAdd)=>{}*/
     changeAdd:PropTypes.func
   };
@@ -360,7 +360,7 @@ export default class TreeEdit extends React.Component {
     /** 是否可以换位置 */
     isChangePos: true,
     /** 上移下移url */
-    move_url: "",
+    moveUrl: "",
     /** 上移下移的接口标示 */
     orderForward: "orderForward",
     /** 获取树的url */

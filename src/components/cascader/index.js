@@ -28,7 +28,7 @@ let CascaderAjaxPro = forwardRef((props, ref)=>{
   });
 
   useEffect(() => {
-    count = layer
+    // count = layer
 
     return () => {
     }
@@ -42,7 +42,7 @@ let CascaderAjaxPro = forwardRef((props, ref)=>{
       setDataSource(formatData(dataSource.map((data, i) => {
         return {...data, isLeaf: isLeafFun(data)}
       })))
-    } else if (url) {
+    } else if (url || urlArr) {
       let param = {...values}
       param[paramField] = initFieldValue
       let _url = url
@@ -118,7 +118,7 @@ let CascaderAjaxPro = forwardRef((props, ref)=>{
 
     let _url = url
     if (urlArr) {
-      _url = urlArr[targetOption.layer]
+      _url = urlArr[targetOption.layer + 1]
     }
 
     if (targetOption.layer === 0) {
@@ -173,24 +173,20 @@ CascaderAjaxPro.propTypes = {
   dataSourceValue:  PropTypes.string,
   /** 表单中用到的控制的值*/
   value:  PropTypes.any,
-  /** 选择框变化时的事件，会返回值和对象 (value) => {
-
-  }*/
+  /** 选择框变化时的事件，会返回值和对象 (value) => {}*/
   onChange:  PropTypes.func,
   /** 点击后的颜色*/
   placeholder:  PropTypes.string,
   /** 每层请求用的url，每层必须使用相同的url，不支持不同层级用不同的*/
-  url:  PropTypes.string,
+  url:  PropTypes.any,
   /** 参数用到的上级带的字段*/
   paramField:  PropTypes.string,
   /** 第一次加载数据时的id值*/
   initFieldValue: PropTypes.any,
   /** 接口获取新数据之后，设置数据的使用*/
   setData:  PropTypes.func,
-  /** 什么规则的数据是不需要请求下级的(data) => {
-    return false
-  }*/
-  isLeafFun:  PropTypes.func,
+  /** 什么规则的数据是不需要请求下级的(data) => {return false}*/
+  isLeafFun: PropTypes.func,
   /** 是否返回值使用label*/
   isValueLabel:  PropTypes.bool,
   /** onchange的时候返回最后选择的值*/

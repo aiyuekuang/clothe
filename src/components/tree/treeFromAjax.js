@@ -15,7 +15,6 @@ import {deepFind, ajax} from "../utils/common";
 import {uid} from "esn"
 import PropTypes from "prop-types";
 
-let defaultProps = {}
 
 /**
  * 更新树形数据

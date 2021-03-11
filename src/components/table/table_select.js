@@ -2,12 +2,13 @@
  * Created by zengtao on 2018/8/1.
  */
 import React, {Component, Fragment} from 'react';
-import {Button, Modal, Table,} from 'antd';
-import {TreePro} from "../index";
-import Search_table from "../form/form_search"
+import {Button, Input, Modal, Table,} from 'antd';
+import {TreePro,SearchFrom} from "../index";
 import {diff, ajax} from "../utils/common"
 import {CaretRightOutlined} from "@ant-design/icons"
 import {diffObj} from "esn";
+
+const { Search } = Input;
 
 
 //截取字符串
@@ -101,7 +102,7 @@ export default class TableSelect extends Component {
     onChange: (value) => {
     },
     /** 弹窗的设置 */
-    modalSet: {},
+    modalConfig: {},
     /** 弹窗的标题 */
     title: null,
     value: [],
@@ -169,7 +170,7 @@ export default class TableSelect extends Component {
   //搜索组件
   table_search = (submit) => {
     return (
-      <Search_table returnFormCallback={(searchForm) => {
+      <SearchFrom returnFormCallback={(searchForm) => {
         this.setState({
           searchForm
         })
@@ -369,7 +370,7 @@ export default class TableSelect extends Component {
           {this.props.children}
         </div>
         <Modal
-          {...this.props.modalSet}
+          {...this.props.modalConfig}
           title={title}
           visible={this.state.visible}
           onCancel={this.handleCancel}

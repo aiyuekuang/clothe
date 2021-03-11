@@ -5,7 +5,7 @@ import React,{Fragment,Component,PureComponent} from 'react';
 import { Button, Input, Modal } from 'antd';
 import {cuns} from 'esn'
 import {uid} from "../utils/common"
-export default class Index extends Component {
+export default class UEditorPro extends Component {
 
     static defaultProps = {
         //文字变化之后的接收

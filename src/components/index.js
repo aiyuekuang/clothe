@@ -60,6 +60,7 @@ import code from "./code"
 import treeInForm from "./tree/treeInForm"
 import loading from "./loading"
 import iconSvg from "./icon"
+import treeInFormCascader from "./tree/treeInFormCascader"
 
 // import _excel from "./excel"
 
@@ -96,7 +97,7 @@ export const GroupChart = Hoc(Groupchart)
 export const PieSmall = Hoc(Duopie)
 export const RichText = Hoc(Upbraft)
 export const Ani = Hoc(Ani_)
-export const TreeSelect = Hoc(Treeselectup_)
+export const TreeSelectPro = Hoc(Treeselectup_)
 export const MonthSelect = Hoc(Monthselect)
 export const DaySelect = Hoc(Dayselect)
 export const RangSelect = Hoc(Rangselect)
@@ -135,6 +136,7 @@ export const CodePro = Hoc(code)
 export const TreeInForm = Hoc(treeInForm)
 export const Loading = Hoc(loading)
 export const IconSvg = Hoc(iconSvg)
+export const TreeInFormCascader = Hoc(treeInFormCascader)
 
 // export const Excel = Hoc(_excel)
 

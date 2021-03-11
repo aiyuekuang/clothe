@@ -3,15 +3,14 @@
  */
 import React, {Fragment, Component, PureComponent} from 'react';
 import {Button, Input, Alert, notification, Form, Table, Empty, Tree, Modal, Spin} from 'antd';
-
+import {TreeEdit} from "../index"
 const TreeNode = Tree.TreeNode;
-import Tree_eidt from "./tree_eidt"
 import {isValEmpty, treeFindObjById} from "esn"
 import {DownOutlined, CaretRightOutlined} from "@ant-design/icons"
 import PropTypes from "prop-types";
 
 
-export default class UpTree extends React.Component {
+export default class TreePro extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -44,7 +43,7 @@ export default class UpTree extends React.Component {
     /** 树的url，如果为null就是不需要树 */
     treeUrl: PropTypes.string,
     /** 获取树数据的接口返回 (data) => {return data.entity;}*/
-    getData:PropTypes.func ,
+    setData:PropTypes.func ,
     /** 数据的label */
     dataSourceKey: PropTypes.string,
     /** 数据的value值 */
@@ -89,7 +88,7 @@ export default class UpTree extends React.Component {
     /** 树的url，如果为null就是不需要树 */
     treeUrl: "/tree",
     /** 获取树数据的接口返回 */
-    getData: (data) => {
+    setData: (data) => {
       return data.entity;
     },
     /** 数据的label */
@@ -139,7 +138,7 @@ export default class UpTree extends React.Component {
     })
     if (this.props.treeUrl) {
       this.props.ajax(this.props.treeUrl, this.props.param, (data) => {
-        let value = this.props.getData(data);
+        let value = this.props.setData(data);
 
         if ((this.props.selectFirstValue && this.first) || (this.props.selectFirstValue && !(select_value  && treeFindObjById(select_value[0],value,dataSourceValue)))) {
           let _value =  value && value.length ? [value[0][dataSourceValue]] : []
@@ -153,11 +152,11 @@ export default class UpTree extends React.Component {
         }
 
         this.setState({
-          treeData: this.props.getData(data),
+          treeData: this.props.setData(data),
           loading: false
         })
-        this.props.getTreeData(this.props.getData(data))
-        this.generateList(this.props.getData(data));
+        this.props.getTreeData(this.props.setData(data))
+        this.generateList(this.props.setData(data));
       }, () => {
         this.first = false
         this.setState({
@@ -388,7 +387,7 @@ export default class UpTree extends React.Component {
           footer={null}
           width={800}
         >
-          <Tree_eidt
+          <TreeEdit
             treeData={this.state.treeData}
             getTree={this.getTree}
             treeUrl={this.props.treeUrl}

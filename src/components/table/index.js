@@ -21,7 +21,7 @@ function str_cut(str, length) {
 }
 
 
-const Search = Input.Search;
+const { Search } = Input;
 const confirm = Modal.confirm;
 
 
@@ -62,7 +62,7 @@ export default class TablePro extends Component {
         /** 是否有新增/编辑 */
         hasAdd: PropTypes.bool,
         /** 是否有编辑，这个参数可以传递函数，因为有的时候不同的行，有的需要编辑，有的则不需要，回调函数中会返回一个record */
-        hasEdit: PropTypes.bool,
+        hasEdit: PropTypes.any,
         /** 是否有批量删除 */
         hasDeleteBatch: PropTypes.bool,
         /** 对删除进行判断，哪些可以删除，哪些不可以删除 (record) => {return true;}*/
@@ -70,7 +70,7 @@ export default class TablePro extends Component {
         /** 其他操作的组件 */
         actionComponent: PropTypes.func,
         /** 弹框的设置 */
-        modalSet: PropTypes.object,
+        modalConfig: PropTypes.object,
         /** 主标题字段，用于显示在新增或编辑弹框的上面 */
         modalTitle: PropTypes.string,
         /** 其他按钮组件，返回一个每个按钮一个div包裹的组件，每个按钮都要用div包裹，不然会连接在一起*/
@@ -224,7 +224,7 @@ export default class TablePro extends Component {
         /** 其他操作的组件 */
         actionComponent: null,
         /** 弹框的设置 */
-        modalSet: {},
+        modalConfig: {},
         /** 主标题字段，用于显示在新增或编辑弹框的上面 */
         modalTitle: "",
         /** 其他按钮组件 */
@@ -711,7 +711,7 @@ export default class TablePro extends Component {
 
 
     render() {
-        const {actionWidth, treeSet, hasPage, ajax, deleteUrl, primaryKeyField, isActionFixed, hasEdit, addForm, size, searchPlaceholder, searchLabelField, hasDeleteBatch, searchWidth, setTotal, addUrl, deleteDisabledFun, addSubmitFun, otherSearchDom, clotheLang, modalTitle, otherBtn, hideSelectAll, addData, addText, otherSearchDomIsBottom, modalSet, deleteBefore} = this.props;
+        const {actionWidth, treeSet, hasPage, ajax, deleteUrl, primaryKeyField, isActionFixed, hasEdit, addForm, size, searchPlaceholder, searchLabelField, hasDeleteBatch, searchWidth, setTotal, addUrl, deleteDisabledFun, addSubmitFun, otherSearchDom, clotheLang, modalTitle, otherBtn, hideSelectAll, addData, addText, otherSearchDomIsBottom, modalConfig, deleteBefore} = this.props;
         const {selectedRowKeys, record, tree_show, visible, values, dataSource, loading, otherSearchValues, isAddText, height} = this.state;
 
 
@@ -790,6 +790,7 @@ export default class TablePro extends Component {
                 {btn}
             </Menu>
         );
+
 
         return (
             <div className="up_table_warp" style={{margin: this.props.margin, ...this.props.style}} id={this.uid}>
@@ -883,7 +884,7 @@ export default class TablePro extends Component {
                     visible={visible}
                     onCancel={this.handleCancel}
                     footer={null}
-                    {...modalSet}
+                    {...modalConfig}
                 >
                     <div id="select"/>
                     {visible ? this.table_add(record) : null}
