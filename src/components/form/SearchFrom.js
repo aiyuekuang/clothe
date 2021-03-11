@@ -4,7 +4,7 @@
 import React, {forwardRef, useEffect, useState} from 'react';
 import {Button, Form, Input} from 'antd';
 import {DownOutlined, UpOutlined} from '@ant-design/icons';
-import {formItemLayoutFun} from "./form_adds";
+import {formItemLayoutFun} from "./FormAdd";
 import PropTypes from "prop-types";
 
 

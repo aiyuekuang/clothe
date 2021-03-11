@@ -3,8 +3,7 @@
  */
 import React, {forwardRef, Fragment, useEffect, useRef, useState} from 'react';
 import {Button} from "antd"
-import TablePro from "./index";
-import Table_select from "./table_select"
+import {TablePro,TableSelect} from "../index";
 import {isArrayop} from "esn";
 import PropTypes from "prop-types";
 
@@ -35,7 +34,7 @@ const TableInForm = forwardRef((props, ref) => {
                 otherBtn={(selectedRowKeys, onSelectChange, getData, values) => {
                     return (
                         <div>
-                            <Table_select
+                            <TableSelect
                                 ajax={props.ajax}
                                 onChange={onChange}
                                 value={value}
@@ -43,7 +42,7 @@ const TableInForm = forwardRef((props, ref) => {
                                 clotheLang={clotheLang}
                             >
                                 <Button>{clotheLang.table.select}</Button>
-                            </Table_select>
+                            </TableSelect>
                         </div>)
                 }}
                 {...props}

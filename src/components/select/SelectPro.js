@@ -16,9 +16,11 @@ const SelectPro = forwardRef((props, ref) => {
     const [dataSource_, setDataSource_] = useState(dataSource);
 
     useEffect(() => {
-        ajax(url, values, (json) => {
-            setDataSource_(setData(json))
-        })
+        if(url){
+            ajax(url, values, (json) => {
+                setDataSource_(setData(json))
+            })
+        }
         return () => {
         }
     }, [url]);
@@ -83,7 +85,7 @@ SelectPro.propTypes = {
     /** select组件的value */
     value: PropTypes.any,
     /** 禁用 */
-    disabled: PropTypes.bool,
+    disabled: PropTypes.any,
     /** antd文档的其他设置 */
     config: PropTypes.object,
     /** 判断是否需要禁用的值 (data)=>{return false}

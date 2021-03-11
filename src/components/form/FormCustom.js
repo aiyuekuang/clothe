@@ -1,7 +1,7 @@
 import {Form, Input, Button, Checkbox} from 'antd';
 import {MinusCircleOutlined, PlusOutlined, ArrowUpOutlined, ArrowDownOutlined} from '@ant-design/icons';
 import React, {Fragment, useEffect, useState, useImperativeHandle, forwardRef} from 'react';
-import {formItemLayoutFun} from "./form_adds";
+import {formItemLayoutFun} from "./FormAdd";
 import PropTypes from "prop-types";
 
 const {TextArea} = Input
