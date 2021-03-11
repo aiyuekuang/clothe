@@ -10,70 +10,7 @@ import PropTypes from "prop-types";
 
 const FormItem = Form.Item;
 
-const defaultProps = {
-  //生成表单的各个字段
-  formData: [{
-    //表单标题
-    title: "标题",
-    //字段
-    field: "email",
-    //表单规则
-    rules: [{
-      max: 10, message: '长度不得超过10',
-    }],
-    //默认值
-    initValue: 1,
-    //表单组件
-    component: <Input/>,
-    //是否在收起时显示
-    isTop: true
-  }, {
-    //表单标题
-    title: "关键字",
-    //字段
-    field: "email2",
-    //表单规则
-    rules: [{
-      max: 10, message: '长度不得超过10',
-    }],
-    //表单组件
-    component: <Input/>,
-    //是否在收起时显示
-    isTop: false
-  }],
-  //submit提交
-  submit: (values) => {
-    console.log(values)
-  },
-  //是横向布局还是竖着的布局，默认是横向的
-  searchLine: true,
-  //布局比例
-  formItemLayout: [5, 17],
-  //是否需要无label的模式
-  noLabel: false,
-  //form表单需要的设置
-  config: {},
-  //实例运行时，返回一个form
-  returnFormCallback: (form) => {
 
-  },
-  //是否需要表格是label和input是横向结构
-  layoutHorizontal: true,
-  //表单数据变化时的回调
-  onValuesChange: (changedValues, allValues) => {
-
-  },
-  //是否需要提交按钮
-  hasSubmit: true,
-  //是否需要重置按钮
-  hasRest:true,
-  //展开或者收起时，触发的回调
-  toggleCallback:(bool)=>{
-
-  },
-  //重置的时候的回调
-  restCallback:()=>{}
-}
 
 const SearchFrom = forwardRef((props,ref) => {
 

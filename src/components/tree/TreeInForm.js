@@ -4,9 +4,6 @@ import {diffObj, isArrayop, uid} from "esn";
 import {ajax} from "../utils/common";
 import PropTypes from "prop-types";
 
-let defaultProps={
-
-}
 
 const TreeInForm = forwardRef((props,ref) => {
 

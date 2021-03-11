@@ -9,7 +9,7 @@ const packageFile = require(packagePath)
 
 module.exports = {
     webpackConfig: require('./webpack.config.js'), // webpack 路径,可以用项目里的,也可以用webpack-blocks创建
-    components: 'src/components/**/**.js', // 写入对应目录的文档
+    components: 'src/components/**/[A-Z]*.js', // 写入对应目录的文档
     // defaultExample: true,
     verbose: true, // 打印详细信息
     updateDocs(docs, file) {

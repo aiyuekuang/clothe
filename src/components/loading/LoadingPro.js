@@ -6,7 +6,7 @@ import {Button, Spin} from "antd"
 import PropTypes from "prop-types";
 
 
-const Loading = forwardRef((props,ref) => {
+const LoadingPro = forwardRef((props,ref) => {
     const {top, left, config} = props;
 
     useEffect(() => {
@@ -26,7 +26,7 @@ const Loading = forwardRef((props,ref) => {
     );
 })
 
-Loading.propTypes = {
+LoadingPro.propTypes = {
     /** 相较顶部的距离 */
     top: PropTypes.string,
     /** 相较左侧的距离 */
@@ -34,7 +34,7 @@ Loading.propTypes = {
     /** 其他antd Spin的设置*/
     config: PropTypes.object
 };
-Loading.defaultProps = {
+LoadingPro.defaultProps = {
     /** 相较顶部的距离 */
     top: "45%",
     /** 相较左侧的距离 */
@@ -42,4 +42,4 @@ Loading.defaultProps = {
     /** 其他antd Spin的设置*/
     config: {}
 };
-export default Loading;
+export default LoadingPro;

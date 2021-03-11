@@ -5,14 +5,14 @@ import React, {forwardRef} from 'react';
 import lang from "./locales/zh-CN"
 
 
-import formAdd from "./form/form_adds"
-import searchTable from "./form/form_search"
-import table from "./table"
-import upTree from "./tree/tree"
-import treeEdit from "./tree/tree_eidt"
-import Ueditor_ from "./ueditor"
-import Upbraft from "./ueditor/braft"
-import UPupload from "./upload/upload_form"
+import formAdd from "./form/FormAdd"
+import searchTable from "./form/SearchFrom"
+import table from "./table/TablePro"
+import upTree from "./tree/TreePro"
+import treeEdit from "./tree/TreeEdit"
+import Ueditor_ from "./ueditor/UEditorPro"
+import Upbraft from "./ueditor/RichText"
+import UPupload from "./upload/UploadPro"
 import Pagin_ from "./paginaction"
 import Chart_ from "./g2"
 import Line_ from "./g2/line"
@@ -21,48 +21,44 @@ import Quan_ from "./g2/quan"
 import Groupchart from "./g2/group_chart"
 import Duopie from "./g2/duo_pie"
 import Ani_ from "./ani"
-import Treeselectup_ from "./tree/tree_select"
-import Monthselect from "./date/month"
-import Dayselect from "./date/day"
-import Rangselect from "./date/rang"
-import Tableselect from "./table/table_select"
-import TableInForm_ from "./table/tableInForm"
-import MenuUp_ from "./menu"
-import ModalWarp_ from "./modal/modalWarp"
+import Treeselectup_ from "./tree/TreeSelectPro"
+import Rangselect from "./date/RangSelect"
+import Tableselect from "./table/TableSelect"
+import TableInForm_ from "./table/TableInForm"
+import MenuUp_ from "./menu/MenuPro"
+import ModalWarp_ from "./modal/ModalWarp"
 import modalUp from "./modal/modalUp"
 import ModalSimple_ from "./modal"
-import select from "./select"
-import QuestionAddForm_ from "./form/questionAddFormAll"
-import questionAddForm from "./form/questionAddForm"
-import FormCustom_ from "./form/formCustom"
-import TreeFromAjax_ from "./tree/treeFromAjax"
-import TreeEditAjax_ from "./tree/treeEditAjax"
-import ConfigProviderUp_ from "./configProvider"
-import TabSelect_ from "./select/tabSelect"
-import radioUp from "./select/radio"
-import _CheckboxUp from "./checkbox"
-import _CheckboxUpGroup from "./checkbox/group"
-import _transfer from "./transfer"
-import _urlTransfer from "./transfer/urlTransfer"
-import _modalUrlTransfer from "./transfer/modalUrlTransfer"
-import cascaderAjax from "./cascader"
-import cascader from "./cascader/cascader"
+import select from "./select/SelectPro"
+import QuestionAddForm_ from "./form/QuestionAddForm"
+import questionAddFormIn from "./form/QuestionAddFormIn"
+import FormCustom_ from "./form/FormCustom"
+import TreeFromAjax_ from "./tree/TreeFromAjax"
+import TreeEditAjax_ from "./tree/TreeEditAjax"
+import ConfigProviderUp_ from "./configProvider/ConfigProviderPro"
+import TabSelect_ from "./select/TabSelect"
+import radioUp from "./select/RadioPro"
+import _CheckboxUp from "./checkbox/CheckboxPro"
+import _CheckboxUpGroup from "./checkbox/GroupPro"
+import _transfer from "./transfer/TransferPro"
+import _urlTransfer from "./transfer/UrlTransfer"
+import _modalUrlTransfer from "./transfer/ModalUrlTransfer"
+import cascaderAjax from "./cascader/CascaderAjaxPro"
+import cascader from "./cascader/Cascader"
 import _tabSelectDom from "./select/tabSelectDom"
-import formCustomTwo from "./form/formCustomTwo"
+import formCustomTwo from "./form/FormCustomTwo"
 import dashboard from "./g2/dashboard"
 import thermograph from "./g2/thermograph"
 import radar from "./g2/radar"
-import remoteSearch from "./select/remoteSearch"
-import editableCell from "./table/editableCell"
-import nav from "./nav"
-import date from "./date"
-import code from "./code"
-import treeInForm from "./tree/treeInForm"
-import loading from "./loading"
-import iconSvg from "./icon"
+import remoteSearch from "./select/RemoteSearch"
+import editableCell from "./table/EditableCell"
+import nav from "./nav/NavPro"
+import date from "./date/DatePro"
+import code from "./code/CodePro"
+import treeInForm from "./tree/TreeInForm"
+import loading from "./loading/LoadingPro"
+import iconSvg from "./icon/IconSvg"
 import treeInFormCascader from "./tree/treeInFormCascader"
-
-// import _excel from "./excel"
 
 let upConfig = {
 
@@ -98,15 +94,13 @@ export const PieSmall = Hoc(Duopie)
 export const RichText = Hoc(Upbraft)
 export const Ani = Hoc(Ani_)
 export const TreeSelectPro = Hoc(Treeselectup_)
-export const MonthSelect = Hoc(Monthselect)
-export const DaySelect = Hoc(Dayselect)
 export const RangSelect = Hoc(Rangselect)
 export const TableSelect = Hoc(Tableselect)
 export const MenuPro = Hoc(MenuUp_)
 export const ModalWarp = Hoc(ModalWarp_)
 export const SelectPro = Hoc(select)
 export const QuestionAddForm = Hoc(QuestionAddForm_)
-export const QuestionAddFormIn = Hoc(questionAddForm)
+export const QuestionAddFormIn = Hoc(questionAddFormIn)
 export const FormCustom = Hoc(FormCustom_)
 export const TableInForm = Hoc(TableInForm_)
 export const TreeFromAjax = Hoc(TreeFromAjax_)
@@ -134,10 +128,8 @@ export const NavPro = Hoc(nav)
 export const DatePro = Hoc(date)
 export const CodePro = Hoc(code)
 export const TreeInForm = Hoc(treeInForm)
-export const Loading = Hoc(loading)
+export const LoadingPro = Hoc(loading)
 export const IconSvg = Hoc(iconSvg)
 export const TreeInFormCascader = Hoc(treeInFormCascader)
-
-// export const Excel = Hoc(_excel)
 
 
