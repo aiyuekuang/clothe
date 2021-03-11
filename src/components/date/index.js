@@ -48,7 +48,7 @@ const DatePro = forwardRef((props,ref) => {
 
 
   useEffect(() => {
-    onChange_(valueFormat(props.value),props.value)
+    // onChange_(valueFormat(props.value),props.value)
 
     return () => {
     }

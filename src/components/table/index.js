@@ -438,9 +438,10 @@ export default class TablePro extends Component {
     }
 
     //编辑和新增用到的表单组件
-    table_add = (record) => {
+    table_add = (record,visible) => {
         return (
             <FormAdd
+                visible={visible}
                 record={record}
                 formData={this.props.addForm}
                 addFormSubmitCallback={() => {
@@ -449,8 +450,7 @@ export default class TablePro extends Component {
                         this.props.addFormSubmitCallback(record, data);
                     });
                 }}
-                // disabledBtn={!this.state.visible}
-                disabledBtn={!this.state.visible}
+                disabledBtn={!visible}
                 submit={this.props.addSubmitFun}
                 addUrl={this.props.addUrl}
                 editUrl={this.props.editUrl}
@@ -887,7 +887,7 @@ export default class TablePro extends Component {
                     {...modalConfig}
                 >
                     <div id="select"/>
-                    {visible ? this.table_add(record) : null}
+                    {this.table_add(record,visible)}
                 </Modal>
             </div>
         )

@@ -35,7 +35,14 @@ export let formItemLayoutFun = (formItemLayout_, _layoutHorizontal) => {
     }
 }
 
+
+
+
 const FormAdd = forwardRef((props, ref) => {
+    let initialValues = {}
+
+    let counts = 0;
+    let line = 0;
 
     const {li, className, formData, hasBtn, editUrl, otherForm, record, config, formDataChangeRest, hideParam, returnFormCallback, layoutHorizontal, renderFooter, visible, isVisibleRest, clotheLang, onValuesChange, disabledBtn, size, otherBtn, submitText, CustomSubmit} = props;
 
@@ -43,7 +50,6 @@ const FormAdd = forwardRef((props, ref) => {
     const [form] = Form.useForm();
     const [disabled, setDisabled] = useState(false);
     const [actData, setActData] = useState(null);
-    let count = 0;
 
     useEffect(() => {
         // Update the document title using the browser API
@@ -55,7 +61,7 @@ const FormAdd = forwardRef((props, ref) => {
     useEffect(() => {
         // Update the document title using the browser API
         if (formDataChangeRest) {
-            form.resetFields();
+            rest()
         }
 
         return () => {
@@ -65,8 +71,8 @@ const FormAdd = forwardRef((props, ref) => {
     useEffect(() => {
         // Update the document title using the browser API
 
-        if (isVisibleRest && !visible) {
-            form.resetFields()
+        if (isVisibleRest && visible) {
+            form.setFieldsValue(initialValues)
         }
         return () => {
         }
@@ -74,13 +80,8 @@ const FormAdd = forwardRef((props, ref) => {
 
     useEffect(() => {
         // Update the document title using the browser API
-        count++;
         if (record) {
             form.setFieldsValue(record)
-        } else {
-            // if (count > 1) {
-            form.resetFields()
-            // }
         }
         return () => {
         }
@@ -90,14 +91,9 @@ const FormAdd = forwardRef((props, ref) => {
 
     const rest = () => {
         form.resetFields();
-        //this.props.submit({});
     }
 
     function handleSubmit(values) {
-        // let _record =null
-        // if(record){
-        //     _record = cloneop(record);
-        // }
 
         setDisabled(true)
         let values_temp = {};
@@ -107,14 +103,6 @@ const FormAdd = forwardRef((props, ref) => {
             values_temp = {...values, ...props.values};
         }
 
-        for (let i in values_temp) {
-            if (values_temp[i] && values_temp[i]._isAMomentObject) {
-                let index = props.formData.find((data) => {
-                    return i === data.field
-                })
-                values_temp[i] = values_temp[i].format(index.format ? index.format : props.dateFormat)
-            }
-        }
         if (props.record) {
             values_temp[props.primaryKeyField] = props.record[props.primaryKeyField]
         }
@@ -145,10 +133,6 @@ const FormAdd = forwardRef((props, ref) => {
         }
     }
 
-    let initialValues = {}
-
-    let counts = 0;
-    let line = 0;
 
     let lists = props.formData.map((data, i) => {
         initialValues[data.field] = props.record ?
@@ -359,8 +343,6 @@ FormAdd.defaultProps = {
         config: {},
         /** 其他提示*/
         extra: "",
-        /** 日期控件用到的format*/
-        format: 'YYYY-MM-DD',
         /** 表单组件*/
         component: <Input/>,
         /** 编辑时是否需要隐藏*/
@@ -440,7 +422,7 @@ FormAdd.defaultProps = {
     /** 触发重置的字段*/
     visible: false,
     /** 是否需要在visible为false的时候重置表单*/
-    isVisibleRest: false,
+    isVisibleRest: true,
     /** 表单数据变化时的回调*/
     onValuesChange: (changedValues, allValues) => {
 
