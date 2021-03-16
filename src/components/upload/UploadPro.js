@@ -5,7 +5,7 @@ import React, {Fragment, Component, PureComponent} from 'react';
 import {Button, Input, Modal, Form, Upload, message, Tooltip, notification} from 'antd';
 import {form_value, turn_data} from "../utils/common";
 import {createMap} from "esn";
-import {CloudUploadOutlined} from "@ant-design/icons";
+import {UploadOutlined} from "@ant-design/icons";
 import {uploadType} from "../utils/enum"
 import PropTypes from "prop-types";
 function f3(n) {
@@ -338,8 +338,7 @@ export default class UploadPro extends Component {
                         {this.props.children ? this.props.children :
                             <Button
                                 disabled={this.state.loading_img || this.props.disabled}>
-                                {this.props.showUploadList ?
-                                    <Fragment><CloudUploadOutlined/> {this.props.title}</Fragment> : this.props.title}
+                                    <UploadOutlined /> {this.props.title}
                             </Button>
                         }
                     </Upload> : <Input style={{width: 180}} value={value} onChange={this.props.onChange} allowClear/>

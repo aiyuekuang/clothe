@@ -815,7 +815,7 @@ export default class TablePro extends Component {
                 <div className="up_table_warp_bottom">
                     {this.props.treeUrl ?
                         <div className={tree_show ? "up_table_warp_bottom_l" : "up_table_warp_bottom_l gybxs"}>
-                            <TreePro tree_hide={this.tree_hide} ajax={ajax} select={this.select}
+                            <TreePro treeHide={this.tree_hide} ajax={ajax} select={this.select}
                                      treeUrl={this.props.treeUrl} {...treeSet}/>
                         </div> : null}
                     <div className={this.props.treeUrl ? "up_table_warp_bottom_r" : "up_table_warp_bottom_r_s"}>
