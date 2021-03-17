@@ -26,10 +26,10 @@ const SelectPro = forwardRef((props, ref) => {
     }, [url]);
 
     useEffect(() => {
-
+        setDataSource_(dataSource)
         return () => {
         }
-    }, [value]);
+    }, [dataSource]);
 
 
     function handleChange(value, option) {
