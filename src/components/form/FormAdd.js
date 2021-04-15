@@ -36,15 +36,13 @@ export let formItemLayoutFun = (formItemLayout_, _layoutHorizontal) => {
 }
 
 
-
-
 const FormAdd = forwardRef((props, ref) => {
     let initialValues = {}
 
     let counts = 0;
     let line = 0;
 
-    const {li, className, formData, hasBtn, editUrl, otherForm, record, config, formDataChangeRest, hideParam, returnFormCallback, layoutHorizontal, renderFooter, visible, isVisibleRest, clotheLang, onValuesChange, disabledBtn, size, otherBtn, submitText, CustomSubmit} = props;
+    const {li, className, formData, hasBtn, editUrl, otherForm, record, config, formDataChangeRest, hideParam, returnFormCallback, layoutHorizontal, renderFooter, visible, isVisibleRest, clotheLang, onValuesChange, disabledBtn, size, otherBtn, submitText, CustomSubmit,submitBefore} = props;
 
 
     const [form] = Form.useForm();
@@ -106,6 +104,8 @@ const FormAdd = forwardRef((props, ref) => {
         if (props.record) {
             values_temp[props.primaryKeyField] = props.record[props.primaryKeyField]
         }
+
+        values_temp = submitBefore(values_temp)
 
         if (props.addUrl) {
             let _url = props.addUrl
@@ -321,7 +321,9 @@ FormAdd.propTypes = {
     /** 提交时的文本*/
     submitText: PropTypes.string,
     /** 自定义提交按钮*/
-    CustomSubmit: PropTypes.elementType
+    CustomSubmit: PropTypes.elementType,
+    /** 自定义提交按钮 (values)=>{return values}*/
+    submitBefore: PropTypes.func,
 };
 FormAdd.defaultProps = {
     ajax: ajax,
@@ -435,7 +437,12 @@ FormAdd.defaultProps = {
     /** 提交时的文本*/
     submitText: null,
     /** 自定义提交按钮*/
-    CustomSubmit: null
+    CustomSubmit: null,
+    /** 自定义提交按钮*/
+    submitBefore: (values) => {
+        return values
+    },
+
 };
 
 export default FormAdd

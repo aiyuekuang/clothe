@@ -5,9 +5,6 @@ import {cloneop} from "esn";
 import PropTypes from "prop-types";
 
 
-let defaultProps = {
-
-}
 
 const QuestionAddFormIn = forwardRef((props,ref) => {
     const [arr, setArr] = useState([]);
