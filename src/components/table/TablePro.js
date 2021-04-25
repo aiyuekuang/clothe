@@ -352,7 +352,7 @@ export default class TablePro extends Component {
             pagination: {
                 current: 1,
                 pageSize: props.pageSize,
-                total: 10,
+                total: 0,
                 showTotal: total => `${props.clotheLang.table.all} ${total} ${props.clotheLang.table.record}`,
                 showQuickJumper: true,
                 showSizeChanger: true,

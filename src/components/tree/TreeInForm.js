@@ -64,7 +64,9 @@ const TreeInForm = forwardRef((props,ref) => {
 
 TreeInForm.propTypes = {
     /** ajax的实现函数 */
-    children: PropTypes.func.isRequired,
+    ajax:PropTypes.func.isRequired,
+    /** 除非你的子也不叫children */
+    children: "children",
     /** The color for the button */
     color: PropTypes.string,
     /** The size of the button */
