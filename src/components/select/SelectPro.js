@@ -12,7 +12,7 @@ const {Option} = Select;
 
 const SelectPro = forwardRef((props, ref) => {
 
-    const {dataSource, label, labelValue, value, config, clotheLang, disabled, disabledFun, dataSet, url, ajax, setData, values} = props;
+    const {dataSource, label, labelValue, value, config, clotheLang, disabled, disabledFun, dataSet, url, ajax, setData, values,multiple} = props;
     const [dataSource_, setDataSource_] = useState(dataSource);
 
     useEffect(() => {
@@ -48,6 +48,7 @@ const SelectPro = forwardRef((props, ref) => {
 
     return (
         <Select
+            mode={multiple ? "multiple" : null}
             style={{width: "100%"}}
             showSearch
             onChange={handleChange}
@@ -94,7 +95,9 @@ SelectPro.propTypes = {
      */
     disabledFun: PropTypes.func,
     /** 数据在生成选项时的函数，返回一个修改后的数值 (data)=>{return data},因为有些数据源并不规则 */
-    dataSet: PropTypes.func
+    dataSet: PropTypes.func,
+    /** 是否多选*/
+    multiple:PropTypes.bool
 };
 SelectPro.defaultProps = {
     /** ajax的实现函数 */
@@ -108,16 +111,7 @@ SelectPro.defaultProps = {
     /** 其他调用接口得参数 */
     values: {},
     /** 数据源 */
-    dataSource: [
-        {
-            label: "11",
-            value: 1
-        },
-        {
-            label: "22",
-            value: 2
-        }
-    ],
+    dataSource: [],
     /** 数据源的label字段 */
     label: "label",
     /** 数据源的value字段 */
@@ -139,6 +133,8 @@ SelectPro.defaultProps = {
     /** 数据在生成选项时的函数，返回一个修改后的数值 */
     dataSet: (data) => {
         return data
-    }
+    },
+    /** 是否多选*/
+    multiple:false
 };
 export default SelectPro;
