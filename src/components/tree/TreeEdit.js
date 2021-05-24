@@ -268,7 +268,7 @@ export function Tree_form(prop) {
                 : "修改"}
             </Button>
           </div>
-          {Object.keys(props.selectData).length !== 0 ? (
+          {Object.keys(props.selectData).length !== 0 && moveUrl !== ""? (
             <Fragment>
               <div>
                 <Button type="primary" shape="circle"
