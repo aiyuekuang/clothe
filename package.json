@@ -9,7 +9,7 @@
     "cleanDist": "rd /s/q dist && mkdir dist",
     "cleanLib": "rd /s/q lib && mkdir lib",
     "login": "npm login",
-    "fabu": "npm run npm && npm run git && npm version patch && npm publish",
+    "fabu": "npm run npm && npm run git && npm version patch && npm publish && npm run git",
     "npm": "npm set registry https://registry.npmjs.org",
     "git": "python ./bin/release.py",
     "copy": "python ./bin/copy.py",
