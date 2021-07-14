@@ -256,9 +256,11 @@ FormAdd.propTypes = {
      *
      *  addHide: true,（是否新增时隐藏）
      *
-     *  isLine: true,（是否在一行）
+     *  isLine: true,（是否在一行，一般一行的话，左右的label和组件的比例是不对的，可以使用formItemLayout进行调节）
      *
-     *  relation: null,（是否在一行）
+     *  relation: null,（根据哪个字段来判断显示还是不显示）
+     *
+     *  formItemLayout (label和组件的比例)
      * */
     formData: PropTypes.array,
     /** submit提交
@@ -355,6 +357,8 @@ FormAdd.defaultProps = {
         isLine: true,
         /** 根据哪个字段来判断显示还是不显示*/
         relation: null,
+        /** label和组件的比例*/
+        formItemLayout:null
     }, {
         /** 表单标题*/
         title: "标题",

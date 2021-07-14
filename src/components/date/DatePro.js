@@ -49,7 +49,8 @@ const DatePro = forwardRef((props,ref) => {
 
   useEffect(() => {
     // onChange_(valueFormat(props.value),props.value)
-
+    //为了解决多个数据在编辑时，不会更新的问题
+    setValue(valueFormat(props.value))
     return () => {
     }
   }, [props.value]);
@@ -58,6 +59,7 @@ const DatePro = forwardRef((props,ref) => {
     setValue(date)
     onChange(dateString)
   }
+
 
   return (
     <React.Fragment>
