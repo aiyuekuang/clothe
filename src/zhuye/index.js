@@ -24,7 +24,7 @@ export default class Index extends React.Component {
   render() {
     return (
       <div className="up_index">
-        <CodePro/>
+        <Table/>
       </div>
     )
   }

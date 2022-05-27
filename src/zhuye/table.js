@@ -2,7 +2,6 @@
  * Created by zengtao on 2017/5/19.
  */
 import React from 'react';
-import {Input, message} from 'antd';
 import {TablePro} from "@components"
 
 
@@ -79,6 +78,11 @@ export default class Index extends React.Component {
               // 是否在收起时显示
             },
           ]}
+          treeUrl="/tree"
+          treeSet={{
+            dataSourceKey:"name",
+            dataSourceValue:"id"
+          }}
         />
       </div>
     )

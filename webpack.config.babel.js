@@ -118,13 +118,8 @@ module.exports = {
             exclude: /node_modules/
         }, {
             test: /\.scss$/,
-            use: [MiniCssExtractPlugin.loader, {
-                loader: 'css-loader?importLoaders=1',
-                options: {
-                    minimize: true //css压缩
-                }
-            }, "postcss-loader", "sass-loader"]
-        }, {
+            use: ['css-loader', "postcss-loader", "sass-loader"]
+        },  {
             test: /\.(less|css)$/,
             use: [MiniCssExtractPlugin.loader, {
                 loader: 'css-loader?importLoaders=1',
@@ -132,7 +127,7 @@ module.exports = {
                     minimize: true //css压缩
                 }
             }, {loader: 'less-loader', options: {javascriptEnabled: true}}]
-        }, {
+        },{
             test: /\.(png|jpg|gif|md)$/,
             use: ['file-loader?limit=10000&name=[md5:hash:base64:10].[ext]']
         }, {

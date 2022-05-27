@@ -21,6 +21,7 @@ export const ajax = async (url = "", param = {}, chenggong = () => {
     let response = await postData("/mock" + url, param);
     //await console.log(response.data)
     await function (response) {
+        console.log(2212,response)
         if (response.data.key === 1) {
             all_fun();
             chenggong(response.data);
