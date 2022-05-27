@@ -2,9 +2,9 @@
  * Created by zengtao on 2018/8/1.
  */
 import React, {Component, Fragment} from 'react';
-import {Button, Divider, Dropdown, Input, Menu, Modal, Table,} from 'antd';
+import {Button, Divider, Dropdown, Input, Menu, Modal, Table, Tag,} from 'antd';
 import {FormAdd, SearchFrom, TreePro} from "../index"
-import {getTextByJs, ajax} from "../utils/common"
+import {ajax, getTextByJs} from "../utils/common"
 import {CaretRightOutlined, DeleteOutlined, DownOutlined, PlusOutlined} from "@ant-design/icons"
 import {diffObj, isArrayop, uid} from "esn";
 import PropTypes from "prop-types";
@@ -21,7 +21,7 @@ function str_cut(str, length) {
 }
 
 
-const { Search } = Input;
+const {Search} = Input;
 const confirm = Modal.confirm;
 
 
@@ -36,7 +36,7 @@ export default class TablePro extends Component {
         /** 表格结构数据,参考antd的table columns */
         columns: PropTypes.array,
         /** 接口连接 */
-        url:PropTypes.string,
+        url: PropTypes.string,
         /** 额外的需要加入的参数 */
         values: PropTypes.object,
         /** 数据获取方式 (data) => {return data.data.records}*/
@@ -54,11 +54,11 @@ export default class TablePro extends Component {
         /** 是否有分页 */
         hasPage: PropTypes.bool,
         /** 判断是否可以被选中的函数，返回false就是这行不可以被选中 (record) => {return false}*/
-        rowDisabledFun:PropTypes.func,
+        rowDisabledFun: PropTypes.func,
         /** 批量操作的对象 [{icon,title,fun(selectedRowKeys---当前已经选中的表格数据, onSelectChange---表格数据更新到组件的函数, get_data---逻辑完成后需要更新表格数据的函数)}]*/
         rowAction: PropTypes.array,
         /** 主键id */
-        primaryKeyField:PropTypes.string,
+        primaryKeyField: PropTypes.string,
         /** 是否有新增/编辑 */
         hasAdd: PropTypes.bool,
         /** 是否有编辑，这个参数可以传递函数，因为有的时候不同的行，有的需要编辑，有的则不需要，回调函数中会返回一个record */
@@ -160,9 +160,11 @@ export default class TablePro extends Component {
         /** 点击新增按钮时的回调 */
         addCallback: PropTypes.func,
         /** 表格加载数据时的loading回调  (loading) => {}*/
-        loadingCallback:PropTypes.func,
+        loadingCallback: PropTypes.func,
         /** 删除之前的回调(id, record, fun) => {},null就是不需要 */
-        deleteBefore: PropTypes.func
+        deleteBefore: PropTypes.func,
+        /** 选择之后的回调 */
+        onSelectChange: PropTypes.func
     }
 
     static defaultProps = {
@@ -336,7 +338,11 @@ export default class TablePro extends Component {
         loadingCallback: (loading) => {
         },
         /** 删除之前的回调(id, record, fun) => {},null就是不需要 */
-        deleteBefore: null
+        deleteBefore: null,
+        /** 选择之后的回调 */
+        onSelectChange:(data)=>{
+
+        }
     }
 
     constructor(props) {
@@ -438,9 +444,10 @@ export default class TablePro extends Component {
     }
 
     //编辑和新增用到的表单组件
-    table_add = (record,visible) => {
+    table_add = (record, visible) => {
         return (
             <FormAdd
+                ajax={this.props.ajax}
                 visible={visible}
                 record={record}
                 formData={this.props.addForm}
@@ -588,7 +595,9 @@ export default class TablePro extends Component {
     }
 
     onSelectChange = (selectedRowKeys = [], selectedRows = []) => {
-        this.setState({selectedRowKeys, selectedRows});
+        this.setState({selectedRowKeys, selectedRows},()=>{
+            this.props.onSelectChange({selectedRowKeys, selectedRows})
+        });
     }
 
     handleMenuClick = (e) => {
@@ -720,7 +729,7 @@ export default class TablePro extends Component {
             if (i && i.strCut) {
                 i.render = (text) => (
                     <span>
-            {text && text.length > i.strCut ?
+            {i.strCut && (text && text.length > i.strCut) ?
                 <Fragment>
                     {str_cut(text, i.strCut)}&nbsp;<a onClick={() => {
                     Modal.info({
@@ -742,6 +751,19 @@ export default class TablePro extends Component {
                 </Fragment> : text}
           </span>
                 )
+            }
+
+            if (i && i.enum) {
+                i.render = (text) =>{
+                    let enumObj = i.enum.get(text)?i.enum.get(text) : {};
+                    return (
+                        <span>
+                        {text && text.length && i.enum ? <Fragment>
+                            <Tag color={enumObj.color}>{enumObj[i.enumField]}</Tag>
+                        </Fragment> : text}
+                    </span>
+                    )
+                }
             }
         }
 
@@ -778,6 +800,7 @@ export default class TablePro extends Component {
             getCheckboxProps: record => ({
                 disabled: this.props.rowDisabledFun(record)
             }),
+            fixed:true
         };
         let btn = this.props.rowAction ? this.props.rowAction.map((data, i) => {
             return (
@@ -887,7 +910,7 @@ export default class TablePro extends Component {
                     {...modalConfig}
                 >
                     <div id="select"/>
-                    {this.table_add(record,visible)}
+                    {this.table_add(record, visible)}
                 </Modal>
             </div>
         )

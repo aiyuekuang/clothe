@@ -59,6 +59,8 @@ import treeInForm from "./tree/TreeInForm"
 import loading from "./loading/LoadingPro"
 import iconSvg from "./icon/IconSvg"
 import treeInFormCascader from "./tree/treeInFormCascader"
+import boolPro from "./bool"
+import tableSelectPro from "./table/TableSelectPro"
 
 let upConfig = {
 
@@ -131,5 +133,7 @@ export const TreeInForm = Hoc(treeInForm)
 export const LoadingPro = Hoc(loading)
 export const IconSvg = Hoc(iconSvg)
 export const TreeInFormCascader = Hoc(treeInFormCascader)
+export const BoolPro = Hoc(boolPro)
+export const TableSelectPro = Hoc(tableSelectPro)
 
 

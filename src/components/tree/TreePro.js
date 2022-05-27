@@ -6,9 +6,9 @@ import {Button, Input, Alert, notification, Form, Table, Empty, Tree, Modal, Spi
 import {TreeEdit} from "../index"
 const TreeNode = Tree.TreeNode;
 import {isValEmpty, treeFindObjById} from "esn"
-import {DownOutlined, CaretRightOutlined} from "@ant-design/icons"
+import {DownOutlined, CaretRightOutlined,EditOutlined} from "@ant-design/icons"
 import PropTypes from "prop-types";
-
+const { DirectoryTree } = Tree;
 
 export default class TreePro extends React.Component {
   constructor(props) {
@@ -65,7 +65,13 @@ export default class TreePro extends React.Component {
     /** 是否首次选中第一个数据 ,默认是null,可以传递布尔值*/
     selectFirstValue: PropTypes.any,
     /** 是否搜索到之后第一个就自动选中 */
-    isSelectSearchValue:PropTypes.bool
+    isSelectSearchValue:PropTypes.bool,
+    /** 编辑时，表单的FormItem设置*/
+    addFormConfig:PropTypes.object,
+    /** 编辑时，表单的设置*/
+    treeEditSet:PropTypes.object,
+    /** 是否目录形式的树形*/
+    isDirectoryTree:PropTypes.bool
   }
 
   static defaultProps = {
@@ -112,7 +118,13 @@ export default class TreePro extends React.Component {
     /** 是否首次选中第一个数据 */
     selectFirstValue: null,
     /** 是否搜索到之后第一个就自动选中 */
-    isSelectSearchValue:false
+    isSelectSearchValue:false,
+    /** 编辑时，表单的设置*/
+    addFormConfig:{},
+    /** 编辑时，表单的设置*/
+    treeEditSet:{},
+    /** 是否目录形式的树形*/
+    isDirectoryTree:false
   }
 
 
@@ -309,8 +321,8 @@ export default class TreePro extends React.Component {
   }
 
   render() {
-    const {searchValue, expandedKeys, autoExpandParent, loading, treeData, select_value, title} = this.state;
-    const {addFormSet, config, className, treeHide, maxHeight, clotheLang} = this.props;
+    const {searchValue, expandedKeys, autoExpandParent, loading, treeData, select_value} = this.state;
+    const {addFormConfig, config, className, treeHide, maxHeight, clotheLang,add,title,ajax,treeEditSet,setData,dataSourceValue,dataSourceKey,isDirectoryTree} = this.props;
 
     const loop = (data = treeData, father_item = null) => {
       //console.log(!data instanceof Array,data,[data])
@@ -345,14 +357,16 @@ export default class TreePro extends React.Component {
       });
     }
 
+    let Comp = isDirectoryTree?DirectoryTree:Tree;
+
     return (
       <div className={className}>
         {title ? <div className="up_tree_head">
           <div className="up_tree_head_tit">
             {this.props.title}
           </div>
-          {this.props.add ? <div>
-            <a onClick={this.showModal}>{clotheLang.form.add}/{clotheLang.tree.modify}</a>
+          {this.props.add ? <div className="up_tree_head_tit_edit">
+            <a onClick={this.showModal}><EditOutlined /></a>
           </div> : null}
           {treeHide ? <div onClick={treeHide.bind(this, false)}>
             <div className="up_tree_head_show">
@@ -364,7 +378,7 @@ export default class TreePro extends React.Component {
           <Input placeholder={clotheLang.tree.pleaseEnterName} onChange={this.onChange} allowClear/>
         </div> : null}
         <div className="up_tree_body" style={{maxHeight: maxHeight}}>
-          {loading ? <div className="loading"><Spin/></div> : (treeData && treeData.length > 0 ? <Tree
+          {loading ? <div className="loading"><Spin/></div> : (treeData && treeData.length > 0 ? <Comp
             onExpand={this.onExpand}
             expandedKeys={expandedKeys}
             autoExpandParent={autoExpandParent}
@@ -374,7 +388,7 @@ export default class TreePro extends React.Component {
             {...config}
           >
             {loop()}
-          </Tree> : <Empty image={Empty.PRESENTED_IMAGE_SIMPLE}/>)}
+          </Comp> : <Empty image={Empty.PRESENTED_IMAGE_SIMPLE}/>)}
         </div>
         {this.props.btn ? <div className="up_tree_btn">
           <Button type="primary"
@@ -388,11 +402,16 @@ export default class TreePro extends React.Component {
           width={800}
         >
           <TreeEdit
+            ajax={ajax}
             treeData={this.state.treeData}
             getTree={this.getTree}
             treeUrl={this.props.treeUrl}
-            config={addFormSet}
+            config={addFormConfig}
             clotheLang={clotheLang}
+            setData={setData}
+            dataSourceValue={dataSourceValue}
+            dataSourceKey={dataSourceKey}
+            {...treeEditSet}
           />
         </Modal>
       </div>

@@ -172,8 +172,7 @@ const FormAdd = forwardRef((props, ref) => {
                             }}
                         >
                             {data.component ? (typeof data.component === "function" ? data.component(props.record) : data.component) :
-                                <Input placeholder={`${clotheLang.form.pleaseEnter}${data.title}`} allowClear
-                                       size={size}/>}
+                                <Input placeholder={`${clotheLang.form.pleaseEnter}${data.title}`} allowClear size={size}/>}
                         </FormItem>
                     </div>}
             </Fragment>

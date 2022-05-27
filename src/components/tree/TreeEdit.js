@@ -93,7 +93,7 @@ export function Tree_form(prop) {
     //我的资源分类_添加/修改我的资源分类
     let eidt_tree = (values, id = selectData[dataSourceValue]) => {
         let obj = {};
-        obj[props.primaryKeyField] = id;
+        obj[primaryKeyField] = id;
         let _url = props.treeEdit
         if (treeEditUrl && id) {
             _url = treeEditUrl
@@ -395,7 +395,6 @@ export default class TreeEdit extends React.Component {
     componentDidMount = () => {
     };
 
-
     //选择的当前树
     onSelect = (value = null, obj = {}, father_item = null) => {
         this.up_tree.current.setSelectedKeys();
@@ -439,7 +438,7 @@ export default class TreeEdit extends React.Component {
         return (
             <div className="up_tree_eidt_warp">
 
-                <div className="up_tree_eidt_warp_l" style={{minWidth: minWidth}}>
+                <div className="up_tree_eidt_warp_l" style={{minWidth}}>
                     <TreePro
                         ref={this.up_tree}
                         select={this.onSelect}

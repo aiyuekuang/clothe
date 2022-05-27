@@ -90,6 +90,11 @@ $up_tree_head_height: 38px;
 .up_tree_head_tit {
   text-indent: 6px;
 }
+.up_tree_head_tit_edit{
+  text-align: right;
+  flex: 1;
+  padding-right: 5px;
+}
 
 .up_tree_warp {
   border: $biankuang;
@@ -434,4 +439,19 @@ $up_tree_head_height: 38px;
 }
 .clothe_loading{
   position: absolute;
+}
+.clothe_table_select_pro_btn{
+  @include hp2();
+}
+.clothe_table_select_pro_btn_list{
+  @include hp2();
+  @extend %chaochu;
+  flex: 1;
+  >div{
+    margin: 2px;
+  }
+}
+.clothe_table_select_pro_btn_body{
+  width: 20px;
+  text-align: right;
 }
